@@ -1,0 +1,2572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_El_Asegurado.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPais" Type="int" Nullable="false" />
+          <Property Name="NroCliente" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="AñoRegistro" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="idPersona" Type="int" Nullable="false" />
+          <Property Name="idProfesion" Type="int" Nullable="false" />
+          <Property Name="idSituacionIVA" Type="int" Nullable="false" />
+          <Property Name="idEstadoCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Domicilio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="calle" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="numero" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="piso" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="departamento" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoCliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoPoliza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GrupoFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="codpostal" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="idProvincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedidaSeguridad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="idmarca" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="apellido" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="idTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="nroDocumento" Type="numeric" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="nroCuil" Type="numeric" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="idDomicilio" Type="int" />
+          <Property Name="idSexo" Type="int" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroPolizaSuc" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="NroPoliza" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="NroPolizaSec" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="idTipoCobertura" Type="int" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" Nullable="false" />
+          <Property Name="idVehiculo" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="datosVehiculo" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="valorAsegurado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="nroMotor" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="nroChasis" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="patente" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="kmPorAño" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="nroSiniestros" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="fechaInicioVigencia" Type="date" Nullable="false" />
+          <Property Name="fechaFinVigencia" Type="date" Nullable="false" />
+          <Property Name="importePremio" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeDerechoEmision" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeTotal" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="idPolizaAnterior" Type="int" />
+          <Property Name="idEstadoPoliza" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolizaCuota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+          <Property Name="nroCuota" Type="int" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="date" Nullable="false" />
+          <Property Name="importeCuota" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeRecargo" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="PolizaHijo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="idSexo" Type="int" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="int" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolizaMedidaSeguridad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMedidaSeguridad" Type="int" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolizaRecibo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroRecibo" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="idPolizaCuota" Type="int" Nullable="false" />
+          <Property Name="FechaRecibo" Type="date" Nullable="false" />
+          <Property Name="HoraRecibo" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolizaRenovacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+          <Property Name="NroPolizaSec" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="idTipoCobertura" Type="int" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" Nullable="false" />
+          <Property Name="idVehiculo" Type="int" Nullable="false" />
+          <Property Name="valorAsegurado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="nroMotor" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="nroChasis" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="patente" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="kmPorAño" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="nroSiniestros" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolizaRenovacionHijo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="idSexo" Type="int" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="int" Nullable="false" />
+          <Property Name="idPolizaRenovacion" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaValorFactorAutoscoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PolizaValorFactorAutoscoring">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="idValorFactorAutoscoring" />
+            <PropertyRef Name="idPoliza" />
+            <PropertyRef Name="ValorPorcentual" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idValorFactorAutoscoring" Type="int" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
+          <Property Name="ValorPorcentual" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="idPais" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SituacionIVA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoCobertura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nchar" MaxLength="300" Nullable="false" />
+          <Property Name="franquicia" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValorFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGrupoFactorAutoscoring" Type="int" Nullable="false" />
+          <Property Name="CodFactorItem" Type="int" Nullable="false" />
+          <Property Name="valorPorcentual" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValorFactorAutoScoringHist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idValorFactorAutoscoring" Type="int" Nullable="false" />
+          <Property Name="valorPorcentual" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idModelo" Type="int" Nullable="false" />
+          <Property Name="AñoFabricacion" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="valorAsegurado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="v_ValorFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="GrupoFactorAutoScoring" />
+            <PropertyRef Name="ItemFactor" />
+            <PropertyRef Name="valorporcentual" />
+          </Key>
+          <Property Name="GrupoFactorAutoScoring" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="ItemFactor" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="valorporcentual" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cliente_EstadoCliente">
+          <End Role="EstadoCliente" Type="Self.EstadoCliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idEstadoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Profesion">
+          <End Role="Profesion" Type="Self.Profesion" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_SituacionIVA">
+          <End Role="SituacionIVA" Type="Self.SituacionIVA" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SituacionIVA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idSituacionIVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domicilio_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="idmarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Domicilio">
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_EstadoPoliza">
+          <End Role="EstadoPoliza" Type="Self.EstadoPoliza" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPoliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_poliza_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Poliza1">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="0..1" />
+          <End Role="Poliza1" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza1">
+              <PropertyRef Name="idPolizaAnterior" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_TipoCobertura">
+          <End Role="TipoCobertura" Type="Self.TipoCobertura" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaCuota_Poliza">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="PolizaCuota" Type="Self.PolizaCuota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaCuota">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaHijo_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
+          <End Role="PolizaHijo" Type="Self.PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaHijo_Poliza">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="PolizaHijo" Type="Self.PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaHijo_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+          <End Role="PolizaHijo" Type="Self.PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaMedidaSeguridad_MedidaSeguridad">
+          <End Role="MedidaSeguridad" Type="Self.MedidaSeguridad" Multiplicity="1" />
+          <End Role="PolizaMedidaSeguridad" Type="Self.PolizaMedidaSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedidaSeguridad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaMedidaSeguridad">
+              <PropertyRef Name="idMedidaSeguridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaMedidaSeguridad_Poliza">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="PolizaMedidaSeguridad" Type="Self.PolizaMedidaSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaMedidaSeguridad">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRecibo_PolizaCuota">
+          <End Role="PolizaCuota" Type="Self.PolizaCuota" Multiplicity="1" />
+          <End Role="PolizaRecibo" Type="Self.PolizaRecibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaCuota">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRecibo">
+              <PropertyRef Name="idPolizaCuota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRecibo_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="PolizaRecibo" Type="Self.PolizaRecibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRecibo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaRenovacion_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaRenovacion_Poliza">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_TipoCobertura">
+          <End Role="TipoCobertura" Type="Self.TipoCobertura" Multiplicity="1" />
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idTipoCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
+          <End Role="PolizaRenovacionHijo" Type="Self.PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_PolizaRenovacion">
+          <End Role="PolizaRenovacion" Type="Self.PolizaRenovacion" Multiplicity="1" />
+          <End Role="PolizaRenovacionHijo" Type="Self.PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaRenovacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idPolizaRenovacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="1" />
+          <End Role="PolizaRenovacionHijo" Type="Self.PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaValorFactorAutoscoring_Poliza">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="1" />
+          <End Role="PolizaValorFactorAutoscoring" Type="Self.PolizaValorFactorAutoscoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaValorFactorAutoscoring">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFactorAutoScoring_GrupoFactorAutoScoring">
+          <End Role="GrupoFactorAutoScoring" Type="Self.GrupoFactorAutoScoring" Multiplicity="1" />
+          <End Role="ValorFactorAutoScoring" Type="Self.ValorFactorAutoScoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoFactorAutoScoring">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoring">
+              <PropertyRef Name="idGrupoFactorAutoscoring" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFActorAutoscoring_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ValorFactorAutoScoring" Type="Self.ValorFactorAutoScoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoring">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFactorAutoScoringHist_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ValorFactorAutoScoringHist" Type="Self.ValorFactorAutoScoringHist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoringHist">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring">
+          <End Role="ValorFactorAutoScoring" Type="Self.ValorFactorAutoScoring" Multiplicity="1" />
+          <End Role="ValorFactorAutoScoringHist" Type="Self.ValorFactorAutoScoringHist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValorFactorAutoScoring">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoringHist">
+              <PropertyRef Name="idValorFactorAutoscoring" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculo_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vehiculo">
+              <PropertyRef Name="idModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_El_AseguradoStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCliente" EntityType="Self.EstadoCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoPoliza" EntityType="Self.EstadoPoliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoFactorAutoScoring" EntityType="Self.GrupoFactorAutoScoring" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedidaSeguridad" EntityType="Self.MedidaSeguridad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaCuota" EntityType="Self.PolizaCuota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaHijo" EntityType="Self.PolizaHijo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaRecibo" EntityType="Self.PolizaRecibo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaRenovacion" EntityType="Self.PolizaRenovacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaRenovacionHijo" EntityType="Self.PolizaRenovacionHijo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SituacionIVA" EntityType="Self.SituacionIVA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCobertura" EntityType="Self.TipoCobertura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValorFactorAutoScoring" EntityType="Self.ValorFactorAutoScoring" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValorFactorAutoScoringHist" EntityType="Self.ValorFactorAutoScoringHist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaValorFactorAutoscoring" EntityType="Self.PolizaValorFactorAutoscoring" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PolizaValorFactorAutoscoring].[id] AS [id], 
+    [PolizaValorFactorAutoscoring].[idValorFactorAutoscoring] AS [idValorFactorAutoscoring], 
+    [PolizaValorFactorAutoscoring].[idPoliza] AS [idPoliza], 
+    [PolizaValorFactorAutoscoring].[ValorPorcentual] AS [ValorPorcentual]
+    FROM [dbo].[PolizaValorFactorAutoscoring] AS [PolizaValorFactorAutoscoring]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ValorFactorAutoScoring" EntityType="Self.v_ValorFactorAutoScoring" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ValorFactorAutoScoring].[GrupoFactorAutoScoring] AS [GrupoFactorAutoScoring], 
+    [v_ValorFactorAutoScoring].[ItemFactor] AS [ItemFactor], 
+    [v_ValorFactorAutoScoring].[valorporcentual] AS [valorporcentual]
+    FROM [dbo].[v_ValorFactorAutoScoring] AS [v_ValorFactorAutoScoring]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Cliente_EstadoCliente" Association="Self.FK_Cliente_EstadoCliente">
+            <End Role="EstadoCliente" EntitySet="EstadoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Pais" Association="Self.FK_Cliente_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Profesion" Association="Self.FK_Cliente_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_SituacionIVA" Association="Self.FK_Cliente_SituacionIVA">
+            <End Role="SituacionIVA" EntitySet="SituacionIVA" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domicilio_Localidad" Association="Self.FK_domicilio_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Domicilio" EntitySet="Domicilio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Marca" Association="Self.FK_Modelo_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Domicilio" Association="Self.FK_Persona_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_EstadoCivil" Association="Self.FK_Persona_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Sexo" Association="Self.FK_Persona_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoDocumento" Association="Self.FK_Persona_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Cliente" Association="Self.FK_Poliza_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_EstadoPoliza" Association="Self.FK_Poliza_EstadoPoliza">
+            <End Role="EstadoPoliza" EntitySet="EstadoPoliza" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_poliza_Localidad" Association="Self.FK_poliza_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Poliza1" Association="Self.FK_Poliza_Poliza1">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="Poliza1" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_TipoCobertura" Association="Self.FK_Poliza_TipoCobertura">
+            <End Role="TipoCobertura" EntitySet="TipoCobertura" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Vehiculo" Association="Self.FK_Poliza_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaCuota_Poliza" Association="Self.FK_polizaCuota_Poliza">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="PolizaCuota" EntitySet="PolizaCuota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaHijo_EstadoCivil" Association="Self.FK_PolizaHijo_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaHijo_Poliza" Association="Self.FK_polizaHijo_Poliza">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaHijo_Sexo" Association="Self.FK_PolizaHijo_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaMedidaSeguridad_MedidaSeguridad" Association="Self.FK_polizaMedidaSeguridad_MedidaSeguridad">
+            <End Role="MedidaSeguridad" EntitySet="MedidaSeguridad" />
+            <End Role="PolizaMedidaSeguridad" EntitySet="PolizaMedidaSeguridad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaMedidaSeguridad_Poliza" Association="Self.FK_polizaMedidaSeguridad_Poliza">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="PolizaMedidaSeguridad" EntitySet="PolizaMedidaSeguridad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRecibo_PolizaCuota" Association="Self.FK_PolizaRecibo_PolizaCuota">
+            <End Role="PolizaCuota" EntitySet="PolizaCuota" />
+            <End Role="PolizaRecibo" EntitySet="PolizaRecibo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRecibo_Usuario" Association="Self.FK_PolizaRecibo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PolizaRecibo" EntitySet="PolizaRecibo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaRenovacion_Localidad" Association="Self.FK_polizaRenovacion_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaRenovacion_Poliza" Association="Self.FK_polizaRenovacion_Poliza">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_TipoCobertura" Association="Self.FK_PolizaRenovacion_TipoCobertura">
+            <End Role="TipoCobertura" EntitySet="TipoCobertura" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_Usuario" Association="Self.FK_PolizaRenovacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_Vehiculo" Association="Self.FK_PolizaRenovacion_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_EstadoCivil" Association="Self.FK_PolizaRenovacionHijo_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_PolizaRenovacion" Association="Self.FK_PolizaRenovacionHijo_PolizaRenovacion">
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacion" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_Sexo" Association="Self.FK_PolizaRenovacionHijo_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaValorFactorAutoscoring_Poliza" Association="Self.FK_PolizaValorFactorAutoscoring_Poliza">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="PolizaValorFactorAutoscoring" EntitySet="PolizaValorFactorAutoscoring" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFactorAutoScoring_GrupoFactorAutoScoring" Association="Self.FK_ValorFactorAutoScoring_GrupoFactorAutoScoring">
+            <End Role="GrupoFactorAutoScoring" EntitySet="GrupoFactorAutoScoring" />
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScoring" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFActorAutoscoring_Usuario" Association="Self.FK_ValorFActorAutoscoring_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScoring" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFactorAutoScoringHist_Usuario" Association="Self.FK_ValorFactorAutoScoringHist_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" Association="Self.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring">
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScoring" />
+            <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculo_Modelo" Association="Self.FK_Vehiculo_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_El_Asegurado" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBEntities_TP" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Clientes" EntityType="DB_El_Asegurado.Cliente" />
+          <EntitySet Name="Domicilios" EntityType="DB_El_Asegurado.Domicilio" />
+          <EntitySet Name="EstadoCivils" EntityType="DB_El_Asegurado.EstadoCivil" />
+          <EntitySet Name="EstadoClientes" EntityType="DB_El_Asegurado.EstadoCliente" />
+          <EntitySet Name="EstadoPolizas" EntityType="DB_El_Asegurado.EstadoPoliza" />
+          <EntitySet Name="GrupoFactorAutoScorings" EntityType="DB_El_Asegurado.GrupoFactorAutoScoring" />
+          <EntitySet Name="Localidads" EntityType="DB_El_Asegurado.Localidad" />
+          <EntitySet Name="Marcas" EntityType="DB_El_Asegurado.Marca" />
+          <EntitySet Name="MedidaSeguridads" EntityType="DB_El_Asegurado.MedidaSeguridad" />
+          <EntitySet Name="Modeloes" EntityType="DB_El_Asegurado.Modelo" />
+          <EntitySet Name="Pais" EntityType="DB_El_Asegurado.Pai" />
+          <EntitySet Name="Personas" EntityType="DB_El_Asegurado.Persona" />
+          <EntitySet Name="Polizas" EntityType="DB_El_Asegurado.Poliza" />
+          <EntitySet Name="PolizaCuotas" EntityType="DB_El_Asegurado.PolizaCuota" />
+          <EntitySet Name="PolizaHijoes" EntityType="DB_El_Asegurado.PolizaHijo" />
+          <EntitySet Name="PolizaMedidaSeguridads" EntityType="DB_El_Asegurado.PolizaMedidaSeguridad" />
+          <EntitySet Name="PolizaReciboes" EntityType="DB_El_Asegurado.PolizaRecibo" />
+          <EntitySet Name="PolizaRenovacions" EntityType="DB_El_Asegurado.PolizaRenovacion" />
+          <EntitySet Name="PolizaRenovacionHijoes" EntityType="DB_El_Asegurado.PolizaRenovacionHijo" />
+          <EntitySet Name="Profesions" EntityType="DB_El_Asegurado.Profesion" />
+          <EntitySet Name="Provincias" EntityType="DB_El_Asegurado.Provincia" />
+          <EntitySet Name="Sexoes" EntityType="DB_El_Asegurado.Sexo" />
+          <EntitySet Name="SituacionIVAs" EntityType="DB_El_Asegurado.SituacionIVA" />
+          <EntitySet Name="sysdiagrams" EntityType="DB_El_Asegurado.sysdiagram" />
+          <EntitySet Name="TipoCoberturas" EntityType="DB_El_Asegurado.TipoCobertura" />
+          <EntitySet Name="TipoDocumentoes" EntityType="DB_El_Asegurado.TipoDocumento" />
+          <EntitySet Name="Usuarios" EntityType="DB_El_Asegurado.Usuario" />
+          <EntitySet Name="ValorFactorAutoScorings" EntityType="DB_El_Asegurado.ValorFactorAutoScoring" />
+          <EntitySet Name="ValorFactorAutoScoringHists" EntityType="DB_El_Asegurado.ValorFactorAutoScoringHist" />
+          <EntitySet Name="Vehiculoes" EntityType="DB_El_Asegurado.Vehiculo" />
+          <EntitySet Name="PolizaValorFactorAutoscorings" EntityType="DB_El_Asegurado.PolizaValorFactorAutoscoring" />
+          <EntitySet Name="v_ValorFactorAutoScoring" EntityType="DB_El_Asegurado.v_ValorFactorAutoScoring" />
+          <AssociationSet Name="FK_Cliente_EstadoCliente" Association="DB_El_Asegurado.FK_Cliente_EstadoCliente">
+            <End Role="EstadoCliente" EntitySet="EstadoClientes" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Pais" Association="DB_El_Asegurado.FK_Cliente_Pais">
+            <End Role="Pai" EntitySet="Pais" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Persona" Association="DB_El_Asegurado.FK_Cliente_Persona">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Profesion" Association="DB_El_Asegurado.FK_Cliente_Profesion">
+            <End Role="Profesion" EntitySet="Profesions" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_SituacionIVA" Association="DB_El_Asegurado.FK_Cliente_SituacionIVA">
+            <End Role="SituacionIVA" EntitySet="SituacionIVAs" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Cliente" Association="DB_El_Asegurado.FK_Poliza_Cliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domicilio_Localidad" Association="DB_El_Asegurado.FK_domicilio_Localidad">
+            <End Role="Localidad" EntitySet="Localidads" />
+            <End Role="Domicilio" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Domicilio" Association="DB_El_Asegurado.FK_Persona_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilios" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_EstadoCivil" Association="DB_El_Asegurado.FK_Persona_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivils" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaHijo_EstadoCivil" Association="DB_El_Asegurado.FK_PolizaHijo_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivils" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_EstadoCivil" Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivils" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_EstadoPoliza" Association="DB_El_Asegurado.FK_Poliza_EstadoPoliza">
+            <End Role="EstadoPoliza" EntitySet="EstadoPolizas" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFactorAutoScoring_GrupoFactorAutoScoring" Association="DB_El_Asegurado.FK_ValorFactorAutoScoring_GrupoFactorAutoScoring">
+            <End Role="GrupoFactorAutoScoring" EntitySet="GrupoFactorAutoScorings" />
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScorings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Provincia" Association="DB_El_Asegurado.FK_Localidad_Provincia">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Localidad" EntitySet="Localidads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_poliza_Localidad" Association="DB_El_Asegurado.FK_poliza_Localidad">
+            <End Role="Localidad" EntitySet="Localidads" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaRenovacion_Localidad" Association="DB_El_Asegurado.FK_polizaRenovacion_Localidad">
+            <End Role="Localidad" EntitySet="Localidads" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Marca" Association="DB_El_Asegurado.FK_Modelo_Marca">
+            <End Role="Marca" EntitySet="Marcas" />
+            <End Role="Modelo" EntitySet="Modeloes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaMedidaSeguridad_MedidaSeguridad" Association="DB_El_Asegurado.FK_polizaMedidaSeguridad_MedidaSeguridad">
+            <End Role="MedidaSeguridad" EntitySet="MedidaSeguridads" />
+            <End Role="PolizaMedidaSeguridad" EntitySet="PolizaMedidaSeguridads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculo_Modelo" Association="DB_El_Asegurado.FK_Vehiculo_Modelo">
+            <End Role="Modelo" EntitySet="Modeloes" />
+            <End Role="Vehiculo" EntitySet="Vehiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="DB_El_Asegurado.FK_Provincia_Pais">
+            <End Role="Pai" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Sexo" Association="DB_El_Asegurado.FK_Persona_Sexo">
+            <End Role="Sexo" EntitySet="Sexoes" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoDocumento" Association="DB_El_Asegurado.FK_Persona_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumentoes" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Poliza1" Association="DB_El_Asegurado.FK_Poliza_Poliza1">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="Poliza1" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_TipoCobertura" Association="DB_El_Asegurado.FK_Poliza_TipoCobertura">
+            <End Role="TipoCobertura" EntitySet="TipoCoberturas" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poliza_Vehiculo" Association="DB_El_Asegurado.FK_Poliza_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculoes" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaCuota_Poliza" Association="DB_El_Asegurado.FK_polizaCuota_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaHijo_Poliza" Association="DB_El_Asegurado.FK_polizaHijo_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaMedidaSeguridad_Poliza" Association="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaMedidaSeguridad" EntitySet="PolizaMedidaSeguridads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polizaRenovacion_Poliza" Association="DB_El_Asegurado.FK_polizaRenovacion_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaValorFactorAutoscoring_Poliza" Association="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaValorFactorAutoscoring" EntitySet="PolizaValorFactorAutoscorings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRecibo_PolizaCuota" Association="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota">
+            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
+            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaHijo_Sexo" Association="DB_El_Asegurado.FK_PolizaHijo_Sexo">
+            <End Role="Sexo" EntitySet="Sexoes" />
+            <End Role="PolizaHijo" EntitySet="PolizaHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRecibo_Usuario" Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_TipoCobertura" Association="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura">
+            <End Role="TipoCobertura" EntitySet="TipoCoberturas" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_Usuario" Association="DB_El_Asegurado.FK_PolizaRenovacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacion_Vehiculo" Association="DB_El_Asegurado.FK_PolizaRenovacion_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculoes" />
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_PolizaRenovacion" Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_PolizaRenovacion">
+            <End Role="PolizaRenovacion" EntitySet="PolizaRenovacions" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRenovacionHijo_Sexo" Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_Sexo">
+            <End Role="Sexo" EntitySet="Sexoes" />
+            <End Role="PolizaRenovacionHijo" EntitySet="PolizaRenovacionHijoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFActorAutoscoring_Usuario" Association="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScorings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFactorAutoScoringHist_Usuario" Association="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" Association="DB_El_Asegurado.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring">
+            <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScorings" />
+            <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHists" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPais" Type="Int32" Nullable="false" />
+          <Property Name="NroCliente" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
+          <Property Name="AñoRegistro" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="idPersona" Type="Int32" Nullable="false" />
+          <Property Name="idProfesion" Type="Int32" Nullable="false" />
+          <Property Name="idSituacionIVA" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoCliente" Relationship="DB_El_Asegurado.FK_Cliente_EstadoCliente" FromRole="Cliente" ToRole="EstadoCliente" />
+          <NavigationProperty Name="Pai" Relationship="DB_El_Asegurado.FK_Cliente_Pais" FromRole="Cliente" ToRole="Pai" />
+          <NavigationProperty Name="Persona" Relationship="DB_El_Asegurado.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
+          <NavigationProperty Name="Profesion" Relationship="DB_El_Asegurado.FK_Cliente_Profesion" FromRole="Cliente" ToRole="Profesion" />
+          <NavigationProperty Name="SituacionIVA" Relationship="DB_El_Asegurado.FK_Cliente_SituacionIVA" FromRole="Cliente" ToRole="SituacionIVA" />
+          <NavigationProperty Name="Polizas" Relationship="DB_El_Asegurado.FK_Poliza_Cliente" FromRole="Cliente" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="Domicilio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calle" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="numero" Type="Decimal" Nullable="false" Precision="6" Scale="0" />
+          <Property Name="piso" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="departamento" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="idLocalidad" Type="Int32" />
+          <NavigationProperty Name="Localidad" Relationship="DB_El_Asegurado.FK_domicilio_Localidad" FromRole="Domicilio" ToRole="Localidad" />
+          <NavigationProperty Name="Personas" Relationship="DB_El_Asegurado.FK_Persona_Domicilio" FromRole="Domicilio" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="DB_El_Asegurado.FK_Persona_EstadoCivil" FromRole="EstadoCivil" ToRole="Persona" />
+          <NavigationProperty Name="PolizaHijoes" Relationship="DB_El_Asegurado.FK_PolizaHijo_EstadoCivil" FromRole="EstadoCivil" ToRole="PolizaHijo" />
+          <NavigationProperty Name="PolizaRenovacionHijoes" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_EstadoCivil" FromRole="EstadoCivil" ToRole="PolizaRenovacionHijo" />
+        </EntityType>
+        <EntityType Name="EstadoCliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_EstadoCliente" FromRole="EstadoCliente" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="EstadoPoliza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Polizas" Relationship="DB_El_Asegurado.FK_Poliza_EstadoPoliza" FromRole="EstadoPoliza" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="GrupoFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ValorFactorAutoScorings" Relationship="DB_El_Asegurado.FK_ValorFactorAutoScoring_GrupoFactorAutoScoring" FromRole="GrupoFactorAutoScoring" ToRole="ValorFactorAutoScoring" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="codpostal" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Domicilios" Relationship="DB_El_Asegurado.FK_domicilio_Localidad" FromRole="Localidad" ToRole="Domicilio" />
+          <NavigationProperty Name="Provincia" Relationship="DB_El_Asegurado.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+          <NavigationProperty Name="Polizas" Relationship="DB_El_Asegurado.FK_poliza_Localidad" FromRole="Localidad" ToRole="Poliza" />
+          <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_polizaRenovacion_Localidad" FromRole="Localidad" ToRole="PolizaRenovacion" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Modeloes" Relationship="DB_El_Asegurado.FK_Modelo_Marca" FromRole="Marca" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="MedidaSeguridad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PolizaMedidaSeguridads" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_MedidaSeguridad" FromRole="MedidaSeguridad" ToRole="PolizaMedidaSeguridad" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="idmarca" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Marca" Relationship="DB_El_Asegurado.FK_Modelo_Marca" FromRole="Modelo" ToRole="Marca" />
+          <NavigationProperty Name="Vehiculoes" Relationship="DB_El_Asegurado.FK_Vehiculo_Modelo" FromRole="Modelo" ToRole="Vehiculo" />
+        </EntityType>
+        <EntityType Name="Pai">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_Pais" FromRole="Pai" ToRole="Cliente" />
+          <NavigationProperty Name="Provincias" Relationship="DB_El_Asegurado.FK_Provincia_Pais" FromRole="Pai" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="idTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="nroDocumento" Type="Decimal" Nullable="false" Precision="11" Scale="0" />
+          <Property Name="nroCuil" Type="Decimal" Nullable="false" Precision="11" Scale="0" />
+          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idDomicilio" Type="Int32" />
+          <Property Name="idSexo" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_Persona" FromRole="Persona" ToRole="Cliente" />
+          <NavigationProperty Name="Domicilio" Relationship="DB_El_Asegurado.FK_Persona_Domicilio" FromRole="Persona" ToRole="Domicilio" />
+          <NavigationProperty Name="EstadoCivil" Relationship="DB_El_Asegurado.FK_Persona_EstadoCivil" FromRole="Persona" ToRole="EstadoCivil" />
+          <NavigationProperty Name="Sexo" Relationship="DB_El_Asegurado.FK_Persona_Sexo" FromRole="Persona" ToRole="Sexo" />
+          <NavigationProperty Name="TipoDocumento" Relationship="DB_El_Asegurado.FK_Persona_TipoDocumento" FromRole="Persona" ToRole="TipoDocumento" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroPolizaSuc" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="NroPoliza" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="NroPolizaSec" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="idTipoCobertura" Type="Int32" Nullable="false" />
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="datosVehiculo" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="valorAsegurado" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="nroMotor" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="nroChasis" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="patente" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="kmPorAño" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="nroSiniestros" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="fechaInicioVigencia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFinVigencia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="importePremio" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeDerechoEmision" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeTotal" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="idPolizaAnterior" Type="Int32" />
+          <Property Name="idEstadoPoliza" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="DB_El_Asegurado.FK_Poliza_Cliente" FromRole="Poliza" ToRole="Cliente" />
+          <NavigationProperty Name="EstadoPoliza" Relationship="DB_El_Asegurado.FK_Poliza_EstadoPoliza" FromRole="Poliza" ToRole="EstadoPoliza" />
+          <NavigationProperty Name="Localidad" Relationship="DB_El_Asegurado.FK_poliza_Localidad" FromRole="Poliza" ToRole="Localidad" />
+          <NavigationProperty Name="Poliza1" Relationship="DB_El_Asegurado.FK_Poliza_Poliza1" FromRole="Poliza" ToRole="Poliza1" />
+          <NavigationProperty Name="Poliza2" Relationship="DB_El_Asegurado.FK_Poliza_Poliza1" FromRole="Poliza1" ToRole="Poliza" />
+          <NavigationProperty Name="TipoCobertura" Relationship="DB_El_Asegurado.FK_Poliza_TipoCobertura" FromRole="Poliza" ToRole="TipoCobertura" />
+          <NavigationProperty Name="Vehiculo" Relationship="DB_El_Asegurado.FK_Poliza_Vehiculo" FromRole="Poliza" ToRole="Vehiculo" />
+          <NavigationProperty Name="PolizaCuotas" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="Poliza" ToRole="PolizaCuota" />
+          <NavigationProperty Name="PolizaHijoes" Relationship="DB_El_Asegurado.FK_polizaHijo_Poliza" FromRole="Poliza" ToRole="PolizaHijo" />
+          <NavigationProperty Name="PolizaMedidaSeguridads" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" FromRole="Poliza" ToRole="PolizaMedidaSeguridad" />
+          <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_polizaRenovacion_Poliza" FromRole="Poliza" ToRole="PolizaRenovacion" />
+          <NavigationProperty Name="PolizaValorFactorAutoscorings" Relationship="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza" FromRole="Poliza" ToRole="PolizaValorFactorAutoscoring" />
+        </EntityType>
+        <EntityType Name="PolizaCuota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="nroCuota" Type="Int32" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="PolizaCuota" ToRole="Poliza" />
+          <NavigationProperty Name="PolizaReciboes" Relationship="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" FromRole="PolizaCuota" ToRole="PolizaRecibo" />
+        </EntityType>
+        <EntityType Name="PolizaHijo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idSexo" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="Int32" Nullable="false" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoCivil" Relationship="DB_El_Asegurado.FK_PolizaHijo_EstadoCivil" FromRole="PolizaHijo" ToRole="EstadoCivil" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaHijo_Poliza" FromRole="PolizaHijo" ToRole="Poliza" />
+          <NavigationProperty Name="Sexo" Relationship="DB_El_Asegurado.FK_PolizaHijo_Sexo" FromRole="PolizaHijo" ToRole="Sexo" />
+        </EntityType>
+        <EntityType Name="PolizaMedidaSeguridad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMedidaSeguridad" Type="Int32" Nullable="false" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MedidaSeguridad" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_MedidaSeguridad" FromRole="PolizaMedidaSeguridad" ToRole="MedidaSeguridad" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" FromRole="PolizaMedidaSeguridad" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="PolizaRecibo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroRecibo" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="idPolizaCuota" Type="Int32" Nullable="false" />
+          <Property Name="FechaRecibo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HoraRecibo" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolizaCuota" Relationship="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" FromRole="PolizaRecibo" ToRole="PolizaCuota" />
+          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="PolizaRecibo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="PolizaRenovacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="NroPolizaSec" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="idTipoCobertura" Type="Int32" Nullable="false" />
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="valorAsegurado" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="nroMotor" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="nroChasis" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="patente" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="kmPorAño" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="nroSiniestros" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Localidad" Relationship="DB_El_Asegurado.FK_polizaRenovacion_Localidad" FromRole="PolizaRenovacion" ToRole="Localidad" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaRenovacion_Poliza" FromRole="PolizaRenovacion" ToRole="Poliza" />
+          <NavigationProperty Name="TipoCobertura" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura" FromRole="PolizaRenovacion" ToRole="TipoCobertura" />
+          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_Usuario" FromRole="PolizaRenovacion" ToRole="Usuario" />
+          <NavigationProperty Name="Vehiculo" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_Vehiculo" FromRole="PolizaRenovacion" ToRole="Vehiculo" />
+          <NavigationProperty Name="PolizaRenovacionHijoes" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_PolizaRenovacion" FromRole="PolizaRenovacion" ToRole="PolizaRenovacionHijo" />
+        </EntityType>
+        <EntityType Name="PolizaRenovacionHijo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idSexo" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoCivil" Type="Int32" Nullable="false" />
+          <Property Name="idPolizaRenovacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoCivil" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_EstadoCivil" FromRole="PolizaRenovacionHijo" ToRole="EstadoCivil" />
+          <NavigationProperty Name="PolizaRenovacion" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_PolizaRenovacion" FromRole="PolizaRenovacionHijo" ToRole="PolizaRenovacion" />
+          <NavigationProperty Name="Sexo" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_Sexo" FromRole="PolizaRenovacionHijo" ToRole="Sexo" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_Profesion" FromRole="Profesion" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="idPais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Localidads" Relationship="DB_El_Asegurado.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <NavigationProperty Name="Pai" Relationship="DB_El_Asegurado.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pai" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="DB_El_Asegurado.FK_Persona_Sexo" FromRole="Sexo" ToRole="Persona" />
+          <NavigationProperty Name="PolizaHijoes" Relationship="DB_El_Asegurado.FK_PolizaHijo_Sexo" FromRole="Sexo" ToRole="PolizaHijo" />
+          <NavigationProperty Name="PolizaRenovacionHijoes" Relationship="DB_El_Asegurado.FK_PolizaRenovacionHijo_Sexo" FromRole="Sexo" ToRole="PolizaRenovacionHijo" />
+        </EntityType>
+        <EntityType Name="SituacionIVA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_SituacionIVA" FromRole="SituacionIVA" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoCobertura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="franquicia" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Polizas" Relationship="DB_El_Asegurado.FK_Poliza_TipoCobertura" FromRole="TipoCobertura" ToRole="Poliza" />
+          <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura" FromRole="TipoCobertura" ToRole="PolizaRenovacion" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="DB_El_Asegurado.FK_Persona_TipoDocumento" FromRole="TipoDocumento" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PolizaReciboes" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="Usuario" ToRole="PolizaRecibo" />
+          <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_Usuario" FromRole="Usuario" ToRole="PolizaRenovacion" />
+          <NavigationProperty Name="ValorFactorAutoScorings" Relationship="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario" FromRole="Usuario" ToRole="ValorFactorAutoScoring" />
+          <NavigationProperty Name="ValorFactorAutoScoringHists" Relationship="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario" FromRole="Usuario" ToRole="ValorFactorAutoScoringHist" />
+        </EntityType>
+        <EntityType Name="ValorFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGrupoFactorAutoscoring" Type="Int32" Nullable="false" />
+          <Property Name="CodFactorItem" Type="Int32" Nullable="false" />
+          <Property Name="valorPorcentual" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GrupoFactorAutoScoring" Relationship="DB_El_Asegurado.FK_ValorFactorAutoScoring_GrupoFactorAutoScoring" FromRole="ValorFactorAutoScoring" ToRole="GrupoFactorAutoScoring" />
+          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario" FromRole="ValorFactorAutoScoring" ToRole="Usuario" />
+          <NavigationProperty Name="ValorFactorAutoScoringHists" Relationship="DB_El_Asegurado.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" FromRole="ValorFactorAutoScoring" ToRole="ValorFactorAutoScoringHist" />
+        </EntityType>
+        <EntityType Name="ValorFactorAutoScoringHist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idValorFactorAutoscoring" Type="Int32" Nullable="false" />
+          <Property Name="valorPorcentual" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario" FromRole="ValorFactorAutoScoringHist" ToRole="Usuario" />
+          <NavigationProperty Name="ValorFactorAutoScoring" Relationship="DB_El_Asegurado.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" FromRole="ValorFactorAutoScoringHist" ToRole="ValorFactorAutoScoring" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idModelo" Type="Int32" Nullable="false" />
+          <Property Name="AñoFabricacion" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="valorAsegurado" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <NavigationProperty Name="Modelo" Relationship="DB_El_Asegurado.FK_Vehiculo_Modelo" FromRole="Vehiculo" ToRole="Modelo" />
+          <NavigationProperty Name="Polizas" Relationship="DB_El_Asegurado.FK_Poliza_Vehiculo" FromRole="Vehiculo" ToRole="Poliza" />
+          <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_Vehiculo" FromRole="Vehiculo" ToRole="PolizaRenovacion" />
+        </EntityType>
+        <EntityType Name="PolizaValorFactorAutoscoring">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="idValorFactorAutoscoring" />
+            <PropertyRef Name="idPoliza" />
+            <PropertyRef Name="ValorPorcentual" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idValorFactorAutoscoring" Type="Int32" Nullable="false" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="ValorPorcentual" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza" FromRole="PolizaValorFactorAutoscoring" ToRole="Poliza" />
+        </EntityType>
+        <EntityType Name="v_ValorFactorAutoScoring">
+          <Key>
+            <PropertyRef Name="GrupoFactorAutoScoring" />
+            <PropertyRef Name="ItemFactor" />
+            <PropertyRef Name="valorporcentual" />
+          </Key>
+          <Property Name="GrupoFactorAutoScoring" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ItemFactor" Type="String" Nullable="false" MaxLength="61" FixedLength="false" Unicode="true" />
+          <Property Name="valorporcentual" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Cliente_EstadoCliente">
+          <End Type="DB_El_Asegurado.EstadoCliente" Role="EstadoCliente" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idEstadoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Pais">
+          <End Type="DB_El_Asegurado.Pai" Role="Pai" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Persona">
+          <End Type="DB_El_Asegurado.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Profesion">
+          <End Type="DB_El_Asegurado.Profesion" Role="Profesion" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_SituacionIVA">
+          <End Type="DB_El_Asegurado.SituacionIVA" Role="SituacionIVA" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SituacionIVA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idSituacionIVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Cliente">
+          <End Type="DB_El_Asegurado.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domicilio_Localidad">
+          <End Type="DB_El_Asegurado.Localidad" Role="Localidad" Multiplicity="0..1" />
+          <End Type="DB_El_Asegurado.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Domicilio">
+          <End Type="DB_El_Asegurado.Domicilio" Role="Domicilio" Multiplicity="0..1" />
+          <End Type="DB_El_Asegurado.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_EstadoCivil">
+          <End Type="DB_El_Asegurado.EstadoCivil" Role="EstadoCivil" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaHijo_EstadoCivil">
+          <End Type="DB_El_Asegurado.EstadoCivil" Role="EstadoCivil" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaHijo" Role="PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_EstadoCivil">
+          <End Type="DB_El_Asegurado.EstadoCivil" Role="EstadoCivil" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacionHijo" Role="PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_EstadoPoliza">
+          <End Type="DB_El_Asegurado.EstadoPoliza" Role="EstadoPoliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPoliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idEstadoPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFactorAutoScoring_GrupoFactorAutoScoring">
+          <End Type="DB_El_Asegurado.GrupoFactorAutoScoring" Role="GrupoFactorAutoScoring" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.ValorFactorAutoScoring" Role="ValorFactorAutoScoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoFactorAutoScoring">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoring">
+              <PropertyRef Name="idGrupoFactorAutoscoring" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Provincia">
+          <End Type="DB_El_Asegurado.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Localidad" Role="Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_poliza_Localidad">
+          <End Type="DB_El_Asegurado.Localidad" Role="Localidad" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaRenovacion_Localidad">
+          <End Type="DB_El_Asegurado.Localidad" Role="Localidad" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Marca">
+          <End Type="DB_El_Asegurado.Marca" Role="Marca" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Modelo" Role="Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="idmarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaMedidaSeguridad_MedidaSeguridad">
+          <End Type="DB_El_Asegurado.MedidaSeguridad" Role="MedidaSeguridad" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaMedidaSeguridad" Role="PolizaMedidaSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedidaSeguridad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaMedidaSeguridad">
+              <PropertyRef Name="idMedidaSeguridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculo_Modelo">
+          <End Type="DB_El_Asegurado.Modelo" Role="Modelo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vehiculo">
+              <PropertyRef Name="idModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Type="DB_El_Asegurado.Pai" Role="Pai" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Provincia" Role="Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pai">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Sexo">
+          <End Type="DB_El_Asegurado.Sexo" Role="Sexo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_TipoDocumento">
+          <End Type="DB_El_Asegurado.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Poliza1">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="0..1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza1">
+              <PropertyRef Name="idPolizaAnterior" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_TipoCobertura">
+          <End Type="DB_El_Asegurado.TipoCobertura" Role="TipoCobertura" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idTipoCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poliza_Vehiculo">
+          <End Type="DB_El_Asegurado.Vehiculo" Role="Vehiculo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaCuota_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaCuota">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaHijo_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaHijo" Role="PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaMedidaSeguridad_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaMedidaSeguridad" Role="PolizaMedidaSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaMedidaSeguridad">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polizaRenovacion_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaValorFactorAutoscoring_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaValorFactorAutoscoring" Role="PolizaValorFactorAutoscoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaValorFactorAutoscoring">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRecibo_PolizaCuota">
+          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaCuota">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRecibo">
+              <PropertyRef Name="idPolizaCuota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaHijo_Sexo">
+          <End Type="DB_El_Asegurado.Sexo" Role="Sexo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaHijo" Role="PolizaHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaHijo">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRecibo_Usuario">
+          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRecibo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_TipoCobertura">
+          <End Type="DB_El_Asegurado.TipoCobertura" Role="TipoCobertura" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCobertura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idTipoCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_Usuario">
+          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacion_Vehiculo">
+          <End Type="DB_El_Asegurado.Vehiculo" Role="Vehiculo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacion">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_PolizaRenovacion">
+          <End Type="DB_El_Asegurado.PolizaRenovacion" Role="PolizaRenovacion" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacionHijo" Role="PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaRenovacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idPolizaRenovacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRenovacionHijo_Sexo">
+          <End Type="DB_El_Asegurado.Sexo" Role="Sexo" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRenovacionHijo" Role="PolizaRenovacionHijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRenovacionHijo">
+              <PropertyRef Name="idSexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFActorAutoscoring_Usuario">
+          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.ValorFactorAutoScoring" Role="ValorFactorAutoScoring" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoring">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFactorAutoScoringHist_Usuario">
+          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.ValorFactorAutoScoringHist" Role="ValorFactorAutoScoringHist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoringHist">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring">
+          <End Type="DB_El_Asegurado.ValorFactorAutoScoring" Role="ValorFactorAutoScoring" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.ValorFactorAutoScoringHist" Role="ValorFactorAutoScoringHist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValorFactorAutoScoring">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ValorFactorAutoScoringHist">
+              <PropertyRef Name="idValorFactorAutoscoring" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_El_AseguradoStoreContainer" CdmEntityContainer="DBEntities_TP">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DB_El_Asegurado.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DB_El_Asegurado.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DB_El_Asegurado.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DB_El_Asegurado.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DB_El_Asegurado.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB_El_Asegurado.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB_El_Asegurado.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idEstadoCliente" ColumnName="idEstadoCliente" />
+                <ScalarProperty Name="idSituacionIVA" ColumnName="idSituacionIVA" />
+                <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="AñoRegistro" ColumnName="AñoRegistro" />
+                <ScalarProperty Name="NroCliente" ColumnName="NroCliente" />
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domicilios">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Domicilio">
+              <MappingFragment StoreEntitySet="Domicilio">
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCivils">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.EstadoCivil">
+              <MappingFragment StoreEntitySet="EstadoCivil">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoClientes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.EstadoCliente">
+              <MappingFragment StoreEntitySet="EstadoCliente">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoPolizas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.EstadoPoliza">
+              <MappingFragment StoreEntitySet="EstadoPoliza">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoFactorAutoScorings">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.GrupoFactorAutoScoring">
+              <MappingFragment StoreEntitySet="GrupoFactorAutoScoring">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidads">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Localidad">
+              <MappingFragment StoreEntitySet="Localidad">
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="codpostal" ColumnName="codpostal" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedidaSeguridads">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.MedidaSeguridad">
+              <MappingFragment StoreEntitySet="MedidaSeguridad">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modeloes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Pai">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="idEstadoCivil" ColumnName="idEstadoCivil" />
+                <ScalarProperty Name="idSexo" ColumnName="idSexo" />
+                <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="nroCuil" ColumnName="nroCuil" />
+                <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
+                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polizas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Poliza">
+              <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="idEstadoPoliza" ColumnName="idEstadoPoliza" />
+                <ScalarProperty Name="idPolizaAnterior" ColumnName="idPolizaAnterior" />
+                <ScalarProperty Name="importeTotal" ColumnName="importeTotal" />
+                <ScalarProperty Name="importeDerechoEmision" ColumnName="importeDerechoEmision" />
+                <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
+                <ScalarProperty Name="importePremio" ColumnName="importePremio" />
+                <ScalarProperty Name="fechaFinVigencia" ColumnName="fechaFinVigencia" />
+                <ScalarProperty Name="fechaInicioVigencia" ColumnName="fechaInicioVigencia" />
+                <ScalarProperty Name="nroSiniestros" ColumnName="nroSiniestros" />
+                <ScalarProperty Name="kmPorAño" ColumnName="kmPorAño" />
+                <ScalarProperty Name="patente" ColumnName="patente" />
+                <ScalarProperty Name="nroChasis" ColumnName="nroChasis" />
+                <ScalarProperty Name="nroMotor" ColumnName="nroMotor" />
+                <ScalarProperty Name="valorAsegurado" ColumnName="valorAsegurado" />
+                <ScalarProperty Name="datosVehiculo" ColumnName="datosVehiculo" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="idTipoCobertura" ColumnName="idTipoCobertura" />
+                <ScalarProperty Name="NroPolizaSec" ColumnName="NroPolizaSec" />
+                <ScalarProperty Name="NroPoliza" ColumnName="NroPoliza" />
+                <ScalarProperty Name="NroPolizaSuc" ColumnName="NroPolizaSuc" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaCuotas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaCuota">
+              <MappingFragment StoreEntitySet="PolizaCuota">
+                <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
+                <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
+                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaHijoes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaHijo">
+              <MappingFragment StoreEntitySet="PolizaHijo">
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="idEstadoCivil" ColumnName="idEstadoCivil" />
+                <ScalarProperty Name="idSexo" ColumnName="idSexo" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaMedidaSeguridads">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaMedidaSeguridad">
+              <MappingFragment StoreEntitySet="PolizaMedidaSeguridad">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="idMedidaSeguridad" ColumnName="idMedidaSeguridad" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaReciboes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaRecibo">
+              <MappingFragment StoreEntitySet="PolizaRecibo">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="HoraRecibo" ColumnName="HoraRecibo" />
+                <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
+                <ScalarProperty Name="idPolizaCuota" ColumnName="idPolizaCuota" />
+                <ScalarProperty Name="NroRecibo" ColumnName="NroRecibo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaRenovacions">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaRenovacion">
+              <MappingFragment StoreEntitySet="PolizaRenovacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nroSiniestros" ColumnName="nroSiniestros" />
+                <ScalarProperty Name="kmPorAño" ColumnName="kmPorAño" />
+                <ScalarProperty Name="patente" ColumnName="patente" />
+                <ScalarProperty Name="nroChasis" ColumnName="nroChasis" />
+                <ScalarProperty Name="nroMotor" ColumnName="nroMotor" />
+                <ScalarProperty Name="valorAsegurado" ColumnName="valorAsegurado" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="idTipoCobertura" ColumnName="idTipoCobertura" />
+                <ScalarProperty Name="NroPolizaSec" ColumnName="NroPolizaSec" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaRenovacionHijoes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaRenovacionHijo">
+              <MappingFragment StoreEntitySet="PolizaRenovacionHijo">
+                <ScalarProperty Name="idPolizaRenovacion" ColumnName="idPolizaRenovacion" />
+                <ScalarProperty Name="idEstadoCivil" ColumnName="idEstadoCivil" />
+                <ScalarProperty Name="idSexo" ColumnName="idSexo" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesions">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Profesion">
+              <MappingFragment StoreEntitySet="Profesion">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincias">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexoes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Sexo">
+              <MappingFragment StoreEntitySet="Sexo">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SituacionIVAs">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.SituacionIVA">
+              <MappingFragment StoreEntitySet="SituacionIVA">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCoberturas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.TipoCobertura">
+              <MappingFragment StoreEntitySet="TipoCobertura">
+                <ScalarProperty Name="franquicia" ColumnName="franquicia" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumentoes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValorFactorAutoScorings">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.ValorFactorAutoScoring">
+              <MappingFragment StoreEntitySet="ValorFactorAutoScoring">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="valorPorcentual" ColumnName="valorPorcentual" />
+                <ScalarProperty Name="CodFactorItem" ColumnName="CodFactorItem" />
+                <ScalarProperty Name="idGrupoFactorAutoscoring" ColumnName="idGrupoFactorAutoscoring" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValorFactorAutoScoringHists">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.ValorFactorAutoScoringHist">
+              <MappingFragment StoreEntitySet="ValorFactorAutoScoringHist">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="valorPorcentual" ColumnName="valorPorcentual" />
+                <ScalarProperty Name="idValorFactorAutoscoring" ColumnName="idValorFactorAutoscoring" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculoes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.Vehiculo">
+              <MappingFragment StoreEntitySet="Vehiculo">
+                <ScalarProperty Name="valorAsegurado" ColumnName="valorAsegurado" />
+                <ScalarProperty Name="AñoFabricacion" ColumnName="AñoFabricacion" />
+                <ScalarProperty Name="idModelo" ColumnName="idModelo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaValorFactorAutoscorings">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaValorFactorAutoscoring">
+              <MappingFragment StoreEntitySet="PolizaValorFactorAutoscoring">
+                <ScalarProperty Name="ValorPorcentual" ColumnName="ValorPorcentual" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="idValorFactorAutoscoring" ColumnName="idValorFactorAutoscoring" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ValorFactorAutoScoring">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.v_ValorFactorAutoScoring">
+              <MappingFragment StoreEntitySet="v_ValorFactorAutoScoring">
+                <ScalarProperty Name="valorporcentual" ColumnName="valorporcentual" />
+                <ScalarProperty Name="ItemFactor" ColumnName="ItemFactor" />
+                <ScalarProperty Name="GrupoFactorAutoScoring" ColumnName="GrupoFactorAutoScoring" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

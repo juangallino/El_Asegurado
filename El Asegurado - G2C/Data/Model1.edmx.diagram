@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e434b21a50b5485a88b69c947b85d581" Name="Diagram1" ZoomLevel="73">
+
+        <EntityTypeShape EntityType="DB_El_Asegurado.Cliente" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Domicilio" Width="1.5" PointX="0.75" PointY="14.625" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.EstadoCivil" Width="1.5" PointX="0.75" PointY="9.375" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.EstadoCliente" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.EstadoPoliza" Width="1.5" PointX="5.25" PointY="16.625" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.GrupoFactorAutoScoring" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Localidad" Width="1.5" PointX="1.5" PointY="18.625" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Marca" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.MedidaSeguridad" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Modelo" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Pai" Width="1.5" PointX="1.5" PointY="26" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Persona" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Poliza" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaCuota" Width="1.5" PointX="9.75" PointY="22.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaHijo" Width="1.5" PointX="9.75" PointY="5.125" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRecibo" Width="1.5" PointX="12" PointY="22.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRenovacion" Width="1.5" PointX="12.75" PointY="7.875" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRenovacionHijo" Width="1.5" PointX="15" PointY="9.125" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Profesion" Width="1.5" PointX="3" PointY="15.875" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Provincia" Width="1.5" PointX="1.5" PointY="22.875" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Sexo" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.SituacionIVA" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.TipoCobertura" Width="1.5" PointX="5.25" PointY="13.625" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.TipoDocumento" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Usuario" Width="1.5" PointX="10.5" PointY="12.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.ValorFactorAutoScoring" Width="1.5" PointX="12.75" PointY="14" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.ValorFactorAutoScoringHist" Width="1.5" PointX="15" PointY="13.375" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.Vehiculo" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaMedidaSeguridad" Width="1.5" PointX="9.75" PointY="9.25" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaValorFactorAutoscoring" Width="1.5" PointX="9.75" PointY="19.5" />
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <EntityTypeShape EntityType="DB_El_Asegurado.v_ValorFactorAutoScoring" Width="1.5" PointX="14.75" PointY="4" />
+
+        <AssociationConnector Association="DB_El_Asegurado.FK_Cliente_EstadoCliente" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Cliente_Pais" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Cliente_Persona" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Cliente_Profesion" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Cliente_SituacionIVA" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_Cliente" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_domicilio_Localidad" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Persona_Domicilio" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Persona_EstadoCivil" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaHijo_EstadoCivil" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_EstadoCivil" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_EstadoPoliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_ValorFactorAutoScoring_GrupoFactorAutoScoring" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Localidad_Provincia" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_poliza_Localidad" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaRenovacion_Localidad" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Modelo_Marca" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaMedidaSeguridad_MedidaSeguridad" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Vehiculo_Modelo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Provincia_Pais" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Persona_Sexo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Persona_TipoDocumento" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_Poliza1" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_TipoCobertura" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_Vehiculo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaCuota_Poliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaHijo_Poliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaRenovacion_Poliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaHijo_Sexo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_Usuario" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_Vehiculo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_PolizaRenovacion" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacionHijo_Sexo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
