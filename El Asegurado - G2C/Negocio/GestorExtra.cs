@@ -13,7 +13,7 @@ namespace Negocio
         public List<dto_extra> BuscarLocalidad(int IdProvincia)
         {
             DAOExtra dAOExtra = new DAOExtra();
-         
+
             // return dAOExtra.BuscarLocalidad(IdProvincia);
 
             List<dto_extra> listaCarga = new List<dto_extra>();
@@ -33,10 +33,11 @@ namespace Negocio
         {
             DAOExtra dAOExtra = new DAOExtra();
             //return dAOExtra.BuscarModelos(idMarca);
-            
+
             List<dto_extra> listaCarga = new List<dto_extra>();
 
-            foreach( var modelo in dAOExtra.BuscarModelos(idMarca)){
+            foreach (var modelo in dAOExtra.BuscarModelos(idMarca))
+            {
 
                 dto_extra dto_extra = new dto_extra();
                 dto_extra dtoExtra = dto_extra;
@@ -50,7 +51,7 @@ namespace Negocio
         public List<dto_extra> CargarTipoCobertura()
         {
             DAOExtra dAOExtra = new DAOExtra();
-           // return dAOExtra.BuscarCoberturas();
+            // return dAOExtra.BuscarCoberturas();
 
             List<dto_extra> listaCarga = new List<dto_extra>();
 
@@ -91,7 +92,7 @@ namespace Negocio
 
         public List<dto_extra> CargaMarca()
         {
-                DAOExtra dAOExtra = new DAOExtra();
+            DAOExtra dAOExtra = new DAOExtra();
             // return dAOExtra.BuscarMarcas();
 
             List<dto_extra> listaCarga = new List<dto_extra>();
@@ -134,7 +135,7 @@ namespace Negocio
         public List<dto_extra> CargarSexo()
         {
             DAOExtra dAOExtra = new DAOExtra();
-           // return dAOExtra.BuscarSexos();
+            // return dAOExtra.BuscarSexos();
 
             List<dto_extra> listaCarga = new List<dto_extra>();
 
@@ -179,13 +180,11 @@ namespace Negocio
         public List<dto_extra> CargarEstadosPoliza()
         {
             DAOExtra dAOExtra = new DAOExtra();
-            
 
             List<dto_extra> listaCarga = new List<dto_extra>();
 
             foreach (var DATO in dAOExtra.BuscarEstadosPoliza())
             {
-
                 dto_extra dtoExtra = new dto_extra();
                 dtoExtra.id = DATO.id;
                 dtoExtra.nombre = DATO.nombre;
@@ -193,10 +192,26 @@ namespace Negocio
             }
             return listaCarga;
         }
-
-        public int GetNroSiniestros(int idCliente)
+        public List<dto_extra> CargarTipoDocumento()
         {
-            return new Random().Next(3);
+            DAOExtra dAOExtra = new DAOExtra();
+            // return dAOExtra.BuscarCoberturas();
+
+            List<dto_extra> listaCarga = new List<dto_extra>();
+
+            foreach (var DATO in dAOExtra.BuscarTipoDocumento())
+            {
+
+                dto_extra dto_extra = new dto_extra();
+                dto_extra dtoExtra = dto_extra;
+                dtoExtra.id = DATO.id;
+                dtoExtra.nombre = DATO.nombre;
+                listaCarga.Add(dtoExtra);
+            }
+            return listaCarga;
+
+
+
         }
     }
 }

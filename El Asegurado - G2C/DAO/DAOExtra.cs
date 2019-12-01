@@ -102,8 +102,16 @@ namespace DAO
 
             }
         }
+        public List<TipoDocumento> BuscarTipoDocumento()
+        {
+            using (DBEntities_TP db = new DBEntities_TP())
+            {
+                return db.TipoDocumentoes.AsNoTracking().ToList();
 
-      
+            }
+        }
+
+
 
 
 

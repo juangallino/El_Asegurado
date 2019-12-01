@@ -22,7 +22,7 @@ namespace DAO
 
         public Persona GetPersona(int idPersona)
         {
-            using(DBEntities_TP db = new DBEntities_TP())
+            using (DBEntities_TP db = new DBEntities_TP())
             {
                 Persona persona = new Persona();
                 persona = db.Personas.Find(idPersona);
@@ -49,7 +49,7 @@ namespace DAO
                 return localidad;
             }
         }
-        
+
         public EstadoCliente GetEstadoCliente(int idEstadoCliente)
         {
             using (DBEntities_TP db = new DBEntities_TP())
@@ -59,14 +59,14 @@ namespace DAO
                 return estadoCliente;
             }
 ;
-        
+
         }
-        
+
         public SituacionIVA GetSituacionIVA(int idSitIVA)
         {
             using (DBEntities_TP db = new DBEntities_TP())
             {
-                SituacionIVA situacionIVA= new SituacionIVA();
+                SituacionIVA situacionIVA = new SituacionIVA();
                 situacionIVA = db.SituacionIVAs.Find(idSitIVA);
                 return situacionIVA;
             }
@@ -136,25 +136,39 @@ namespace DAO
 
         public Pai GetPais(int idPais)
         {
-            using(DBEntities_TP db = new DBEntities_TP())
+            using (DBEntities_TP db = new DBEntities_TP())
             {
                 Pai pais = new Pai();
                 pais = db.Pais.Find(idPais);
                 return pais;
             }
         }
-
-       /* public string GetNombre(int idCliente)
-        {
-            using (DBEntities_TP db = new DBEntities_TP())
-            {
-
-                var aux = db.Clientes.
-                aux.
-            }
-        }*/
     }
-
-
-
 }
+        //public List<Cliente> ConsultaBuscarClientes(DTO_busquedaCliente dtoBC)
+        //{
+        //    try
+        //    {
+         //       using (DBEntities_TP db = new DBEntities_TP())
+          //      {
+           //          var aux = db.Clientes.AsNoTracking().Where(c => c.id.Tostring() == id) &&
+                    //                                             (dtoBC.Nombre == "" || (p.Cliente.Persona.nombre.Contains(dtoBC.nombreCliente) || p.Cliente.Persona.apellido.Contains(dtoBC.nombreCliente))) &&
+                    //                                              (dtoBC.idestado == 0 || p.EstadoPoliza.id == dtoBC.idestado) &&
+                    //                                              (dtoBC.idmarca == 0 || p.Vehiculo.Modelo.Marca.id == dtoBC.idmarca) &&
+                    //                                              (dtoBC.idmodelo == 0 || p.Vehiculo.Modelo.id == dtoBC.idmodelo) &&
+                    //                                              (dtoBC.fdesde == null || p.fechaFinVigencia >= dtoBC.fdesde) &&
+                    //                                              (dtoBC.fhasta == null || p.fechaFinVigencia <= dtoBC.fhasta)).ToList();
+
+             //       return; 
+
+          //--      }
+          //  }
+          //  catch (Exception e)
+          //  {
+          //      throw new Exception(e.Message);
+          //  }
+       // }
+
+
+
+

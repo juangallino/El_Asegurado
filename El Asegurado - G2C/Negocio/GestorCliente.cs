@@ -7,8 +7,12 @@ using Data;
 using DTO;
 using DAO;
 
+
 namespace Negocio
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GestorCliente
     {
         //comentario
@@ -106,6 +110,34 @@ namespace Negocio
 
             return cuotasImpagas;
         }
+        /// <summary>
+        
+        /* public List<dto_ListaClientesBuscados> BuscarCliente(dto_busquedaCliente dto_BusquedaCliente)
+        {
+            DAOCliente dAOCliente = new DAOCliente();
+           
+            List<dto_ListaClientesBuscados> listaAux = new List<dto_ListaClientesBuscados>();
+
+            foreach (var Cliente in dAOCliente.ConsultaBuscarClientes(dto_BusquedaCliente))
+            {
+
+                dto_ListaClientesBuscados dto_Lista = new dto_ListaClientesBuscados();
+
+                dto_Lista.id = Cliente.id;
+                dto_Lista.Patente = Cliente.patente;
+                dto_Lista.Cliente = Cliente.idCliente.ToString(); ; //Cliente.Cliente.Persona.nombre + ", " + Cliente.Cliente.Persona.apellido;
+                dto_Lista.Vehiculo = Cliente.datosVehiculo;
+                dto_Lista.Motor = Cliente.nroMotor;
+                dto_Lista.Chasis = Cliente.nroChasis;
+                dto_Lista.FechaFin = Cliente.fechaFinVigencia;
+                dto_Lista.FechaInicio = Cliente.fechaInicioVigencia;
+                dto_Lista.Estado = Cliente.idEstadoCliente.ToString();// Cliente.EstadoCliente.nombre;
+                listaAux.Add(dto_Lista);
+            }
+            return listaAux;
+            
+        }
+        */
 
     }
 }

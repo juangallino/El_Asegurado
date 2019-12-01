@@ -79,6 +79,18 @@
     <Compile Include="DeclaracionHijosForm.Designer.cs">
       <DependentUpon>DeclaracionHijosForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClienteForm.Designer.cs">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PolizaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PolizaForm.Designer.cs">
+      <DependentUpon>PolizaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MedidasSeguridadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,8 +111,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ClienteForm.resx">
+      <DependentUpon>ClienteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeclaracionHijosForm.resx">
       <DependentUpon>DeclaracionHijosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PolizaForm.resx">
+      <DependentUpon>PolizaForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MedidasSeguridadForm.resx">
       <DependentUpon>MedidasSeguridadForm.cs</DependentUpon>
