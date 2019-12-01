@@ -8,7 +8,7 @@ namespace DTO
 {
     public class DTO_busquedaCliente
     {
-        public int idCliente { get; set; }
+        public Nullable<int> idCliente { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int NroDocumento { get; set; }

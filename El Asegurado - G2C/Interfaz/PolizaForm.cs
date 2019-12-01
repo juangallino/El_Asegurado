@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using DTO;
 using Negocio;
-
+using System.Threading;
 
 namespace Interfaz
 {
@@ -94,7 +94,7 @@ namespace Interfaz
                 dtoPoliza.Tipo_Cobertura = Convert.ToInt32(comboBoxTipoCobertura.SelectedValue);
                 dtoPoliza.NombreCobertura = comboBoxTipoCobertura.Text;
                 dtoPoliza.FechaInicioVigencia = (timepickerFechaInicio.Value);
-                dtoPoliza.Patente = textBoxPatente.Text;
+                dtoPoliza.Patente = nroPatenteMaskedTextBox.Text;
                 dtoPoliza.IdCliente = Convert.ToInt32(textBoxClienteNro.Text);
 
                 //CREAMOS LAS LISTA DE CUOTAS
@@ -271,7 +271,7 @@ namespace Interfaz
             textBoxMotorNro.Text = "";
             textBoxSumaAsegurada.Text = "";
             comboBoxPatente.SelectedItem = null;
-            textBoxPatente.Text = "";
+            nroPatenteMaskedTextBox.Text = "";
             textBoxClienteNro.Text = "";
 
             //cliente
@@ -283,8 +283,116 @@ namespace Interfaz
         }
         private void BtnSiguiente_Click(object sender, EventArgs e)
         {
-           
+            try
+            {
+                switch (tabControlPoliza2.SelectedTab.Text)
+                {
+                    case "Datos Póliza":
+                        var control = ValidarPestañaNuevo();
+                        //Si no valida, no pasa a la siguiente pestaña, y muestra error
+                        if (control == null)
+                            tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex + 1);
+                        else
+                        {
+                            MessageBox.Show("Por favor, completa los datos para continuar", "Atención: Datos con Error o Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                            control.Focus();
+                            //Si es combo box lo despliega, sino llama al metodo Blink
+                            if (control.GetType().Name == "ComboBox")
+                            {
+                                ComboBox ctrl = control as ComboBox;
+                                ctrl.DroppedDown = true;
+                            }
+                            else
+                            {
+                                Blink(control);
+                            }
+
+                        }
+
+                        break;
+                    case "Revisión":
+                        ObtenerDatos();
+                        break;
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+
+
+        }
+        //Método que genera un cambio de color en el control que generó un error
+        private async void Blink(Control control)
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            cts.CancelAfter(1000);
+            Color colorOrig = control.BackColor;
+            while (!cts.IsCancellationRequested)
+            {
+                await Task.Delay(250);
+                control.BackColor = control.BackColor == Color.Red ? Color.PaleVioletRed : Color.Red;
+
+            }
+            control.BackColor = colorOrig;
+        }
+
+
+        //Valida que los controles estén completos y correctos
+        private System.Windows.Forms.Control ValidarPestañaNuevo()
+        {
+            //Recorremos los controles cuyo contenido puede contener algún error
+            //Cliente
+            if (textBoxClienteNro.Text == "")
+            {
+                return textBoxClienteNro;
+            }
+            //Domicilio de Riesgo ////// Si no se seleccionó Localidad es porque no se abrió el combobox de provincia
+            if (Convert.ToString(comboBoxLocalidad.SelectedValue) == "")
+            {
+                return comboBoxProvincia;
+            }
+            //Modelo ////// Si no se seleccionó Modelo es porque no se abrió el combobox de Marca
+            if (Convert.ToString(comboBoxModelo.SelectedValue) == "")
+            {
+                return comboBoxMarca;
+            }
+            //Año vehículo
+            if (comboBoxAño.Text == "")
+            {
+                return comboBoxAño;
+            }
+            //Número de motor
+            if (textBoxMotorNro.Text == "")
+            {
+                return textBoxMotorNro;
+            }
+            //Número de chasis
+            if (textboxChasis.Text == "")
+            {
+                return textboxChasis;
+            }
+            //Tipo patente
+
+            if (Convert.ToString(comboBoxPatente.Text) == "")
+            {
+                return comboBoxPatente;
+            }
+            //Patente //// Si la patente no está completa ocurre un error
+            if (nroPatenteMaskedTextBox.Text.Trim().Length < nroPatenteMaskedTextBox.Mask.Length)
+            {
+                return nroPatenteMaskedTextBox;
+            }
+            //Kilómetros por año
+            if (textBoxKmAño.Text == "")
+            {
+                return textBoxKmAño;
+            }
+            //Si todos los campos obligatorios están completos, retorna null
+            return null;
         }
 
         private void BtnVolver_Click(object sender, EventArgs e)
@@ -417,7 +525,7 @@ namespace Interfaz
 
 
         }
-        public bool ValidarPatente()
+       /* public bool ValidarPatente()
         {
             Regex patenteVieja = new Regex("^[A - Za - z]{3}[0-9]{3}$");
             Regex patenteNueva = new Regex("^[A-Za-z]{2}[0-9]{3}[A-Z]{2}$");
@@ -448,7 +556,7 @@ namespace Interfaz
             }
 
             return true;
-        }
+        }*/
         private void TextBoxPatente_Enter(object sender, EventArgs e)
         {
             /* while (!ValidarPatente())
@@ -460,23 +568,22 @@ namespace Interfaz
              textBoxPatente.ForeColor = Color.Green;*/
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void ComboBoxPatente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ValidarPatente()) { MessageBox.Show("ta re bien el formato perro", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-            else { MessageBox.Show("Formato de la Patente Incorrecto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-
-        }
-
-         private void ComboBoxPatente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxPatente.SelectedIndex == 0) textBoxPatente.MaxLength = 6;
-            else textBoxPatente.MaxLength = 7;
+            if (comboBoxPatente.SelectedIndex == 0)
+            {
+                nroPatenteMaskedTextBox.Mask = "LLL000";
+            }
+            else
+            {
+                nroPatenteMaskedTextBox.Mask = "LL000LL";
+            }
         }
 
         private void TabBusquedaPoliza_Enter(object sender, EventArgs e)
         {
 
-            TituloPanelPoliza.Text = "Busqueda Póliza";
+            TituloPanelPoliza.Text = "Búsqueda Póliza";
             GestorExtra gestorExtra = new GestorExtra();
             foreach (var marca in gestorExtra.CargaMarca())
             {
@@ -579,10 +686,7 @@ namespace Interfaz
 
         }
 
-        private void Button2_Click_1(object sender, EventArgs e)
-        {
-            if (ValidarPatente()) { MessageBox.Show("anduvo la mierda, pintate vergde gil"); }
-        }
+
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
@@ -606,19 +710,6 @@ namespace Interfaz
         {
             if (tabControlPoliza2.SelectedIndex >= 1) tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex - 1);
             btnSiguiente.Enabled = true;
-        }
-
-        private void btnSiguiente_Click_1(object sender, EventArgs e)
-        {
-            tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex + 1);
-            if (tabControlPoliza2.SelectedTab == tabRevision)
-            {
-                // btnSiguiente.Enabled = false;
-                // tabRevision.Hide();
-
-                try { ObtenerDatos(); }
-                catch (Exception error) { MessageBox.Show(error.Message); }
-            }
         }
 
         private void btnDeclaracionHijos_Click_1(object sender, EventArgs e)
@@ -701,11 +792,6 @@ namespace Interfaz
 
         }
 
-        private void textBoxClienteNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBoxLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -723,6 +809,29 @@ namespace Interfaz
         private void comboBoxAño_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.ToolTipTitle = "Entrada inválida";
+            toolTip1.Show("Debés ingresar un caracter válido, de acuerdo al tipo de patente que has elegido.", nroPatenteMaskedTextBox, nroPatenteMaskedTextBox.Location, 3000);
+        }
+
+        private void nroPatenteMaskedTextBox_Leave(object sender, EventArgs e)
+        {
+            if (nroPatenteMaskedTextBox.Text.Length == nroPatenteMaskedTextBox.Mask.Length)
+            {
+                nroPatenteMaskedTextBox.ForeColor = Color.Green;
+            }
+            else
+            {
+                nroPatenteMaskedTextBox.ForeColor = Color.Red;
+            }
+        }
+        private void textBoxClienteNombre_TextChanged(object sender, EventArgs e)
+        {
+            GestorExtra gestorExtra = new GestorExtra();
+            comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
         }
     }
 

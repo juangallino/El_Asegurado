@@ -213,5 +213,9 @@ namespace Negocio
 
 
         }
+        public int GetNroSiniestros(int idCliente)
+        {
+            return new Random().Next(3);
+        }
     }
 }
