@@ -471,7 +471,6 @@ namespace Interfaz
             this.comboBoxLocalidad.Name = "comboBoxLocalidad";
             this.comboBoxLocalidad.Size = new System.Drawing.Size(194, 21);
             this.comboBoxLocalidad.TabIndex = 9;
-            this.comboBoxLocalidad.SelectedIndexChanged += new System.EventHandler(this.comboBoxLocalidad_SelectedIndexChanged);
             // 
             // comboBoxModelo
             // 
