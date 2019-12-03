@@ -57,9 +57,9 @@ namespace Interfaz
                 
             ////////////////////////////////
             ///cargamos data table 
-            //dataGridBusquedaCliente.DataSource = gestorCliente.BuscarCliente(dtoBusquedaCliente);
+           /* dataGridBusquedaCliente.DataSource = gestorCliente.BuscarCliente(dtoBusquedaCliente);
 
-            //dataGridBusquedaCliente.Refresh();
+            dataGridBusquedaCliente.Refresh();*/
 
         }
 

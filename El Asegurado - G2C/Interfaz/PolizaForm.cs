@@ -831,7 +831,7 @@ namespace Interfaz
         private void textBoxClienteNombre_TextChanged(object sender, EventArgs e)
         {
             GestorExtra gestorExtra = new GestorExtra();
-            comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
+          //  comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
         }
     }
 

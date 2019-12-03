@@ -112,32 +112,24 @@ namespace Negocio
         }
         /// <summary>
         
-        /* public List<dto_ListaClientesBuscados> BuscarCliente(dto_busquedaCliente dto_BusquedaCliente)
+         public List<dto_ListaClientesBuscados> BuscarCliente(DTO_busquedaCliente dto_BusquedaCliente)
         {
             DAOCliente dAOCliente = new DAOCliente();
            
             List<dto_ListaClientesBuscados> listaAux = new List<dto_ListaClientesBuscados>();
 
-            foreach (var Cliente in dAOCliente.ConsultaBuscarClientes(dto_BusquedaCliente))
+            foreach (var v_Cliente in dAOCliente.ConsultaBuscarClientes(dto_BusquedaCliente))
             {
 
                 dto_ListaClientesBuscados dto_Lista = new dto_ListaClientesBuscados();
-
-                dto_Lista.id = Cliente.id;
-                dto_Lista.Patente = Cliente.patente;
-                dto_Lista.Cliente = Cliente.idCliente.ToString(); ; //Cliente.Cliente.Persona.nombre + ", " + Cliente.Cliente.Persona.apellido;
-                dto_Lista.Vehiculo = Cliente.datosVehiculo;
-                dto_Lista.Motor = Cliente.nroMotor;
-                dto_Lista.Chasis = Cliente.nroChasis;
-                dto_Lista.FechaFin = Cliente.fechaFinVigencia;
-                dto_Lista.FechaInicio = Cliente.fechaInicioVigencia;
-                dto_Lista.Estado = Cliente.idEstadoCliente.ToString();// Cliente.EstadoCliente.nombre;
+                dto_Lista.Apellido = v_Cliente.apellido;
+                dto_Lista.Nombre = v_Cliente.nombre;
                 listaAux.Add(dto_Lista);
             }
             return listaAux;
             
         }
-        */
+        
 
     }
 }

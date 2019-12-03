@@ -24,32 +24,7 @@ namespace Data
             this.PolizaRenovacions = new HashSet<PolizaRenovacion>();
             this.PolizaValorFactorAutoscorings = new HashSet<PolizaValorFactorAutoscoring>();
         }
-        public Poliza(DTO.dto_poliza dtoPoliza)
-        {
-            NroPolizaSuc = 0001; //Hardcode
-            NroPolizaSec = dtoPoliza.NroPolizaSec;
-            idTipoCobertura = dtoPoliza.Tipo_Cobertura;
-            idLocalidad = dtoPoliza.IdDomicilioRiesgo;
-            idVehiculo = dtoPoliza.IdVehiculo;
-            idCliente = dtoPoliza.IdCliente;
-            datosVehiculo = dtoPoliza.Marca + "-" + dtoPoliza.Modelo + "-" + dtoPoliza.AñoVehiculo;
-            valorAsegurado = dtoPoliza.Suma_Asegurada;
-            nroMotor = dtoPoliza.NroMotor;
-            nroChasis = dtoPoliza.NroChasis;
-            patente = dtoPoliza.Patente;
-            kmPorAño = dtoPoliza.KmPorAño;
-            nroSiniestros = dtoPoliza.Nro_Siniestros;
-            fechaInicioVigencia = dtoPoliza.FechaInicioVigencia;
-            fechaFinVigencia = fechaInicioVigencia.AddDays(180);
-            //falta cambiar idPolizaAnterior por PolizaAnterior 
-
-            this.PolizaHijoes = new HashSet<PolizaHijo>();
-            this.Poliza1 = new HashSet<Poliza>();
-            this.PolizaCuotas = new HashSet<PolizaCuota>();
-            this.PolizaMedidaSeguridads = new HashSet<PolizaMedidaSeguridad>();
-            this.PolizaRenovacions = new HashSet<PolizaRenovacion>();
-            this.PolizaValorFactorAutoscorings = new HashSet<PolizaValorFactorAutoscoring>();
-        }
+    
         public int id { get; set; }
         public decimal NroPolizaSuc { get; set; }
         public decimal NroPoliza { get; set; }
