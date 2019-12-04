@@ -29,21 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
-            this.dBTP2019DataSet = new Interfaz.DBTP2019DataSet();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MnuMenuPrincipal = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dBTP2019DataSet
-            // 
-            this.dBTP2019DataSet.DataSetName = "DBTP2019DataSet";
-            this.dBTP2019DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // pictureBox1
             // 
@@ -108,7 +101,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "El Asegurado";
             this.Load += new System.EventHandler(this.MenuPrincipal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -119,7 +111,6 @@
 
         #endregion
         private System.Windows.Forms.PictureBox pictureBox1;
-        private DBTP2019DataSet dBTP2019DataSet;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem MnuMenuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;

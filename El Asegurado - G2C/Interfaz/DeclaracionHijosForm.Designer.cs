@@ -38,7 +38,6 @@
             this.dateTimePickerDeclaH = new System.Windows.Forms.DateTimePicker();
             this.comboBoxEstadoCivilDeclaH = new System.Windows.Forms.ComboBox();
             this.estadoCivilBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dBTP2019DataSet = new Interfaz.DBTP2019DataSet();
             this.comboBoxSexoDeclaH = new System.Windows.Forms.ComboBox();
             this.sexoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sexoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -47,11 +46,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
-            this.sexoTableAdapter = new Interfaz.DBTP2019DataSetTableAdapters.SexoTableAdapter();
-            this.estadoCivilTableAdapter = new Interfaz.DBTP2019DataSetTableAdapters.EstadoCivilTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.HijosGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadoCivilBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sexoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sexoBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -132,16 +128,6 @@
             this.comboBoxEstadoCivilDeclaH.TabIndex = 3;
             this.comboBoxEstadoCivilDeclaH.ValueMember = "id";
             // 
-            // estadoCivilBindingSource
-            // 
-            this.estadoCivilBindingSource.DataMember = "EstadoCivil";
-            this.estadoCivilBindingSource.DataSource = this.dBTP2019DataSet;
-            // 
-            // dBTP2019DataSet
-            // 
-            this.dBTP2019DataSet.DataSetName = "DBTP2019DataSet";
-            this.dBTP2019DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // comboBoxSexoDeclaH
             // 
             this.comboBoxSexoDeclaH.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.sexoBindingSource, "id", true));
@@ -154,16 +140,6 @@
             this.comboBoxSexoDeclaH.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSexoDeclaH.TabIndex = 2;
             this.comboBoxSexoDeclaH.ValueMember = "id";
-            // 
-            // sexoBindingSource
-            // 
-            this.sexoBindingSource.DataMember = "Sexo";
-            this.sexoBindingSource.DataSource = this.dBTP2019DataSet;
-            // 
-            // sexoBindingSource1
-            // 
-            this.sexoBindingSource1.DataMember = "Sexo";
-            this.sexoBindingSource1.DataSource = this.dBTP2019DataSet;
             // 
             // label1
             // 
@@ -212,14 +188,6 @@
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.BtnBorrar_Click);
             // 
-            // sexoTableAdapter
-            // 
-            this.sexoTableAdapter.ClearBeforeFill = true;
-            // 
-            // estadoCivilTableAdapter
-            // 
-            this.estadoCivilTableAdapter.ClearBeforeFill = true;
-            // 
             // DeclaracionHijosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,7 +210,6 @@
             this.Load += new System.EventHandler(this.DeclaracionHijosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.HijosGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadoCivilBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sexoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sexoBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -261,11 +228,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnBorrar;
-        private DBTP2019DataSet dBTP2019DataSet;
         private System.Windows.Forms.BindingSource sexoBindingSource;
-        private DBTP2019DataSetTableAdapters.SexoTableAdapter sexoTableAdapter;
         private System.Windows.Forms.BindingSource estadoCivilBindingSource;
-        private DBTP2019DataSetTableAdapters.EstadoCivilTableAdapter estadoCivilTableAdapter;
         private System.Windows.Forms.BindingSource sexoBindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaNac;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sexo;
