@@ -277,7 +277,7 @@ namespace Interfaz
             this.btnBusquedaCliente.Size = new System.Drawing.Size(27, 25);
             this.btnBusquedaCliente.TabIndex = 4;
             this.btnBusquedaCliente.UseVisualStyleBackColor = false;
-            this.btnBusquedaCliente.Click += new System.EventHandler(this.btnBusquedaCliente_Click);
+            this.btnBusquedaCliente.Click += new System.EventHandler(this.BtnBusquedaCliente_Click);
             // 
             // btnVolver
             // 
@@ -287,7 +287,7 @@ namespace Interfaz
             this.btnVolver.TabIndex = 20;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click_1);
+            this.btnVolver.Click += new System.EventHandler(this.BtnVolver_Click_1);
             // 
             // tabControlPoliza2
             // 
@@ -343,8 +343,8 @@ namespace Interfaz
             this.nroPatenteMaskedTextBox.Size = new System.Drawing.Size(57, 20);
             this.nroPatenteMaskedTextBox.TabIndex = 16;
             this.nroPatenteMaskedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nroPatenteMaskedTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
-            this.nroPatenteMaskedTextBox.Leave += new System.EventHandler(this.nroPatenteMaskedTextBox_Leave);
+            this.nroPatenteMaskedTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MaskedTextBox1_MaskInputRejected);
+            this.nroPatenteMaskedTextBox.Leave += new System.EventHandler(this.NroPatenteMaskedTextBox_Leave);
             // 
             // comboBoxAño
             // 
@@ -394,7 +394,7 @@ namespace Interfaz
             this.comboBoxAño.Name = "comboBoxAño";
             this.comboBoxAño.Size = new System.Drawing.Size(62, 21);
             this.comboBoxAño.TabIndex = 12;
-            this.comboBoxAño.SelectedIndexChanged += new System.EventHandler(this.comboBoxAño_SelectedIndexChanged);
+            this.comboBoxAño.SelectedIndexChanged += new System.EventHandler(this.ComboBoxAño_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -426,7 +426,7 @@ namespace Interfaz
             this.btnDeclaracionHijos.TabIndex = 19;
             this.btnDeclaracionHijos.Text = "Declaracion de Hijos";
             this.btnDeclaracionHijos.UseVisualStyleBackColor = true;
-            this.btnDeclaracionHijos.Click += new System.EventHandler(this.btnDeclaracionHijos_Click_1);
+            this.btnDeclaracionHijos.Click += new System.EventHandler(this.BtnDeclaracionHijos_Click_1);
             // 
             // btnMedidasdeSeguridad
             // 
@@ -436,7 +436,7 @@ namespace Interfaz
             this.btnMedidasdeSeguridad.TabIndex = 18;
             this.btnMedidasdeSeguridad.Text = "Medidas de Seguridad";
             this.btnMedidasdeSeguridad.UseVisualStyleBackColor = true;
-            this.btnMedidasdeSeguridad.Click += new System.EventHandler(this.btnMedidasdeSeguridad_Click_1);
+            this.btnMedidasdeSeguridad.Click += new System.EventHandler(this.BtnMedidasdeSeguridad_Click_1);
             // 
             // textboxChasis
             // 
@@ -500,7 +500,7 @@ namespace Interfaz
             this.comboBoxMarca.Size = new System.Drawing.Size(121, 21);
             this.comboBoxMarca.TabIndex = 10;
             this.comboBoxMarca.ValueMember = "id";
-            this.comboBoxMarca.SelectedIndexChanged += new System.EventHandler(this.comboBoxMarca_SelectedIndexChanged);
+            this.comboBoxMarca.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMarca_SelectedIndexChanged);
             // 
             // comboBoxProvincia
             // 
@@ -514,7 +514,7 @@ namespace Interfaz
             this.comboBoxProvincia.Size = new System.Drawing.Size(178, 21);
             this.comboBoxProvincia.TabIndex = 8;
             this.comboBoxProvincia.ValueMember = "id";
-            this.comboBoxProvincia.SelectedIndexChanged += new System.EventHandler(this.comboBoxProvincia_SelectedIndexChanged);
+            this.comboBoxProvincia.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProvincia_SelectedIndexChanged);
             // 
             // textBoxSumaAsegurada
             // 
@@ -1102,7 +1102,7 @@ namespace Interfaz
             this.textBoxClienteNombre.ReadOnly = true;
             this.textBoxClienteNombre.Size = new System.Drawing.Size(455, 20);
             this.textBoxClienteNombre.TabIndex = 6;
-            this.textBoxClienteNombre.TextChanged += new System.EventHandler(this.textBoxClienteNombre_TextChanged);
+            this.textBoxClienteNombre.TextChanged += new System.EventHandler(this.TextBoxClienteNombre_TextChanged);
             // 
             // textBoxClienteNro
             // 
@@ -1203,7 +1203,7 @@ namespace Interfaz
             this.btnBuscarTabConsultaPoliza.TabIndex = 22;
             this.btnBuscarTabConsultaPoliza.Text = "Buscar";
             this.btnBuscarTabConsultaPoliza.UseVisualStyleBackColor = true;
-            this.btnBuscarTabConsultaPoliza.Click += new System.EventHandler(this.btnBuscarTabConsultaPoliza_Click_1);
+            this.btnBuscarTabConsultaPoliza.Click += new System.EventHandler(this.BtnBuscarTabConsultaPoliza_Click_1);
             // 
             // dataGridBusquedaPoliza
             // 
@@ -1786,7 +1786,7 @@ namespace Interfaz
             this.btnNuevo.TabIndex = 5;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click_1);
+            this.btnNuevo.Click += new System.EventHandler(this.BtnNuevo_Click_1);
             // 
             // btnconsultar
             // 
@@ -1796,7 +1796,7 @@ namespace Interfaz
             this.btnconsultar.TabIndex = 6;
             this.btnconsultar.Text = "Consultar";
             this.btnconsultar.UseVisualStyleBackColor = true;
-            this.btnconsultar.Click += new System.EventHandler(this.btnconsultar_Click_1);
+            this.btnconsultar.Click += new System.EventHandler(this.Btnconsultar_Click_1);
             // 
             // PolizaForm
             // 

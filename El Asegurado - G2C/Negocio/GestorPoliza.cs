@@ -14,13 +14,13 @@ namespace Negocio
     public class GestorPoliza
     {
         private Cliente clientePoliza = new Cliente();
-        private GestorCliente gestorCliente = new GestorCliente();
-        public void generarPoliza(dto_poliza dtoPoliza)
+        private readonly GestorCliente gestorCliente = new GestorCliente();
+        public void GenerarPoliza(dto_poliza dtoPoliza)
         {
 
             try
             {
-                validar(dtoPoliza);
+                Validar(dtoPoliza);
                 Poliza poliza = new Poliza(dtoPoliza)
                 {
                     idCliente = clientePoliza.id
@@ -40,10 +40,12 @@ namespace Negocio
                 foreach (var auxhijo in dtoPoliza.Hijo)
                 {
                     DAOEstCivil dAOEstCivil = new DAOEstCivil();
-                    PolizaHijo hijo = new PolizaHijo();
-                    hijo.fechaNacimiento = auxhijo.Fecha_nac;
-                    hijo.idEstadoCivil = auxhijo.IdEstadoCivil;
-                    hijo.idSexo = auxhijo.IdSexo;
+                    PolizaHijo hijo = new PolizaHijo
+                    {
+                        fechaNacimiento = auxhijo.Fecha_nac,
+                        idEstadoCivil = auxhijo.IdEstadoCivil,
+                        idSexo = auxhijo.IdSexo
+                    };
                     poliza.PolizaHijoes.Add(hijo);  //se usa clase virtual
                 }
 
@@ -51,11 +53,13 @@ namespace Negocio
                 int nroCuota = 1;
                 foreach (var fechaVenc in dtoPoliza.Vto_Pago)
                 {
-                    PolizaCuota polizaCuota = new PolizaCuota();
-                    polizaCuota.fechaVencimiento = fechaVenc;
-                    polizaCuota.idPoliza = poliza.id;
-                    polizaCuota.importeCuota = dtoPoliza.Monto_Abonar / dtoPoliza.FormaPago;
-                    polizaCuota.nroCuota = nroCuota++;
+                    PolizaCuota polizaCuota = new PolizaCuota
+                    {
+                        fechaVencimiento = fechaVenc,
+                        idPoliza = poliza.id,
+                        importeCuota = dtoPoliza.Monto_Abonar / dtoPoliza.FormaPago,
+                        nroCuota = nroCuota++
+                    };
                     poliza.PolizaCuotas.Add(polizaCuota);   // Usando esta clase virtual terminamos creando una PolizaCuota
                 }
 
@@ -89,7 +93,6 @@ namespace Negocio
             }
             catch (Exception e)
             {
-                // MessageBox.Show("Error: \nMensaje: " + e.Message + " \nTrace:" + e.StackTrace + " \nData: " + e.Data + " \nInnerException: " + e.InnerException);
                 throw new Exception(e.Message);
             }
         }
@@ -104,7 +107,7 @@ namespace Negocio
             return 750;
         }
 
-        private void validar(dto_poliza dto_Poliza) //ver
+        private void Validar(dto_poliza dto_Poliza) //ver
         {
             try
             {
@@ -162,9 +165,6 @@ namespace Negocio
             }
             dto_Poliza.AñoVehiculo = vehiculo.AñoFabricacion;
             dto_Poliza.FechaInicioVigencia = poliza.fechaInicioVigencia;
-            //dto_Poliza.Fecha_Pago = ???
-            //dto_Poliza.FormaPago = ???
-            // dto_Poliza.Estado = (dAOPoliza.GetEstado(poliza).nombre);
             dto_Poliza.Hijo = dto_Hijos;
             dto_Poliza.id = poliza.id;
             dto_Poliza.IdVehiculo = poliza.idVehiculo;
@@ -193,14 +193,9 @@ namespace Negocio
         public (dto_poliza, dto_cliente) BuscarDetallePolizaID(int polizaId)
         {
             //DTOs
-            dto_poliza dtoPoliza = new dto_poliza();
-            dto_cliente dtoCliente = new dto_cliente();
-
-            dtoPoliza = CargarDTOPoliza(polizaId);
-            dtoCliente = gestorCliente.CargarDTOCliente(dtoPoliza.IdCliente);
-
-
-
+            dto_poliza dtoPoliza = CargarDTOPoliza(polizaId);
+            dto_cliente dtoCliente = gestorCliente.CargarDTOCliente(dtoPoliza.IdCliente);
+            
             return (dtoPoliza, dtoCliente);
         }
 
@@ -214,16 +209,18 @@ namespace Negocio
         public List<dto_ListaPolizasBuscadas> BuscarPoliza(dto_busquedaPoliza dto_BusquedaPoliza)
         {
             DAOPoliza dAOPoliza = new DAOPoliza();
-            DAOCliente dAOCliente = new DAOCliente();
+            
             List<dto_ListaPolizasBuscadas> listaAux = new List<dto_ListaPolizasBuscadas>();
             
-            foreach (var poliza in dAOPoliza.ConsultaBuscarPolizas(dto_BusquedaPoliza)) {             
-                
-                dto_ListaPolizasBuscadas dto_Lista = new dto_ListaPolizasBuscadas();
+            foreach (var poliza in dAOPoliza.ConsultaBuscarPolizas(dto_BusquedaPoliza)) {
 
-                dto_Lista.id = poliza.id;
-                dto_Lista.Patente = poliza.patente;
-                dto_Lista.Cliente = poliza.idCliente.ToString(); ; //poliza.Cliente.Persona.nombre + ", " + poliza.Cliente.Persona.apellido;
+                dto_ListaPolizasBuscadas dto_Lista = new dto_ListaPolizasBuscadas
+                {
+                    id = poliza.id,
+                    Patente = poliza.patente,
+                    Cliente = poliza.idCliente.ToString()
+                };
+                ; //poliza.Cliente.Persona.nombre + ", " + poliza.Cliente.Persona.apellido;
                 dto_Lista.Vehiculo = poliza.datosVehiculo;
                 dto_Lista.Motor = poliza.nroMotor;
                 dto_Lista.Chasis = poliza.nroChasis;
