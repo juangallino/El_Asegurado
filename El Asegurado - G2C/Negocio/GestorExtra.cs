@@ -23,9 +23,11 @@ namespace Negocio
             foreach (var DATO in dAOExtra.BuscarLocalidad(IdProvincia))
             {
 
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -53,8 +55,8 @@ namespace Negocio
         public List<dto_extra> CargarTipoCobertura(int añovehículo)
         {
             DAOExtra dAOExtra = new DAOExtra();
-            
-            DateTime fecha = new DateTime();
+
+            DateTime fecha;
             fecha = DateTime.Today;
             List<dto_extra> listaCarga = new List<dto_extra>();
             
@@ -94,9 +96,11 @@ namespace Negocio
             foreach (var DATO in dAOExtra.BuscarProvincias())
             {
 
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -115,9 +119,11 @@ namespace Negocio
             foreach (var DATO in dAOExtra.BuscarMarcas())
             {
 
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -137,9 +143,11 @@ namespace Negocio
             foreach (var DATO in dAOExtra.BuscarEstodosCiviles())
             {
 
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -157,9 +165,11 @@ namespace Negocio
             foreach (var DATO in dAOExtra.BuscarSexos())
             {
 
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -170,7 +180,7 @@ namespace Negocio
 
         public decimal GetSumaAsegurada(int idModelo, int añoVehiculo)
         {
-            decimal sumaAsegurada = 1500000;
+            decimal sumaAsegurada = new Random().Next(500000,3500000);
             //Hardcodeo
 
             return sumaAsegurada;
@@ -200,9 +210,11 @@ namespace Negocio
 
             foreach (var DATO in dAOExtra.BuscarEstadosPoliza())
             {
-                dto_extra dtoExtra = new dto_extra();
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
             return listaCarga;
@@ -230,7 +242,7 @@ namespace Negocio
         }
         public int GetNroSiniestros(int idCliente)
         {
-            return new Random().Next(3);
+            return new Random().Next(4);
         }
     }
 }

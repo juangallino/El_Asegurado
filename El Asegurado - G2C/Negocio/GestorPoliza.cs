@@ -63,10 +63,12 @@ namespace Negocio
                     poliza.PolizaCuotas.Add(polizaCuota);   // Usando esta clase virtual terminamos creando una PolizaCuota
                 }
 
-                // DERECHOS Y MONTOS
-                //poliza.importeDescuento = dtoPoliza.ImporteDescuento;
-                poliza.importeDerechoEmision = 155;
-                poliza.importeTotal = dtoPoliza.Monto_Abonar + poliza.importeDerechoEmision - poliza.importeDescuento;
+                // DERECHOS DE EMISION, PREMIO Y DESCUENTOS                
+
+                poliza.importeDerechoEmision = dtoPoliza.DerechoEmision;
+                poliza.importePremio = dtoPoliza.Premio;
+                poliza.importeDescuento = dtoPoliza.ImporteDescuento;
+                poliza.importeTotal = dtoPoliza.Monto_Abonar;
 
 
 
@@ -95,16 +97,6 @@ namespace Negocio
             {
                 throw new Exception(e.Message);
             }
-        }
-
-        public decimal CalcularPremio()
-        {
-            return 15000;
-        }
-
-        public decimal CalcularDescuento()
-        {
-            return 750;
         }
 
         private void Validar(dto_poliza dto_Poliza) //ver

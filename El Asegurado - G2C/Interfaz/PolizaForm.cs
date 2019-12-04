@@ -69,6 +69,7 @@ namespace Interfaz
             //Creo un gestor poliza para poder calcular el premio y los descuentos
             GestorPoliza gestorPoliza = new GestorPoliza();
             GestorExtra gestorExtra = new GestorExtra();
+            GestorCalculos gestorCalculos = new GestorCalculos();
             try
             {
                 //Creo un gestor poliza para poder calcular el premio y los descuentos
@@ -104,11 +105,12 @@ namespace Interfaz
                 dtoPoliza = medidaSeguridadView.ObtenerDatos(dtoPoliza);
 
                 
-                //SUPER DUPER HARDCODEADO
-                //Falta metodo para calcular prima y descuentos
-                dtoPoliza.ImporteDescuento = gestorPoliza.CalcularDescuento();
-                dtoPoliza.Premio = gestorPoliza.CalcularPremio();
-                dtoPoliza.Monto_Abonar = 45000 + dtoPoliza.ImporteDescuento + dtoPoliza.Premio;
+                //CALCULO DERECHO EMISION, PREMIO Y DESCUENTOS
+                dtoPoliza.DerechoEmision = gestorCalculos.CalcularDerechoEmision();
+                dtoPoliza.Premio = gestorCalculos.CalcularPrima() + dtoPoliza.DerechoEmision;
+                dtoPoliza.ImporteDescuento = gestorCalculos.CalcularDescuento(dtoPoliza.FormaPago, dtoPoliza.IdCliente, dtoPoliza.Premio);
+                dtoPoliza.Monto_Abonar =  dtoPoliza.DerechoEmision + dtoPoliza.Premio - dtoPoliza.ImporteDescuento;
+
                 CargarRevisionPoliza(dtoPoliza);
                 //Le asigno a la variable global DTOPOLIZACTE, el dto que voy a imprimir
                 DTOPOLIZAAUX = dtoPoliza;
@@ -389,6 +391,8 @@ namespace Interfaz
                         declaracionHijosView.Limpiate();
                         medidaSeguridadView.limpiate();
                         LimpiarCampos();
+                        tabControlPoliza2.SelectedIndex = 0;
+                        btnSiguiente.Text = "Siguiente";
                     }
                      catch(Exception e) 
                     { 
