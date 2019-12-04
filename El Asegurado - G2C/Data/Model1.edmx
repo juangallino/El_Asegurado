@@ -161,9 +161,14 @@
           <Property Name="idEstadoCivil" Type="int" Nullable="false" />
           <Property Name="idPoliza" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaMedidaSeguridad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PolizaMedidaSeguridad">
           <Key>
             <PropertyRef Name="id" />
+            
+            
+            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idMedidaSeguridad" Type="int" Nullable="false" />
@@ -867,7 +872,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaCuota" EntityType="Self.PolizaCuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaHijo" EntityType="Self.PolizaHijo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRecibo" EntityType="Self.PolizaRecibo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacion" EntityType="Self.PolizaRenovacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacionHijo" EntityType="Self.PolizaRenovacionHijo" Schema="dbo" store:Type="Tables" />
@@ -882,6 +886,14 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="ValorFactorAutoScoring" EntityType="Self.ValorFactorAutoScoring" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValorFactorAutoScoringHist" EntityType="Self.ValorFactorAutoScoringHist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PolizaMedidaSeguridad].[id] AS [id], 
+    [PolizaMedidaSeguridad].[idMedidaSeguridad] AS [idMedidaSeguridad], 
+    [PolizaMedidaSeguridad].[idPoliza] AS [idPoliza], 
+    [PolizaMedidaSeguridad].[Valor] AS [Valor]
+    FROM [dbo].[PolizaMedidaSeguridad] AS [PolizaMedidaSeguridad]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="PolizaValorFactorAutoscoring" EntityType="Self.PolizaValorFactorAutoscoring" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PolizaValorFactorAutoscoring].[id] AS [id], 

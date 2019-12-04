@@ -118,28 +118,21 @@
             // 
             // comboBoxEstadoCivilDeclaH
             // 
-            this.comboBoxEstadoCivilDeclaH.DataSource = this.estadoCivilBindingSource;
-            this.comboBoxEstadoCivilDeclaH.DisplayMember = "nombre";
             this.comboBoxEstadoCivilDeclaH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEstadoCivilDeclaH.FormattingEnabled = true;
             this.comboBoxEstadoCivilDeclaH.Location = new System.Drawing.Point(158, 123);
             this.comboBoxEstadoCivilDeclaH.Name = "comboBoxEstadoCivilDeclaH";
             this.comboBoxEstadoCivilDeclaH.Size = new System.Drawing.Size(121, 21);
             this.comboBoxEstadoCivilDeclaH.TabIndex = 3;
-            this.comboBoxEstadoCivilDeclaH.ValueMember = "id";
             // 
             // comboBoxSexoDeclaH
             // 
-            this.comboBoxSexoDeclaH.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.sexoBindingSource, "id", true));
-            this.comboBoxSexoDeclaH.DataSource = this.sexoBindingSource1;
-            this.comboBoxSexoDeclaH.DisplayMember = "nombre";
             this.comboBoxSexoDeclaH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSexoDeclaH.FormattingEnabled = true;
             this.comboBoxSexoDeclaH.Location = new System.Drawing.Point(158, 80);
             this.comboBoxSexoDeclaH.Name = "comboBoxSexoDeclaH";
             this.comboBoxSexoDeclaH.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSexoDeclaH.TabIndex = 2;
-            this.comboBoxSexoDeclaH.ValueMember = "id";
             // 
             // label1
             // 
