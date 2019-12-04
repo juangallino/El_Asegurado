@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dto_CargarDetalles.cs" />
     <Compile Include="GestorCalculos.cs" />
     <Compile Include="GestorCliente.cs" />
     <Compile Include="GestorExtra.cs" />
+    <Compile Include="GestorPago.cs" />
     <Compile Include="GestorPoliza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

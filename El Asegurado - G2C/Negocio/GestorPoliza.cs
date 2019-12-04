@@ -69,9 +69,9 @@ namespace Negocio
                 poliza.importePremio = dtoPoliza.Premio;
                 poliza.importeDescuento = dtoPoliza.ImporteDescuento;
                 poliza.importeTotal = dtoPoliza.Monto_Abonar;
+                
 
-
-
+                // CARGA VEHICULO
                 DAOVehiculo dAOVehiculo = new DAOVehiculo();
 
 
