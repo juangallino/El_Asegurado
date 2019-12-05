@@ -16,11 +16,11 @@ namespace Negocio
     public class GestorCliente
     {
         //comentario
-        public Data.Cliente ValidarCliente(int idCliente)
+        public Cliente ValidarCliente(int idCliente)
         {
             try
             {
-                Data.Cliente cliente = new Data.Cliente();
+                Cliente cliente = new Cliente();
                 DAOCliente dAOCliente = new DAOCliente();
                 cliente = dAOCliente.Get(idCliente);
                 return cliente;

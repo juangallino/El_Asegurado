@@ -41,6 +41,11 @@ namespace Data
             nroSiniestros = dtoPoliza.Nro_Siniestros;
             fechaInicioVigencia = dtoPoliza.FechaInicioVigencia;
             fechaFinVigencia = fechaInicioVigencia.AddDays(180);
+            importeDerechoEmision = dtoPoliza.DerechoEmision;
+            importePremio = dtoPoliza.Premio;
+            importeDescuento = dtoPoliza.ImporteDescuento;
+            importeTotal = dtoPoliza.Monto_Abonar;
+
             //falta cambiar idPolizaAnterior por PolizaAnterior 
 
             this.PolizaHijoes = new HashSet<PolizaHijo>();

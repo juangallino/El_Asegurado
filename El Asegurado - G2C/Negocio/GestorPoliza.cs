@@ -39,7 +39,7 @@ namespace Negocio
                 //Agregar hijos
                 foreach (var auxhijo in dtoPoliza.Hijo)
                 {
-                    DAOEstCivil dAOEstCivil = new DAOEstCivil();
+                   DAOEstCivil dAOEstCivil = new DAOEstCivil();
                     PolizaHijo hijo = new PolizaHijo
                     {
                         fechaNacimiento = auxhijo.Fecha_nac,
@@ -62,14 +62,6 @@ namespace Negocio
                     };
                     poliza.PolizaCuotas.Add(polizaCuota);   // Usando esta clase virtual terminamos creando una PolizaCuota
                 }
-
-                // DERECHOS DE EMISION, PREMIO Y DESCUENTOS                
-
-                poliza.importeDerechoEmision = dtoPoliza.DerechoEmision;
-                poliza.importePremio = dtoPoliza.Premio;
-                poliza.importeDescuento = dtoPoliza.ImporteDescuento;
-                poliza.importeTotal = dtoPoliza.Monto_Abonar;
-                
 
                 // CARGA VEHICULO
                 DAOVehiculo dAOVehiculo = new DAOVehiculo();
@@ -99,7 +91,20 @@ namespace Negocio
             }
         }
 
-        private void Validar(dto_poliza dto_Poliza) //ver
+        internal Poliza BuscarPoliza(int idPoliza)
+        {
+            try
+            {
+                DAOPoliza dAOPoliza = new DAOPoliza();
+                return dAOPoliza.GetPoliza(idPoliza);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void Validar(dto_poliza dto_Poliza) 
         {
             try
             {
@@ -107,7 +112,7 @@ namespace Negocio
                 DAOPoliza daoPoliza = new DAOPoliza();
                 if (daoPoliza.VerificarPolizaActiva(dto_Poliza.Patente, dto_Poliza.NroMotor, dto_Poliza.NroChasis))
                 {
-                    dto_Poliza.NroPolizaSec = 0;
+                    dto_Poliza.NroPolizaSec = 00;
                 }
 
             }
