@@ -59,6 +59,8 @@ namespace Data
         public virtual DbSet<Vehiculo> Vehiculoes { get; set; }
         public virtual DbSet<PolizaValorFactorAutoscoring> PolizaValorFactorAutoscorings { get; set; }
         public virtual DbSet<v_ValorFactorAutoScoring> v_ValorFactorAutoScoring { get; set; }
+        public virtual DbSet<v_Cliente> v_Cliente { get; set; }
+        public virtual DbSet<v_Localidad> v_Localidad { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

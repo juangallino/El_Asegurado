@@ -161,9 +161,14 @@
           <Property Name="idEstadoCivil" Type="int" Nullable="false" />
           <Property Name="idPoliza" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaMedidaSeguridad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PolizaMedidaSeguridad">
           <Key>
             <PropertyRef Name="id" />
+            
+            
+            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idMedidaSeguridad" Type="int" Nullable="false" />
@@ -315,6 +320,55 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaValorFactorAutoscoring' n
           <Property Name="idModelo" Type="int" Nullable="false" />
           <Property Name="AñoFabricacion" Type="numeric" Precision="4" Scale="0" Nullable="false" />
           <Property Name="valorAsegurado" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_Cliente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="v_Cliente">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="NroCliente" />
+            <PropertyRef Name="AñoRegistro" />
+            <PropertyRef Name="CorreoElectronico" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="NroCliente" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="AñoRegistro" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="apellido" Type="nchar" MaxLength="60" />
+          <Property Name="nombre" Type="nchar" MaxLength="60" />
+          <Property Name="nroDocumento" Type="numeric" Precision="11" Scale="0" />
+          <Property Name="nroCuil" Type="numeric" Precision="11" Scale="0" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="calle" Type="nchar" MaxLength="60" />
+          <Property Name="numero" Type="numeric" Precision="6" Scale="0" />
+          <Property Name="piso" Type="nchar" MaxLength="10" />
+          <Property Name="departamento" Type="nchar" MaxLength="10" />
+          <Property Name="Sexo" Type="nchar" MaxLength="30" />
+          <Property Name="EstadoCivil" Type="nchar" MaxLength="30" />
+          <Property Name="Pais" Type="nchar" MaxLength="30" />
+          <Property Name="codpostal" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="Localidad" Type="nchar" MaxLength="30" />
+          <Property Name="nombreTipoDocumento" Type="nchar" MaxLength="30" />
+          <Property Name="NombreSituacionIVA" Type="nchar" MaxLength="30" />
+          <Property Name="Provincia" Type="nchar" MaxLength="30" />
+          <Property Name="Profesion" Type="nchar" MaxLength="30" />
+          <Property Name="EstadoCliente" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_Localidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="v_Localidad">
+          <Key>
+            <PropertyRef Name="idLocalidad" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="codpostal" />
+            <PropertyRef Name="Provincia" />
+            <PropertyRef Name="Pais" />
+          </Key>
+          <Property Name="idLocalidad" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="codpostal" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Provincia" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pais" Type="nchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -867,7 +921,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaCuota" EntityType="Self.PolizaCuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaHijo" EntityType="Self.PolizaHijo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRecibo" EntityType="Self.PolizaRecibo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacion" EntityType="Self.PolizaRenovacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacionHijo" EntityType="Self.PolizaRenovacionHijo" Schema="dbo" store:Type="Tables" />
@@ -882,6 +935,14 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="ValorFactorAutoScoring" EntityType="Self.ValorFactorAutoScoring" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValorFactorAutoScoringHist" EntityType="Self.ValorFactorAutoScoringHist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PolizaMedidaSeguridad].[id] AS [id], 
+    [PolizaMedidaSeguridad].[idMedidaSeguridad] AS [idMedidaSeguridad], 
+    [PolizaMedidaSeguridad].[idPoliza] AS [idPoliza], 
+    [PolizaMedidaSeguridad].[Valor] AS [Valor]
+    FROM [dbo].[PolizaMedidaSeguridad] AS [PolizaMedidaSeguridad]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="PolizaValorFactorAutoscoring" EntityType="Self.PolizaValorFactorAutoscoring" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PolizaValorFactorAutoscoring].[id] AS [id], 
@@ -889,6 +950,42 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
     [PolizaValorFactorAutoscoring].[idPoliza] AS [idPoliza], 
     [PolizaValorFactorAutoscoring].[ValorPorcentual] AS [ValorPorcentual]
     FROM [dbo].[PolizaValorFactorAutoscoring] AS [PolizaValorFactorAutoscoring]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Cliente" EntityType="Self.v_Cliente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Cliente].[id] AS [id], 
+    [v_Cliente].[NroCliente] AS [NroCliente], 
+    [v_Cliente].[AñoRegistro] AS [AñoRegistro], 
+    [v_Cliente].[CorreoElectronico] AS [CorreoElectronico], 
+    [v_Cliente].[apellido] AS [apellido], 
+    [v_Cliente].[nombre] AS [nombre], 
+    [v_Cliente].[nroDocumento] AS [nroDocumento], 
+    [v_Cliente].[nroCuil] AS [nroCuil], 
+    [v_Cliente].[fechaNacimiento] AS [fechaNacimiento], 
+    [v_Cliente].[calle] AS [calle], 
+    [v_Cliente].[numero] AS [numero], 
+    [v_Cliente].[piso] AS [piso], 
+    [v_Cliente].[departamento] AS [departamento], 
+    [v_Cliente].[Sexo] AS [Sexo], 
+    [v_Cliente].[EstadoCivil] AS [EstadoCivil], 
+    [v_Cliente].[Pais] AS [Pais], 
+    [v_Cliente].[codpostal] AS [codpostal], 
+    [v_Cliente].[Localidad] AS [Localidad], 
+    [v_Cliente].[nombreTipoDocumento] AS [nombreTipoDocumento], 
+    [v_Cliente].[NombreSituacionIVA] AS [NombreSituacionIVA], 
+    [v_Cliente].[Provincia] AS [Provincia], 
+    [v_Cliente].[Profesion] AS [Profesion], 
+    [v_Cliente].[EstadoCliente] AS [EstadoCliente]
+    FROM [dbo].[v_Cliente] AS [v_Cliente]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Localidad" EntityType="Self.v_Localidad" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Localidad].[idLocalidad] AS [idLocalidad], 
+    [v_Localidad].[nombre] AS [nombre], 
+    [v_Localidad].[codpostal] AS [codpostal], 
+    [v_Localidad].[Provincia] AS [Provincia], 
+    [v_Localidad].[Pais] AS [Pais]
+    FROM [dbo].[v_Localidad] AS [v_Localidad]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ValorFactorAutoScoring" EntityType="Self.v_ValorFactorAutoScoring" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1293,6 +1390,8 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScorings" />
             <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHists" />
           </AssociationSet>
+          <EntitySet Name="v_Cliente" EntityType="DB_El_Asegurado.v_Cliente" />
+          <EntitySet Name="v_Localidad" EntityType="DB_El_Asegurado.v_Localidad" />
           </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -2187,6 +2286,51 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="v_Cliente">
+          <Key>
+            <PropertyRef Name="NroCliente" />
+            <PropertyRef Name="AñoRegistro" />
+            <PropertyRef Name="CorreoElectronico" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="NroCliente" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
+          <Property Name="AñoRegistro" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="apellido" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="nroDocumento" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="nroCuil" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="calle" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="numero" Type="Decimal" Precision="6" Scale="0" />
+          <Property Name="piso" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="departamento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="EstadoCivil" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Pais" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="codpostal" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="Localidad" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="nombreTipoDocumento" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="NombreSituacionIVA" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Profesion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="EstadoCliente" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_Localidad">
+          <Key>
+            <PropertyRef Name="idLocalidad" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="codpostal" />
+            <PropertyRef Name="Provincia" />
+            <PropertyRef Name="Pais" />
+          </Key>
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="codpostal" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2543,6 +2687,46 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
                 <ScalarProperty Name="valorporcentual" ColumnName="valorporcentual" />
                 <ScalarProperty Name="ItemFactor" ColumnName="ItemFactor" />
                 <ScalarProperty Name="GrupoFactorAutoScoring" ColumnName="GrupoFactorAutoScoring" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Cliente">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.v_Cliente">
+              <MappingFragment StoreEntitySet="v_Cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="NombreSituacionIVA" ColumnName="NombreSituacionIVA" />
+                <ScalarProperty Name="nombreTipoDocumento" ColumnName="nombreTipoDocumento" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="codpostal" ColumnName="codpostal" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="nroCuil" ColumnName="nroCuil" />
+                <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="AñoRegistro" ColumnName="AñoRegistro" />
+                <ScalarProperty Name="NroCliente" ColumnName="NroCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Localidad">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.v_Localidad">
+              <MappingFragment StoreEntitySet="v_Localidad">
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="codpostal" ColumnName="codpostal" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

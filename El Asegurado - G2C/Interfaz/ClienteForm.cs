@@ -15,6 +15,8 @@ namespace Interfaz
 {
     public partial class ClienteForm : Form
     {
+        List<dto_ListaClientesBuscados> ListaClientesBuscados = new List<dto_ListaClientesBuscados>();
+        int RowPosition = -1;
         public ClienteForm()
         {
             InitializeComponent();
@@ -49,41 +51,64 @@ namespace Interfaz
 
 
             //cargamos dto con datos a buscar
-            dtoBusquedaCliente.IdCliente = textBoxIdCliente.Text == "" ? -1 : Convert.ToInt32(textBoxIdCliente.Text);
+            if (!string.IsNullOrWhiteSpace(textBoxIdCliente.Text))
 
-            dtoBusquedaCliente.Apellido = textBoxApellido.ToString();
-            dtoBusquedaCliente.Nombre = textBoxNombre.ToString();
-            dtoBusquedaCliente.NroDocumento = textBoxNroDocumento.Text == "" ? -1 : Convert.ToInt32(textBoxNroDocumento.Text);
+                dtoBusquedaCliente.idCliente = textBoxIdCliente.Text == "" ? -1 : Convert.ToInt32(textBoxIdCliente.Text);
+            if (!string.IsNullOrWhiteSpace(textBoxApellido.Text))
+
+                dtoBusquedaCliente.Apellido = textBoxApellido.ToString();
+            if (!string.IsNullOrWhiteSpace(textBoxNombre.Text))
+
+                dtoBusquedaCliente.Nombre = textBoxNombre.ToString();
+            if (!string.IsNullOrWhiteSpace(textBoxNroDocumento.Text))
+
+                dtoBusquedaCliente.NroDocumento = textBoxNroDocumento.Text == "" ? -1 : Convert.ToInt32(textBoxNroDocumento.Text);
                 
             ////////////////////////////////
             ///cargamos data table 
-            //dataGridBusquedaCliente.DataSource = gestorCliente.BuscarCliente(dtoBusquedaCliente);
+            ///
+            try
+            {
+                dataGridBusquedaCliente.DataSource = gestorCliente.BuscarCliente(dtoBusquedaCliente);
 
-            //dataGridBusquedaCliente.Refresh();
+                dataGridBusquedaCliente.Refresh();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
+
+
+
 
         }
 
-        private void textBoxNroDocumento_TextChanged(object sender, EventArgs e)
+
+        private void dataGridBusquedaCliente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-                      
+            RowPosition = e.RowIndex;
+           
         }
 
-        private void textBoxIdCliente_TextChanged(object sender, EventArgs e)
+
+       private void comboBoxTipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void textBoxApellidoCliente_TextChanged(object sender, EventArgs e)
+        private void dataGridBusquedaCliente_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void textBoxNombreCliente_TextChanged(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void comboBoxTipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
+        private void panelcliente_Paint(object sender, PaintEventArgs e)
         {
 
         }

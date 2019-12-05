@@ -78,6 +78,7 @@
             this.HijosGridView.Size = new System.Drawing.Size(352, 190);
             this.HijosGridView.TabIndex = 3;
             this.HijosGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.HijosGridView_CellClick);
+            this.HijosGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.HijosGridView_CellContentClick);
             // 
             // FechaNac
             // 

@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class dto_ListaClientesBuscados
+    public class dto_ListaClientesBuscados
     {
-        
-        public int id { get; set; }
-        public int PolizaNumero { get; set; }
-        public string Cliente { get; set; }
-        public string Vehiculo { get; set; }
-        public string Patente { get; set; }
-        public string Motor { get; set; }
-        public string Chasis { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public string Estado { get; set; }
+        public int Id { get; set; }
+        public decimal IdCliente { get; set; }
+        public decimal AñoRegistro { get; set; }
+        public string Apellido { get; set; }
+        public string Nombre { get; set; }
+        public string TipoDoc { get; set; }
+        public Nullable<decimal> NroDocumento { get; set; }
 
-    }
+        }
 }

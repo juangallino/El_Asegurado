@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Data;
 using DTO;
 
@@ -143,31 +144,35 @@ namespace DAO
                 return pais;
             }
         }
+        public List<v_Cliente> ConsultaBuscarClientes(DTO_busquedaCliente dtoBC)
+        {
+
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    var query = db.v_Cliente.AsNoTracking().Where(q => q.nombre.Length > 0);
+                    if (dtoBC.idCliente.Value > 0 )
+                        query = query.Where(q => q.NroCliente == dtoBC.idCliente);
+                    if (dtoBC.NroDocumento > 0)
+                        query = query.Where(q => q.nroDocumento == dtoBC.NroDocumento);
+                    if (!string.IsNullOrWhiteSpace(dtoBC.Apellido))
+                        query = query.Where(q => q.apellido.Contains(dtoBC.Apellido));
+                    if (!string.IsNullOrWhiteSpace(dtoBC.Nombre))
+                        query = query.Where(q => q.nombre.Contains(dtoBC.Nombre));
+                    return query.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
+
 }
-        //public List<Cliente> ConsultaBuscarClientes(DTO_busquedaCliente dtoBC)
-        //{
-        //    try
-        //    {
-         //       using (DBEntities_TP db = new DBEntities_TP())
-          //      {
-           //          var aux = db.Clientes.AsNoTracking().Where(c => c.id.Tostring() == id) &&
-                    //                                             (dtoBC.Nombre == "" || (p.Cliente.Persona.nombre.Contains(dtoBC.nombreCliente) || p.Cliente.Persona.apellido.Contains(dtoBC.nombreCliente))) &&
-                    //                                              (dtoBC.idestado == 0 || p.EstadoPoliza.id == dtoBC.idestado) &&
-                    //                                              (dtoBC.idmarca == 0 || p.Vehiculo.Modelo.Marca.id == dtoBC.idmarca) &&
-                    //                                              (dtoBC.idmodelo == 0 || p.Vehiculo.Modelo.id == dtoBC.idmodelo) &&
-                    //                                              (dtoBC.fdesde == null || p.fechaFinVigencia >= dtoBC.fdesde) &&
-                    //                                              (dtoBC.fhasta == null || p.fechaFinVigencia <= dtoBC.fhasta)).ToList();
 
-             //       return; 
 
-          //--      }
-          //  }
-          //  catch (Exception e)
-          //  {
-          //      throw new Exception(e.Message);
-          //  }
-       // }
 
 
 
