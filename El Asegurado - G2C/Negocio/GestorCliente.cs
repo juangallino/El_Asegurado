@@ -117,17 +117,31 @@ namespace Negocio
             DAOCliente dAOCliente = new DAOCliente();
            
             List<dto_ListaClientesBuscados> listaAux = new List<dto_ListaClientesBuscados>();
+            try
+            {
 
             foreach (var v_Cliente in dAOCliente.ConsultaBuscarClientes(dto_BusquedaCliente))
             {
 
                 dto_ListaClientesBuscados dto_Lista = new dto_ListaClientesBuscados();
+                dto_Lista.AñoRegistro = v_Cliente.AñoRegistro;
                 dto_Lista.Apellido = v_Cliente.apellido;
                 dto_Lista.Nombre = v_Cliente.nombre;
+                dto_Lista.IdCliente = v_Cliente.NroCliente;
+                dto_Lista.NroDocumento = v_Cliente.nroDocumento;
+
+
+
                 listaAux.Add(dto_Lista);
             }
             return listaAux;
-            
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+
         }
         
 

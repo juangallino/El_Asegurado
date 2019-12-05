@@ -325,10 +325,12 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaValorFactorAutoscoring' n
 advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_Cliente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="v_Cliente">
           <Key>
+            <PropertyRef Name="id" />
             <PropertyRef Name="NroCliente" />
             <PropertyRef Name="AñoRegistro" />
             <PropertyRef Name="CorreoElectronico" />
           </Key>
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="NroCliente" Type="numeric" Precision="8" Scale="0" Nullable="false" />
           <Property Name="AñoRegistro" Type="numeric" Precision="4" Scale="0" Nullable="false" />
           <Property Name="CorreoElectronico" Type="nchar" MaxLength="60" Nullable="false" />
@@ -951,6 +953,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           </EntitySet>
           <EntitySet Name="v_Cliente" EntityType="Self.v_Cliente" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [v_Cliente].[id] AS [id], 
     [v_Cliente].[NroCliente] AS [NroCliente], 
     [v_Cliente].[AñoRegistro] AS [AñoRegistro], 
     [v_Cliente].[CorreoElectronico] AS [CorreoElectronico], 
@@ -2288,6 +2291,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <PropertyRef Name="NroCliente" />
             <PropertyRef Name="AñoRegistro" />
             <PropertyRef Name="CorreoElectronico" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="NroCliente" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
           <Property Name="AñoRegistro" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
@@ -2311,6 +2315,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="Provincia" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Profesion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="EstadoCliente" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="v_Localidad">
           <Key>
@@ -2688,6 +2693,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySetMapping Name="v_Cliente">
             <EntityTypeMapping TypeName="DB_El_Asegurado.v_Cliente">
               <MappingFragment StoreEntitySet="v_Cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
                 <ScalarProperty Name="Profesion" ColumnName="Profesion" />
                 <ScalarProperty Name="Provincia" ColumnName="Provincia" />

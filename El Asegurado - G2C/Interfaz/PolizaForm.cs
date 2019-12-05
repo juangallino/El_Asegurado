@@ -833,6 +833,11 @@ namespace Interfaz
             GestorExtra gestorExtra = new GestorExtra();
           //  comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
         }
+
+        private void tabBusquedaPoliza_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

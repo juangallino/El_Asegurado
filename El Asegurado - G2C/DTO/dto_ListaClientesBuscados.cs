@@ -8,13 +8,13 @@ namespace DTO
 {
     public class dto_ListaClientesBuscados
     {
-
-        public int IdCliente { get; set; }
+        public int Id { get; set; }
+        public decimal IdCliente { get; set; }
         public decimal AñoRegistro { get; set; }
         public string Apellido { get; set; }
         public string Nombre { get; set; }
         public string TipoDoc { get; set; }
-        public decimal NroDocumento { get; set; }
+        public Nullable<decimal> NroDocumento { get; set; }
 
         }
 }

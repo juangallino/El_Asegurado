@@ -36,5 +36,6 @@ namespace Data
         public string Provincia { get; set; }
         public string Profesion { get; set; }
         public string EstadoCliente { get; set; }
+        public int id { get; set; }
     }
 }

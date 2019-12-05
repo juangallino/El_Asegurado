@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Data;
 using DTO;
 
@@ -150,8 +151,11 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
-                    var query = db.v_Cliente.AsQueryable();
-
+                    var query = db.v_Cliente.AsNoTracking().Where(q => q.nombre.Length > 0);
+                    if (dtoBC.idCliente.Value > 0 )
+                        query = query.Where(q => q.NroCliente == dtoBC.idCliente);
+                    if (dtoBC.NroDocumento > 0)
+                        query = query.Where(q => q.nroDocumento == dtoBC.NroDocumento);
                     if (!string.IsNullOrWhiteSpace(dtoBC.Apellido))
                         query = query.Where(q => q.apellido.Contains(dtoBC.Apellido));
                     if (!string.IsNullOrWhiteSpace(dtoBC.Nombre))

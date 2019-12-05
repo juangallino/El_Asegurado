@@ -129,6 +129,10 @@ namespace Interfaz
             }
         }
 
+        private void HijosGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
         
