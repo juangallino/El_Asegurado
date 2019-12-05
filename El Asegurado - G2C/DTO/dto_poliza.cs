@@ -95,5 +95,6 @@ namespace DTO
         public string Scoring_unidad_adicional { get; set; }
         public string Scoring_siniestros { get; set; }
         public string Estado { get; set; }
+        public int DerechoEmision { get; set; }
     }
 }

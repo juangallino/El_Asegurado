@@ -152,8 +152,8 @@ namespace DAO
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
                     var query = db.v_Cliente.AsNoTracking().Where(q => q.nombre.Length > 0);
-                    if (dtoBC.idCliente.Value > 0 )
-                        query = query.Where(q => q.NroCliente == dtoBC.idCliente);
+                    if (dtoBC.IdCliente.Value > 0 )
+                        query = query.Where(q => q.NroCliente == dtoBC.IdCliente);
                     if (dtoBC.NroDocumento > 0)
                         query = query.Where(q => q.nroDocumento == dtoBC.NroDocumento);
                     if (!string.IsNullOrWhiteSpace(dtoBC.Apellido))

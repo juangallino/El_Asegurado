@@ -51,7 +51,7 @@
             this.tabPageDetalleCliente = new System.Windows.Forms.TabPage();
             this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.btnConsultarCliente = new System.Windows.Forms.Button();
-            this.dBTP2019DataSet = new Interfaz.DBTP2019DataSet();
+          //  this.dBTP2019DataSet = new Interfaz.DBTP2019DataSet();
             this.dBTP2019DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dBTP2019DataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@
             this.tabControlCliente.SuspendLayout();
             this.tabPageBuscarCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusquedaCliente)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).BeginInit();
+          //  ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSetBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -278,21 +278,6 @@
             this.btnConsultarCliente.UseVisualStyleBackColor = true;
             this.btnConsultarCliente.Click += new System.EventHandler(this.btnConsultarCliente_Click);
             // 
-            // dBTP2019DataSet
-            // 
-            this.dBTP2019DataSet.DataSetName = "DBTP2019DataSet";
-            this.dBTP2019DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dBTP2019DataSetBindingSource
-            // 
-            this.dBTP2019DataSetBindingSource.DataSource = this.dBTP2019DataSet;
-            this.dBTP2019DataSetBindingSource.Position = 0;
-            // 
-            // dBTP2019DataSetBindingSource1
-            // 
-            this.dBTP2019DataSetBindingSource1.DataSource = this.dBTP2019DataSet;
-            this.dBTP2019DataSetBindingSource1.Position = 0;
-            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Gadugi", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,9 +301,6 @@
             this.tabPageBuscarCliente.ResumeLayout(false);
             this.tabPageBuscarCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusquedaCliente)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBTP2019DataSetBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,7 +328,7 @@
         private System.Windows.Forms.TextBox textBoxApellido;
         private System.Windows.Forms.DataGridView dataGridBusquedaCliente;
         private System.Windows.Forms.BindingSource dBTP2019DataSetBindingSource;
-        private DBTP2019DataSet dBTP2019DataSet;
+       // private DBTP2019DataSet dBTP2019DataSet;
         private System.Windows.Forms.BindingSource dBTP2019DataSetBindingSource1;
         private System.Windows.Forms.Label label1;
     }

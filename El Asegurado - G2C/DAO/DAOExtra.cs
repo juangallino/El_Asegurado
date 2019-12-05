@@ -13,108 +13,173 @@ namespace DAO
     {
         public List<TipoCobertura> BuscarCoberturas()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-                return db.TipoCoberturas.AsNoTracking().ToList();
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.TipoCoberturas.AsNoTracking().ToList();
+                }
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public List<Localidad> BuscarLocalidad(int IdProvincia)
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-
-                return db.Localidads.AsNoTracking().Where(p => p.idProvincia == IdProvincia).OrderBy(p => p.nombre).ToList();
-
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Localidads.AsNoTracking().Where(p => p.idProvincia == IdProvincia).OrderBy(p => p.nombre).ToList();
+                }
             }
-
-
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public List<Modelo> BuscarModelos(int idMarca)
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-
-                return db.Modeloes.AsNoTracking().Where(p => p.idmarca == idMarca).OrderBy(p => p.nombre).ToList();
-
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Modeloes.AsNoTracking().Where(p => p.idmarca == idMarca).OrderBy(p => p.nombre).ToList();
+                }
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public List<Provincia> BuscarProvincias()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-
-                return db.Provincias.AsNoTracking().ToList();
-
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Provincias.AsNoTracking().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
         public List<EstadoCivil> BuscarEstodosCiviles()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-
-                return db.EstadoCivils.AsNoTracking().ToList();
-
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.EstadoCivils.AsNoTracking().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
         public List<Sexo> BuscarSexos()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
 
-                return db.Sexoes.AsNoTracking().ToList();
+                    return db.Sexoes.AsNoTracking().ToList();
 
+                }
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public List<Marca> BuscarMarcas()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Marcas.AsNoTracking().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
-                return db.Marcas.AsNoTracking().ToList();
-
+        public TipoCobertura GetResponsabilidadCivil()
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    var ResponsabilidadCivil = db.TipoCoberturas.AsNoTracking().Where(p => p.nombre == "Responsabilidad Civil");
+                    return ResponsabilidadCivil.FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
         public decimal GetSumaAsegurada(int idModelo, int AñoFabricacion)
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-                
+            using (DBEntities_TP db = new DBEntities_TP())
+            {               
                 var valorAsegurado = db.Vehiculoes.AsNoTracking().Where(p => p.idModelo == idModelo).Where(p => p.AñoFabricacion == AñoFabricacion).Select(p => p.valorAsegurado);
                 return valorAsegurado.FirstOrDefault();
-
-
+            }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
         public List<EstadoPoliza> BuscarEstadosPoliza()
         {
+            try
+            {
             using (DBEntities_TP db = new DBEntities_TP())
             {
-
                 return db.EstadoPolizas.AsNoTracking().ToList();
-
+            }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
         public List<TipoDocumento> BuscarTipoDocumento()
         {
-            using (DBEntities_TP db = new DBEntities_TP())
+            try
             {
-                return db.TipoDocumentoes.AsNoTracking().ToList();
-
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.TipoDocumentoes.AsNoTracking().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
-
-
-
-
-
-
     }
 }
