@@ -53,7 +53,7 @@ namespace Interfaz
             //cargamos dto con datos a buscar
             if (!string.IsNullOrWhiteSpace(textBoxIdCliente.Text))
 
-                dtoBusquedaCliente.idCliente = textBoxIdCliente.Text == "" ? -1 : Convert.ToInt32(textBoxIdCliente.Text);
+                dtoBusquedaCliente.IdCliente = textBoxIdCliente.Text == "" ? -1 : Convert.ToInt32(textBoxIdCliente.Text);
             if (!string.IsNullOrWhiteSpace(textBoxApellido.Text))
 
                 dtoBusquedaCliente.Apellido = textBoxApellido.ToString();

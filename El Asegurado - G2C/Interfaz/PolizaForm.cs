@@ -589,7 +589,7 @@ namespace Interfaz
         }
 
         private void BtnBusquedaCliente_Click(object sender, EventArgs e)
-        {
+        {/*
             GestorCliente gestorCliente = new GestorCliente();
             dto_cliente dtoCliente;
             try
@@ -603,7 +603,7 @@ namespace Interfaz
             {
                 throw new Exception(error.Message);
             }
-            /*
+            */
             ClienteForm ClienteFrm = new ClienteForm();
             ClienteFrm.tabControlCliente.Enabled = true;
             ClienteFrm.btnNuevoCliente.Enabled = false;
@@ -611,7 +611,7 @@ namespace Interfaz
             ClienteFrm.tabControlCliente.SelectedIndex = 1;
             
             ClienteFrm.Show();
-            */
+            
         }
 
         private void BtnVolver_Click_1(object sender, EventArgs e)

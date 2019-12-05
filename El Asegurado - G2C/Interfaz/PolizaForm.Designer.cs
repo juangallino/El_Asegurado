@@ -1167,7 +1167,7 @@ namespace Interfaz
             this.tabBusquedaPoliza.TabIndex = 0;
             this.tabBusquedaPoliza.Text = "Búsqueda";
             this.tabBusquedaPoliza.UseVisualStyleBackColor = true;
-            this.tabBusquedaPoliza.Click += new System.EventHandler(this.tabBusquedaPoliza_Click);
+           // this.tabBusquedaPoliza.Click += new System.EventHandler(this.tabBusquedaPoliza_Click);
             // 
             // cboxEstadoBusquedaPoliza
             // 
