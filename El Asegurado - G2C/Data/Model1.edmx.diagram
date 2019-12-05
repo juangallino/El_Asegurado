@@ -28,7 +28,6 @@
         <EntityTypeShape EntityType="DB_El_Asegurado.Provincia" Width="1.5" PointX="1.5" PointY="22.875" />
         <EntityTypeShape EntityType="DB_El_Asegurado.Sexo" Width="1.5" PointX="0.75" PointY="6.5" />
         <EntityTypeShape EntityType="DB_El_Asegurado.SituacionIVA" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="DB_El_Asegurado.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.TipoCobertura" Width="1.5" PointX="5.25" PointY="13.625" />
         <EntityTypeShape EntityType="DB_El_Asegurado.TipoDocumento" Width="1.5" PointX="0.75" PointY="12.25" />
         <EntityTypeShape EntityType="DB_El_Asegurado.Usuario" Width="1.5" PointX="10.5" PointY="12.25" />
@@ -112,8 +111,9 @@
         <AssociationConnector Association="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario" />
         <AssociationConnector Association="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario" />
         <AssociationConnector Association="DB_El_Asegurado.FK_ValorFActorAutoscoringHist_ValorFactorAutoscoring" />
-        <EntityTypeShape EntityType="DB_El_Asegurado.v_Cliente" Width="1.5" PointX="15.375" PointY="16.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.v_Localidad" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.v_Cliente" Width="1.5" PointX="15.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

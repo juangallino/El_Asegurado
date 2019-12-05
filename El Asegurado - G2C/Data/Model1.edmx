@@ -1217,7 +1217,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="Provincias" EntityType="DB_El_Asegurado.Provincia" />
           <EntitySet Name="Sexoes" EntityType="DB_El_Asegurado.Sexo" />
           <EntitySet Name="SituacionIVAs" EntityType="DB_El_Asegurado.SituacionIVA" />
-          <EntitySet Name="sysdiagrams" EntityType="DB_El_Asegurado.sysdiagram" />
           <EntitySet Name="TipoCoberturas" EntityType="DB_El_Asegurado.TipoCobertura" />
           <EntitySet Name="TipoDocumentoes" EntityType="DB_El_Asegurado.TipoDocumento" />
           <EntitySet Name="Usuarios" EntityType="DB_El_Asegurado.Usuario" />
@@ -1390,8 +1389,9 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <End Role="ValorFactorAutoScoring" EntitySet="ValorFactorAutoScorings" />
             <End Role="ValorFactorAutoScoringHist" EntitySet="ValorFactorAutoScoringHists" />
           </AssociationSet>
-          <EntitySet Name="v_Cliente" EntityType="DB_El_Asegurado.v_Cliente" />
           <EntitySet Name="v_Localidad" EntityType="DB_El_Asegurado.v_Localidad" />
+          <EntitySet Name="sysdiagrams" EntityType="DB_El_Asegurado.sysdiagram" />
+          <EntitySet Name="v_Cliente" EntityType="DB_El_Asegurado.v_Cliente" />
           </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -1692,16 +1692,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Clientes" Relationship="DB_El_Asegurado.FK_Cliente_SituacionIVA" FromRole="SituacionIVA" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoCobertura">
           <Key>
@@ -2286,13 +2276,38 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="v_Localidad">
+          <Key>
+            <PropertyRef Name="idLocalidad" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="codpostal" />
+            <PropertyRef Name="Provincia" />
+            <PropertyRef Name="Pais" />
+          </Key>
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="codpostal" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="v_Cliente">
           <Key>
+            <PropertyRef Name="id" />
             <PropertyRef Name="NroCliente" />
             <PropertyRef Name="AñoRegistro" />
             <PropertyRef Name="CorreoElectronico" />
-            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="NroCliente" Type="Decimal" Nullable="false" Precision="8" Scale="0" />
           <Property Name="AñoRegistro" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
           <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
@@ -2315,21 +2330,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="Provincia" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Profesion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="EstadoCliente" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="v_Localidad">
-          <Key>
-            <PropertyRef Name="idLocalidad" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="codpostal" />
-            <PropertyRef Name="Provincia" />
-            <PropertyRef Name="Pais" />
-          </Key>
-          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="codpostal" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
-          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2601,17 +2601,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DB_El_Asegurado.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoCoberturas">
             <EntityTypeMapping TypeName="DB_El_Asegurado.TipoCobertura">
               <MappingFragment StoreEntitySet="TipoCobertura">
@@ -2690,10 +2679,31 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="v_Localidad">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.v_Localidad">
+              <MappingFragment StoreEntitySet="v_Localidad">
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="codpostal" ColumnName="codpostal" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="v_Cliente">
             <EntityTypeMapping TypeName="DB_El_Asegurado.v_Cliente">
               <MappingFragment StoreEntitySet="v_Cliente">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
                 <ScalarProperty Name="Profesion" ColumnName="Profesion" />
                 <ScalarProperty Name="Provincia" ColumnName="Provincia" />
@@ -2716,17 +2726,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
                 <ScalarProperty Name="AñoRegistro" ColumnName="AñoRegistro" />
                 <ScalarProperty Name="NroCliente" ColumnName="NroCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="v_Localidad">
-            <EntityTypeMapping TypeName="DB_El_Asegurado.v_Localidad">
-              <MappingFragment StoreEntitySet="v_Localidad">
-                <ScalarProperty Name="Pais" ColumnName="Pais" />
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-                <ScalarProperty Name="codpostal" ColumnName="codpostal" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2745,7 +2745,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

@@ -14,6 +14,7 @@ namespace Data
     
     public partial class v_Cliente
     {
+        public int id { get; set; }
         public decimal NroCliente { get; set; }
         public decimal AñoRegistro { get; set; }
         public string CorreoElectronico { get; set; }
@@ -36,6 +37,5 @@ namespace Data
         public string Provincia { get; set; }
         public string Profesion { get; set; }
         public string EstadoCliente { get; set; }
-        public int id { get; set; }
     }
 }
