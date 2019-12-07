@@ -580,75 +580,7 @@ namespace Interfaz
             }
         }
 
-        private void TabBusquedaPoliza_Enter(object sender, EventArgs e)
-        {
-
-            TituloPanelPoliza.Text = "Búsqueda Póliza";
-            GestorExtra gestorExtra = new GestorExtra();
-            foreach (var marca in gestorExtra.CargaMarca())
-            {
-                cboxMarcaBusquedaPoliza.Items.Add(marca);
-            }
-            //cboxMarcaBusquedaPoliza.DataSource = gestorExtra.CargaMarca();
-            cboxMarcaBusquedaPoliza.DisplayMember = "nombre";
-            cboxMarcaBusquedaPoliza.ValueMember = "id";
-            cboxMarcaBusquedaPoliza.Items.Insert(0, "Todos");
-            cboxMarcaBusquedaPoliza.SelectedIndex = 0;
-
-            //opcion 2
-            foreach (var estado in gestorExtra.CargarEstadosPoliza())
-            {
-                cboxEstadoBusquedaPoliza.Items.Add(estado);
-
-            }
-            //opcion 1 original
-            //cboxEstadoBusquedaPoliza.DataSource = gestorExtra.CargarEstadosPoliza();
-            cboxEstadoBusquedaPoliza.DisplayMember = "nombre";
-            cboxEstadoBusquedaPoliza.ValueMember = "id";
-
-
-            cboxEstadoBusquedaPoliza.Items.Insert(0, "Todos");
-            cboxEstadoBusquedaPoliza.SelectedIndex = 0;
-
-
-        }
-
-        private void CboxMarcaBusquedaPoliza_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            cboxModeloBusquedaPoliza.Items.Clear();
-            GestorExtra gestorExtra = new GestorExtra();
-            // cboxModeloBusquedaPoliza.DataSource = gestorExtra.BuscarModelo(Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex));
-            foreach (var modelo in gestorExtra.BuscarModelo(Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex)))
-            {
-                cboxModeloBusquedaPoliza.Items.Add(modelo);
-            }
-            cboxModeloBusquedaPoliza.DisplayMember = "nombre";
-            cboxModeloBusquedaPoliza.ValueMember = "id";
-            cboxModeloBusquedaPoliza.Items.Insert(0, "Todos");
-            cboxModeloBusquedaPoliza.SelectedIndex = 0;
-        }
-
-        private void BtnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
-        {
-            //super consulta
-           
-        }
-
-        private void BtnVolverTabDetallePoliza_Click(object sender, EventArgs e)
-        {
-            tabControlPoliza1.SelectedTab = tabBusquedaPoliza;
-        }
-
-
-
-        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            GestorPoliza gestorPoliza = new GestorPoliza();
-            int polizaId = Convert.ToInt32(dataGridBusquedaPoliza.Rows[e.RowIndex].Cells[0].Value);
-            var ResultBusquedaPolizaCliente = gestorPoliza.BuscarDetallePolizaID(polizaId);
-            CargarPolizaDetalles(ResultBusquedaPolizaCliente.Item1, ResultBusquedaPolizaCliente.Item2);
-            tabControlPoliza1.SelectedTab = tabDetallesPoliza;
-        }
+        
 
         private void CargarPolizaDetalles(dto_poliza dtoPoliza, dto_cliente dtoCliente)
         {
@@ -767,6 +699,73 @@ namespace Interfaz
 
         }
 
+        private void TabBusquedaPoliza_Enter(object sender, EventArgs e)
+        {
+
+            TituloPanelPoliza.Text = "Búsqueda Póliza";
+            GestorExtra gestorExtra = new GestorExtra();
+            foreach (var marca in gestorExtra.CargaMarca())
+            {
+                cboxMarcaBusquedaPoliza.Items.Add(marca);
+            }
+            //cboxMarcaBusquedaPoliza.DataSource = gestorExtra.CargaMarca();
+            cboxMarcaBusquedaPoliza.DisplayMember = "nombre";
+            cboxMarcaBusquedaPoliza.ValueMember = "id";
+            cboxMarcaBusquedaPoliza.Items.Insert(0, "Todos");
+            cboxMarcaBusquedaPoliza.SelectedIndex = 0;
+
+            //opcion 2
+            foreach (var estado in gestorExtra.CargarEstadosPoliza())
+            {
+                cboxEstadoBusquedaPoliza.Items.Add(estado);
+
+            }
+            //opcion 1 original
+            //cboxEstadoBusquedaPoliza.DataSource = gestorExtra.CargarEstadosPoliza();
+            cboxEstadoBusquedaPoliza.DisplayMember = "nombre";
+            cboxEstadoBusquedaPoliza.ValueMember = "id";
+            cboxEstadoBusquedaPoliza.Items.Insert(0, "Todos");
+            cboxEstadoBusquedaPoliza.SelectedIndex = 0;
+
+
+        }
+
+        private void CboxMarcaBusquedaPoliza_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cboxModeloBusquedaPoliza.Items.Clear();
+            GestorExtra gestorExtra = new GestorExtra();
+            // cboxModeloBusquedaPoliza.DataSource = gestorExtra.BuscarModelo(Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex));
+            foreach (var modelo in gestorExtra.BuscarModelo(Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex)))
+            {
+                cboxModeloBusquedaPoliza.Items.Add(modelo);
+            }
+            cboxModeloBusquedaPoliza.DisplayMember = "nombre";
+            cboxModeloBusquedaPoliza.ValueMember = "id";
+            cboxModeloBusquedaPoliza.Items.Insert(0, "Todos");
+            cboxModeloBusquedaPoliza.SelectedIndex = 0;
+        }
+
+        private void BtnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
+        {
+            //super consulta
+
+        }
+
+        private void BtnVolverTabDetallePoliza_Click(object sender, EventArgs e)
+        {
+            tabControlPoliza1.SelectedTab = tabBusquedaPoliza;
+        }
+
+
+
+        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GestorPoliza gestorPoliza = new GestorPoliza();
+            int polizaId = Convert.ToInt32(dataGridBusquedaPoliza.Rows[e.RowIndex].Cells[0].Value);
+            var ResultBusquedaPolizaCliente = gestorPoliza.BuscarDetallePolizaID(polizaId);
+            CargarPolizaDetalles(ResultBusquedaPolizaCliente.Item1, ResultBusquedaPolizaCliente.Item2);
+            tabControlPoliza1.SelectedTab = tabDetallesPoliza;
+        }
         private void btnBuscarTabConsultaPoliza_Click_1(object sender, EventArgs e)
         {
             GestorPoliza gestorPoliza = new GestorPoliza();

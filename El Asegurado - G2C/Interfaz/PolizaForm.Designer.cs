@@ -1814,6 +1814,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1028, 581);
             this.Controls.Add(this.panelPoliza);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PolizaForm";
             this.Text = "Polizas";
             this.Load += new System.EventHandler(this.PolizaForm_Load_1);
