@@ -54,8 +54,6 @@ namespace Interfaz
             {
                 e.Handled = true;
             }
-
-
         }
         //Titulo PANEL POLIZA
         private void TabDetallesPoliza_Enter(object sender, EventArgs e)
@@ -68,7 +66,6 @@ namespace Interfaz
             TituloPanelPoliza.Text = "Nueva Póliza";
         }
 
-
         /// <Obtener //datos>
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ObtenerDatos()
@@ -80,7 +77,7 @@ namespace Interfaz
             {
                 //Creo un gestor poliza para poder calcular el premio y los descuentos
 
-                dto_poliza dtoPoliza = new dto_poliza(true); // Creamos el dto de poliza y lo cargamos con los datos obtenido de la interfaz
+                dto_poliza dtoPoliza = new dto_poliza(); // Creamos el dto de poliza y lo cargamos con los datos obtenido de la interfaz
                 dtoPoliza.IdDomicilioRiesgo = Convert.ToInt32(comboBoxLocalidad.SelectedValue);
                 dtoPoliza.Suma_Asegurada = Convert.ToInt32(textBoxSumaAsegurada.Text);
                 dtoPoliza.IdVehiculo = Convert.ToInt32(comboBoxModelo.SelectedValue);
@@ -132,17 +129,15 @@ namespace Interfaz
                 //Le asigno a la variable global DTOPOLIZACTE, el dto que voy a imprimir
                 DTOPOLIZAAUX = dtoPoliza;
             }
-
             catch (Exception error)
             {
                 MessageBox.Show("ERROR " + error.Message);
             }
         }
 
-
         public void CargarRevisionPoliza(dto_poliza dtoPoliza)
         {
-            textBoxTitularSeguro.Text = "nombre del cliente";
+            textBoxTitularSeguro.Text = textBoxClienteNombre.Text;
             textBoxRevMarca.Text = dtoPoliza.Marca;
             textBoxRevModelo.Text = dtoPoliza.Modelo;
             textBoxRevChasis.Text = dtoPoliza.NroChasis;
@@ -158,16 +153,14 @@ namespace Interfaz
 
             if (dtoPoliza.FormaPago == 6)
             {
-
                 textBoxRevMontoPago1.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
                 textBoxRevMontoPago2.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
                 textBoxRevMontoPago3.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
                 textBoxRevMontoPago4.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
                 textBoxRevMontoPago5.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
                 textBoxRevMontoPago6.Text = (dtoPoliza.Monto_Abonar / 6).ToString();
+
                 //// muestro campo pago
-
-
                 textBoxRevMontoPago1.Show();
                 textBoxRevMontoPago2.Show();
                 textBoxRevMontoPago3.Show();
@@ -199,7 +192,6 @@ namespace Interfaz
             }
             else
             {
-
                 textBoxRevMontoPago1.Text = (dtoPoliza.Monto_Abonar).ToString();
                 textBoxRevMontoPago2.Hide();
                 textBoxRevMontoPago3.Hide();
@@ -220,11 +212,7 @@ namespace Interfaz
                 textBoxRevDiaPago6.Hide();
             }
             textBoxRevTipoCobertura.Text = dtoPoliza.NombreCobertura.Trim();
-
-
-
         }
-
 
         private void limpiarCampos()
         {  //tabRevision
@@ -291,7 +279,14 @@ namespace Interfaz
                         var control = ValidarPestañaNuevo();
                         //Si no valida, no pasa a la siguiente pestaña, y muestra error
                         if (control == null)
-                            tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex + 1);
+                        {
+                            tabControlPoliza2.SelectedIndex += 1;
+                            //CARGAR CBOX  TIPO COBERTURA
+                            GestorExtra gestorExtra = new GestorExtra();
+                            comboBoxTipoCobertura.DataSource = gestorExtra.CargarTipoCobertura(Convert.ToInt32(comboBoxAño.SelectedItem));
+                            comboBoxTipoCobertura.DisplayMember = "nombre";
+                            comboBoxTipoCobertura.ValueMember = "id";
+                        }
                         else
                         {
                             MessageBox.Show("Por favor, completa los datos para continuar", "Atención: Datos con Error o Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -307,28 +302,28 @@ namespace Interfaz
                             {
                                 Blink(control);
                             }
-
                         }
-
+                        break;
+                    case "Tipo Cobertura":
+                        tabControlPoliza2.SelectedIndex += 1;
+                        ObtenerDatos();
+                        btnSiguiente.Text = "Emitir Póliza";
                         break;
                     case "Revisión":
-                        ObtenerDatos();
+                        ConfirmarGenerarPoliza();
                         break;
                 }
-
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message);
             }
-
-
         }
+
         //Método que genera un cambio de color en el control que generó un error
         private async void Blink(Control control)
         {
             CancellationTokenSource cts = new CancellationTokenSource();
-
             cts.CancelAfter(1000);
             Color colorOrig = control.BackColor;
             while (!cts.IsCancellationRequested)
@@ -339,7 +334,6 @@ namespace Interfaz
             }
             control.BackColor = colorOrig;
         }
-
 
         //Valida que los controles estén completos y correctos
         private System.Windows.Forms.Control ValidarPestañaNuevo()
@@ -394,36 +388,47 @@ namespace Interfaz
             //Si todos los campos obligatorios están completos, retorna null
             return null;
         }
-
-        private void BtnVolver_Click(object sender, EventArgs e)
+        private void ConfirmarGenerarPoliza()
         {
-            
+            GestorPoliza gestorPoliza = new GestorPoliza();
+            DialogResult Estaseguro = MessageBox.Show("¿Está seguro que desea dar de alta una Póliza nueva? ¡Esta acción no se puede deshacer!", "Generar Póliza", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            switch (Estaseguro)
+            {
+                case DialogResult.Yes:   // Yes button pressed
+                    try
+                    {
+                        gestorPoliza.generarPoliza(DTOPOLIZAAUX);
+                        DTOPOLIZAAUX = null;
+                        declaracionHijosView.Limpiate();
+                        medidaSeguridadView.limpiate();
+                        limpiarCampos();
+                    }
+                     catch(Exception e) 
+                    { 
+                        MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException); 
+                    }
+
+                    break;
+                case DialogResult.No:    // No button pressed
+                    MessageBox.Show("Creación de póliza cancelada.","Información",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    break;
+
+                    // gestorPoliza.generarPoliza(DTOPOLIZACTE);
+                    // DTOPOLIZACTE = null;
+            }
         }
 
         private void BtnNuevo_Click(object sender, EventArgs e)
         {
             tabControlPoliza1.Visible = true;
             tabControlPoliza1.SelectedTab = tabNuevaPoliza;
-
-
         }
 
         private void Btnconsultar_Click(object sender, EventArgs e)
         {
             tabControlPoliza1.Visible = true;
             tabControlPoliza1.SelectedTab = tabBusquedaPoliza;
-        }
-        private void PolizaForm_Load(object sender, EventArgs e)
-
-        {
-
-            
-        }
-
-        private void BtnDeclaracionHijos_Click(object sender, EventArgs e)
-        {
-
-           
         }
 
         private void BtnMedidasdeSeguridad_Click(object sender, EventArgs e)
@@ -449,18 +454,6 @@ namespace Interfaz
             LimitarKeypres(e, false, true, false, true);
         }
 
-
-
-
-
-
-        private void ComboBoxProvincia_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-   
-        }
-
-
-
         private void ComboBoxMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
             comboBoxModelo.DataSource = null;
@@ -470,61 +463,18 @@ namespace Interfaz
             comboBoxModelo.ValueMember = "id";
         }
 
-
-
-
-
-
-        private void comboBoxAño_SelectedIndexChanged(object sender, EventArgs e)
+      private void comboBoxAño_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             GestorExtra gestorExtra = new GestorExtra();
             textBoxSumaAsegurada.Visible = true;
             textBoxSumaAsegurada.Text = Convert.ToString(gestorExtra.GetSumaAsegurada(comboBoxModelo.SelectedIndex, comboBoxAño.SelectedIndex));
         }
-
+               
         private void textBoxRevTipoCobertura_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void BtnEmitirPoliza_Click(object sender, EventArgs e)
-        {
-            GestorPoliza gestorPoliza = new GestorPoliza();
-            DialogResult Estaseguro = MessageBox.Show("Seguro que desea dar de alta una Poliza nueva? Esta accion no se puede deshacer!", "Generar Poliza", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            switch (Estaseguro)
-            {
-                case DialogResult.Yes:   // Yes button pressed
-                                         // try
-                                         // {
-                    gestorPoliza.generarPoliza(DTOPOLIZAAUX);
-                    DTOPOLIZAAUX = null;
-                    declaracionHijosView.Limpiate();
-                    medidaSeguridadView.limpiate();
-                    limpiarCampos();
-
-                    // }
-                    // catch(Exception e) { MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException); }
-
-                    break;
-                case DialogResult.No:    // No button pressed
-                    MessageBox.Show("cancelamos la creacion de la poliza");
-                    break;
-
-
-
-                    // gestorPoliza.generarPoliza(DTOPOLIZACTE);
-                    // DTOPOLIZACTE = null;
-
-            }
-
-
-            /////////////////////////// funcion limitar boton siguiente a que esten todos los campos completos
-            MessageBox.Show("Póliza emitida con Exito", "Nueva Poliza", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-        }
+        } 
        /* public bool ValidarPatente()
         {
             Regex patenteVieja = new Regex("^[A - Za - z]{3}[0-9]{3}$");
@@ -627,7 +577,17 @@ namespace Interfaz
 
         private void btnBusquedaCliente_Click(object sender, EventArgs e)
         {
-            
+            GestorCliente gestorCliente = new GestorCliente();
+            dto_cliente dtoCliente = new dto_cliente();
+            try
+            {
+                dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(textBoxClienteNro.Text));
+                textBoxClienteNombre.Text = (dtoCliente.Nombre.Trim() + ", " + dtoCliente.Apellido.Trim());
+                textBoxClienteDomicilio.Text = (dtoCliente.Calle.ToString().Trim() + "  " + dtoCliente.NumeroDomicilio.ToString().Trim() + ",  " + dtoCliente.Localidad.ToString().Trim() + ", " + dtoCliente.Provincia.ToString().Trim() + ", " + dtoCliente.Pais.ToUpper().ToString().Trim());
+                textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + dtoCliente.NroDocumento.ToString().Trim();
+            }
+            catch (Exception error) { MessageBox.Show(error.Message); }
+            /*
             ClienteForm ClienteFrm = new ClienteForm();
             ClienteFrm.tabControlCliente.Enabled = true;
             ClienteFrm.btnNuevoCliente.Enabled = false;
@@ -635,13 +595,18 @@ namespace Interfaz
             ClienteFrm.tabControlCliente.SelectedIndex = 1;
             
             ClienteFrm.Show();
-
+            */
         }
 
         private void btnVolver_Click_1(object sender, EventArgs e)
         {
-            if (tabControlPoliza2.SelectedIndex >= 1) tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex - 1);
+            if (tabControlPoliza2.SelectedIndex >= 1)
+            {
+                tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex - 1);
+                btnSiguiente.Text = "Siguiente";
+            }
             btnSiguiente.Enabled = true;
+
         }
 
         private void btnDeclaracionHijos_Click_1(object sender, EventArgs e)
@@ -680,23 +645,15 @@ namespace Interfaz
             timepickerFechaInicio.MaxDate = DateTime.Today.AddMonths(1);
 
 
-            //CARGAR CBOX  TIPO COB     
-            comboBoxTipoCobertura.DataSource = gestorExtra.CargarTipoCobertura();
-            comboBoxTipoCobertura.DisplayMember = "nombre";
-            comboBoxTipoCobertura.ValueMember = "id";
-
             //CARGAR PROVINCIA
             comboBoxProvincia.DataSource = gestorExtra.CargarProvincia();
             comboBoxProvincia.DisplayMember = "nombre";
             comboBoxProvincia.ValueMember = "id";
 
             //CARGAR MARCAS
-
             comboBoxMarca.DataSource = gestorExtra.CargaMarca();
             comboBoxMarca.DisplayMember = "nombre";
             comboBoxMarca.ValueMember = "id";
-
-
         }
 
         private void TabBusquedaPoliza_Enter(object sender, EventArgs e)
@@ -771,9 +728,6 @@ namespace Interfaz
             GestorPoliza gestorPoliza = new GestorPoliza();
             dto_busquedaPoliza dtoBusquedaPoliza = new dto_busquedaPoliza();
 
-
-
-
             //cargamos dto con datos a buscar
             dtoBusquedaPoliza.idestado = Convert.ToInt32(cboxEstadoBusquedaPoliza.SelectedIndex);
             dtoBusquedaPoliza.idmarca = Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex);
@@ -791,11 +745,6 @@ namespace Interfaz
 
         }
 
-        private void comboBoxLocalidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBoxProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxLocalidad.DataSource = null;
@@ -803,11 +752,6 @@ namespace Interfaz
             comboBoxLocalidad.DataSource = gestorExtra.BuscarLocalidad(Convert.ToInt32(comboBoxProvincia.SelectedValue));
             comboBoxLocalidad.DisplayMember = "nombre";
             comboBoxLocalidad.ValueMember = "id";
-        }
-
-        private void comboBoxAño_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
         }
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {

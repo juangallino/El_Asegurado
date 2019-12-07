@@ -1,4 +1,6 @@
-﻿namespace Interfaz
+﻿using System;
+
+namespace Interfaz
 {
     partial class PolizaForm
     {
@@ -77,7 +79,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.tabRevision = new System.Windows.Forms.TabPage();
-            this.btnEmitirPoliza = new System.Windows.Forms.Button();
             this.textBoxRevMontoPago6 = new System.Windows.Forms.TextBox();
             this.textBoxRevMontoPago5 = new System.Windows.Forms.TextBox();
             this.textBoxRevMontoPago4 = new System.Windows.Forms.TextBox();
@@ -393,7 +394,7 @@
             this.comboBoxAño.Name = "comboBoxAño";
             this.comboBoxAño.Size = new System.Drawing.Size(62, 21);
             this.comboBoxAño.TabIndex = 12;
-            this.comboBoxAño.SelectedIndexChanged += new System.EventHandler(this.comboBoxAño_SelectedIndexChanged_1);
+            this.comboBoxAño.SelectedIndexChanged += new System.EventHandler(this.comboBoxAño_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -415,6 +416,7 @@
             this.comboBoxPatente.Name = "comboBoxPatente";
             this.comboBoxPatente.Size = new System.Drawing.Size(84, 21);
             this.comboBoxPatente.TabIndex = 15;
+            this.comboBoxPatente.SelectedIndexChanged += new System.EventHandler(this.ComboBoxPatente_SelectedIndexChanged);
             // 
             // btnDeclaracionHijos
             // 
@@ -447,11 +449,13 @@
             // comboBoxNroSiniestros
             // 
             this.comboBoxNroSiniestros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNroSiniestros.Enabled = false;
             this.comboBoxNroSiniestros.FormattingEnabled = true;
             this.comboBoxNroSiniestros.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
+            "Ninguno",
+            "Uno",
+            "Dos",
+            "Más de dos"});
             this.comboBoxNroSiniestros.Location = new System.Drawing.Point(495, 165);
             this.comboBoxNroSiniestros.Name = "comboBoxNroSiniestros";
             this.comboBoxNroSiniestros.Size = new System.Drawing.Size(84, 21);
@@ -467,7 +471,6 @@
             this.comboBoxLocalidad.Name = "comboBoxLocalidad";
             this.comboBoxLocalidad.Size = new System.Drawing.Size(194, 21);
             this.comboBoxLocalidad.TabIndex = 9;
-            this.comboBoxLocalidad.SelectedIndexChanged += new System.EventHandler(this.comboBoxLocalidad_SelectedIndexChanged);
             // 
             // comboBoxModelo
             // 
@@ -651,11 +654,11 @@
             // timepickerFechaInicio
             // 
             this.timepickerFechaInicio.Location = new System.Drawing.Point(246, 88);
-            this.timepickerFechaInicio.MinDate = new System.DateTime(2019, 11, 22, 13, 50, 30, 0);
+            this.timepickerFechaInicio.MinDate = new System.DateTime(2019, 12, 3, 0, 0, 0, 0);
             this.timepickerFechaInicio.Name = "timepickerFechaInicio";
             this.timepickerFechaInicio.Size = new System.Drawing.Size(200, 20);
             this.timepickerFechaInicio.TabIndex = 4;
-            this.timepickerFechaInicio.Value = new System.DateTime(2019, 11, 22, 13, 50, 30, 0);
+            this.timepickerFechaInicio.Value = new System.DateTime(2019, 12, 3, 0, 0, 0, 0);
             // 
             // comboBoxTipoCobertura
             // 
@@ -698,7 +701,6 @@
             // 
             // tabRevision
             // 
-            this.tabRevision.Controls.Add(this.btnEmitirPoliza);
             this.tabRevision.Controls.Add(this.textBoxRevMontoPago6);
             this.tabRevision.Controls.Add(this.textBoxRevMontoPago5);
             this.tabRevision.Controls.Add(this.textBoxRevMontoPago4);
@@ -742,19 +744,8 @@
             this.tabRevision.Padding = new System.Windows.Forms.Padding(3);
             this.tabRevision.Size = new System.Drawing.Size(1001, 303);
             this.tabRevision.TabIndex = 2;
-            this.tabRevision.Text = "Revisón";
+            this.tabRevision.Text = "Revisión";
             this.tabRevision.UseVisualStyleBackColor = true;
-            // 
-            // btnEmitirPoliza
-            // 
-            this.btnEmitirPoliza.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmitirPoliza.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.btnEmitirPoliza.Location = new System.Drawing.Point(814, 215);
-            this.btnEmitirPoliza.Name = "btnEmitirPoliza";
-            this.btnEmitirPoliza.Size = new System.Drawing.Size(151, 43);
-            this.btnEmitirPoliza.TabIndex = 55;
-            this.btnEmitirPoliza.Text = "EMITIR PÓLIZA";
-            this.btnEmitirPoliza.UseVisualStyleBackColor = true;
             // 
             // textBoxRevMontoPago6
             // 
@@ -866,9 +857,9 @@
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(25, 188);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(96, 13);
+            this.label33.Size = new System.Drawing.Size(98, 13);
             this.label33.TabIndex = 41;
-            this.label33.Text = "Ultimo dia de Pago";
+            this.label33.Text = "Ultimo día de Pago";
             // 
             // textBoxRevImpDescuentos
             // 
@@ -1884,7 +1875,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TabPage tabRevision;
-        private System.Windows.Forms.Button btnEmitirPoliza;
         private System.Windows.Forms.TextBox textBoxRevMontoPago6;
         private System.Windows.Forms.TextBox textBoxRevMontoPago5;
         private System.Windows.Forms.TextBox textBoxRevMontoPago4;

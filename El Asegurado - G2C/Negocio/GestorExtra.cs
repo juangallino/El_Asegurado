@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DAO;
 using DTO;
 using Data;
+using System.Windows.Forms;
+
 namespace Negocio
 {
     public class GestorExtra
@@ -48,25 +50,38 @@ namespace Negocio
             return listaCarga;
         }
 
-        public List<dto_extra> CargarTipoCobertura()
+        public List<dto_extra> CargarTipoCobertura(int añovehículo)
         {
             DAOExtra dAOExtra = new DAOExtra();
-            // return dAOExtra.BuscarCoberturas();
-
+            
+            DateTime fecha = new DateTime();
+            fecha = DateTime.Today;
             List<dto_extra> listaCarga = new List<dto_extra>();
-
-            foreach (var DATO in dAOExtra.BuscarCoberturas())
+            
+            //Verifico el año del vehículo. Si es mayor a 10 años, sólo muestra la cobertura Responsabilidad Civil
+            if(fecha.Year - añovehículo > 10)
             {
-
-                dto_extra dto_extra = new dto_extra();
-                dto_extra dtoExtra = dto_extra;
-                dtoExtra.id = DATO.id;
-                dtoExtra.nombre = DATO.nombre;
+                var DATO = dAOExtra.GetResponsabilidadCivil();
+                dto_extra dtoExtra = new dto_extra
+                {
+                    id = DATO.id,
+                    nombre = DATO.nombre
+                };
                 listaCarga.Add(dtoExtra);
             }
+            else
+            {
+                foreach (var DATO in dAOExtra.BuscarCoberturas())
+                {
+                    dto_extra dtoExtra = new dto_extra
+                    {
+                        id = DATO.id,
+                        nombre = DATO.nombre
+                    };
+                    listaCarga.Add(dtoExtra);
+                }
+            }            
             return listaCarga;
-
-
         }
 
         public List<dto_extra> CargarProvincia()
