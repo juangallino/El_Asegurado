@@ -9,6 +9,7 @@ namespace DTO
     public class dto_Cuota
     {
         public int IdCuota { get; set; }
+        public int NroCuota { get; set; }
         public DateTime FechaVencimiento { get; set; }
         public DateTime FechaPago { get; set; }
         public decimal ImporteCuota { get; set; }

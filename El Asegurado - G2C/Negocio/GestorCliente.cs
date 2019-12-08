@@ -124,11 +124,12 @@ namespace Negocio
             {
 
                 dto_ListaClientesBuscados dto_Lista = new dto_ListaClientesBuscados();
+                dto_Lista.Id = v_Cliente.id;
                 dto_Lista.AñoRegistro = v_Cliente.AñoRegistro;
                 dto_Lista.Apellido = v_Cliente.apellido;
                 dto_Lista.Nombre = v_Cliente.nombre;
                 dto_Lista.IdCliente = v_Cliente.NroCliente;
-                dto_Lista.NroDocumento = v_Cliente.nroDocumento;
+                dto_Lista.NroDocumento = v_Cliente.nroDocumento;    
 
 
 
