@@ -112,5 +112,11 @@ namespace Interfaz
         {
 
         }
+
+        private void dataGridBusquedaCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RowPosition = e.RowIndex;
+
+        }
     }
 }
