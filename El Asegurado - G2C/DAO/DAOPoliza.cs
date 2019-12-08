@@ -163,13 +163,30 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+       /* public List<Poliza> ConsultaBuscarPolizasPorNumero(string nroPolizaBusqueda)
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
 
+                {
+                   // return db.Polizas.Find(nroPolizaBusqueda);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }*/
         public List<Poliza> ConsultaBuscarPolizas(dto_busquedaPoliza dtoBP)
         {
             try
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
+
                     var aux = db.Polizas.AsNoTracking().Where(p => //(nroPoliza ==0 || p.NroPolizaSec.Tostring() == nroPoliza) &&
                                                                 (dtoBP.nombreCliente == "" || (p.Cliente.Persona.nombre.Contains(dtoBP.nombreCliente) || p.Cliente.Persona.apellido.Contains(dtoBP.nombreCliente))) &&
                                                                  (dtoBP.idestado == 0 || p.EstadoPoliza.id == dtoBP.idestado) &&
@@ -187,6 +204,7 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+
 
         /* public EstadoPoliza GetEstado(Poliza poliza)
          {

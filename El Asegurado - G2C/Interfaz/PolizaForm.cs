@@ -20,6 +20,8 @@ namespace Interfaz
         readonly MedidasSeguridadForm medidaSeguridadView = new MedidasSeguridadForm();
         dto_poliza DTOPOLIZAAUX = new dto_poliza();
         
+
+        
         public PolizaForm()
         {
             InitializeComponent();
@@ -27,6 +29,8 @@ namespace Interfaz
             panelPoliza.Visible = true;
             textBoxSumaAsegurada.Visible = false;
         }
+
+    
         public void LimitarKeypres(KeyPressEventArgs e, bool numero, bool letra, bool control, bool separador)
 
         {
@@ -393,14 +397,13 @@ namespace Interfaz
                         LimpiarCampos();
                         tabControlPoliza2.SelectedIndex = 0;
                         btnSiguiente.Text = "Siguiente";
+                        MessageBox.Show("Póliza emitida con Exito", "Nueva Póliza", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                      catch(Exception e) 
                     { 
                         //throw new Exception(e.Message, e.InnerException);
-                        MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException); 
+                        MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException,"Errora al Actualizar Poliza", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                     }
-                    MessageBox.Show("Póliza emitida con Exito", "Nueva Póliza", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     break;
                 case DialogResult.No:    // No button pressed
                     MessageBox.Show("Creación de póliza cancelada.","Información",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -585,33 +588,72 @@ namespace Interfaz
 
         private void BtnNuevo_Click_1(object sender, EventArgs e)
         {
-            this.tabControlPoliza1.SelectedIndex = 0;
-        }
-
-        private void BtnBusquedaCliente_Click(object sender, EventArgs e)
-        {/*
+            this.tabControlPoliza2.Enabled = false;
             GestorCliente gestorCliente = new GestorCliente();
             dto_cliente dtoCliente;
+            ClienteForm ClienteFrm = new ClienteForm();
+            ClienteFrm.tabControlCliente.Enabled = true;
+            ClienteFrm.btnNuevoCliente.Enabled = false;
+            ClienteFrm.btnConsultarCliente.Enabled = true;
+            ClienteFrm.tabControlCliente.SelectedIndex = 1;
+
+            ClienteFrm.ShowDialog();
+            MessageBox.Show("ClienteSeleccionado" + ClienteFrm.TxtClienteSeleccionado);
+            lblClienteSeleccionado.Text = ClienteFrm.TxtClienteSeleccionado;
+
             try
             {
-                dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(textBoxClienteNro.Text));
+                dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(lblClienteSeleccionado.Text));
+                textBoxClienteNro.Text = (dtoCliente.IdCliente.ToString());
                 textBoxClienteNombre.Text = (dtoCliente.Nombre.Trim() + ", " + dtoCliente.Apellido.Trim());
                 textBoxClienteDomicilio.Text = (dtoCliente.Calle.ToString().Trim() + "  " + dtoCliente.NumeroDomicilio.ToString().Trim() + ",  " + dtoCliente.Localidad.ToString().Trim() + ", " + dtoCliente.Provincia.ToString().Trim() + ", " + dtoCliente.Pais.ToUpper().ToString().Trim());
-                textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + dtoCliente.NroDocumento.ToString().Trim();
+                textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + " " + dtoCliente.NroDocumento.ToString().Trim();
             }
-            catch (Exception error) 
+            catch (Exception error)
             {
                 throw new Exception(error.Message);
             }
-            */
+            this.tabControlPoliza2.Enabled = true;
+            tabControlPoliza2.SelectedIndex = 0;
+
+        }
+
+        private void BtnBusquedaCliente_Click(object sender, EventArgs e)
+        {
+            GestorCliente gestorCliente = new GestorCliente();
+            dto_cliente dtoCliente;
             ClienteForm ClienteFrm = new ClienteForm();
             ClienteFrm.tabControlCliente.Enabled = true;
             ClienteFrm.btnNuevoCliente.Enabled = false;
             ClienteFrm.btnConsultarCliente.Enabled = true;
             ClienteFrm.tabControlCliente.SelectedIndex = 1;
             
-            ClienteFrm.Show();
+
+            ClienteFrm.ShowDialog();
+            if (!string.IsNullOrEmpty(ClienteFrm.TxtClienteSeleccionado))
+            { 
+                lblClienteSeleccionado.Text = ClienteFrm.TxtClienteSeleccionado;
+
             
+
+                try
+                {
+                    dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(lblClienteSeleccionado.Text));
+                    textBoxClienteNro.Text = (dtoCliente.IdCliente.ToString());
+                    textBoxClienteNombre.Text = (dtoCliente.Nombre.Trim() + ", " + dtoCliente.Apellido.Trim());
+                    textBoxClienteDomicilio.Text = (dtoCliente.Calle.ToString().Trim() + "  " + dtoCliente.NumeroDomicilio.ToString().Trim() + ",  " + dtoCliente.Localidad.ToString().Trim() + ", " + dtoCliente.Provincia.ToString().Trim() + ", " + dtoCliente.Pais.ToUpper().ToString().Trim());
+                    textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + " " + dtoCliente.NroDocumento.ToString().Trim();
+                }
+                catch (Exception error)
+                {
+                    throw new Exception(error.Message);
+                }
+            }
+            else
+                MessageBox.Show("No se ha seleccionado un cliente");
+            
+            tabControlPoliza2.SelectedIndex = 0;
+         
         }
 
         private void BtnVolver_Click_1(object sender, EventArgs e)
@@ -627,13 +669,13 @@ namespace Interfaz
 
         private void BtnDeclaracionHijos_Click_1(object sender, EventArgs e)
         {
-            declaracionHijosView.Show();
+            declaracionHijosView.ShowDialog();
             declaracionHijosView.BringToFront();
         }
 
         private void BtnMedidasdeSeguridad_Click_1(object sender, EventArgs e)
         {
-            medidaSeguridadView.Show();
+            medidaSeguridadView.ShowDialog();
             medidaSeguridadView.BringToFront();
         }
 
@@ -733,6 +775,16 @@ namespace Interfaz
                 comboBoxNroSiniestros.SelectedItem = null;
             else
                 comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
