@@ -21,17 +21,18 @@ namespace Interfaz
         {
             InitializeComponent();
         }
-        private void Form_Load(object sender, EventArgs e)
+        private void ClienteForm_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'dBTP2019DataSet.Poliza' Puede moverla o quitarla según sea necesario.
             // this.polizaTableAdapter.Fill(this.dBTP2019DataSet.Poliza);
             GestorExtra gestorExtra = new GestorExtra();
-
-           //CARGAR CBOX  TIPO Documento     
+            inicializar_frm_busqueda_cliente();
+            //CARGAR CBOX  TIPO Documento     
             comboBoxTipoDocumento.DataSource = gestorExtra.CargarTipoDocumento();
             comboBoxTipoDocumento.DisplayMember = "nombre";
             comboBoxTipoDocumento.ValueMember = "id";
 
+            
 
         }
         private void btnNuevoCliente_Click(object sender, EventArgs e)
@@ -116,6 +117,15 @@ namespace Interfaz
         private void dataGridBusquedaCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             RowPosition = e.RowIndex;
+
+        }
+
+        private void inicializar_frm_busqueda_cliente()
+        {
+            textBoxIdCliente.Text = "";
+            textBoxApellido.Text = "";
+            textBoxNombre.Text = "";
+            textBoxNroDocumento.Text = "";
 
         }
     }
