@@ -19,9 +19,10 @@ namespace Interfaz
         readonly DeclaracionHijosForm declaracionHijosView = new DeclaracionHijosForm();
         readonly MedidasSeguridadForm medidaSeguridadView = new MedidasSeguridadForm();
         dto_poliza DTOPOLIZAAUX = new dto_poliza();
-        
 
-        
+        bool checkCancel = true;
+
+
         public PolizaForm()
         {
             InitializeComponent();
@@ -229,7 +230,7 @@ namespace Interfaz
             textBoxRevVigenciaInicio.Text = "";
             //tab 2
 
-            btnCheckMensual.Checked = false;
+            btnCheckMensual.Checked = true;
             btnCheckSemestral.Checked = false;
             comboBoxTipoCobertura.SelectedItem = null;
 
@@ -261,6 +262,7 @@ namespace Interfaz
         }
         private void BtnSiguiente_Click(object sender, EventArgs e)
         {
+            checkCancel = false;    //habilita la navegación entre pestañas
             try
             {
                 switch (tabControlPoliza2.SelectedTab.Text)
@@ -306,7 +308,7 @@ namespace Interfaz
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message);
+                MessageBox.Show(error.Message,"¡Atención!",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -396,13 +398,14 @@ namespace Interfaz
                         medidaSeguridadView.limpiate();
                         LimpiarCampos();
                         tabControlPoliza2.SelectedIndex = 0;
+                        cargarForm();
                         btnSiguiente.Text = "Siguiente";
                         MessageBox.Show("Póliza emitida con Exito", "Nueva Póliza", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                      catch(Exception e) 
-                    { 
-                        //throw new Exception(e.Message, e.InnerException);
-                        MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException,"Errora al Actualizar Poliza", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    {
+                        throw new Exception(e.Message);
+                        
                     }
                     break;
                 case DialogResult.No:    // No button pressed
@@ -526,11 +529,11 @@ namespace Interfaz
             cboxModeloBusquedaPoliza.SelectedIndex = 0;
         }
 
-        private void BtnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
+       /* private void BtnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
         {
             //super consulta
            
-        }
+        }*/
 
         private void BtnVolverTabDetallePoliza_Click(object sender, EventArgs e)
         {
@@ -658,6 +661,7 @@ namespace Interfaz
 
         private void BtnVolver_Click_1(object sender, EventArgs e)
         {
+            checkCancel = false;        //habilita la navegación entre pestañas
             if (tabControlPoliza2.SelectedIndex >= 1)
             {
                 tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex - 1);
@@ -694,6 +698,11 @@ namespace Interfaz
         }
 
         private void PolizaForm_Load_1(object sender, EventArgs e)
+        {
+            cargarForm();
+        }
+
+        private void cargarForm()
         {
             // TODO: esta línea de código carga datos en la tabla 'dBTP2019DataSet.Poliza' Puede moverla o quitarla según sea necesario.
             // this.polizaTableAdapter.Fill(this.dBTP2019DataSet.Poliza);
@@ -786,6 +795,14 @@ namespace Interfaz
         {
 
         }
+
+        
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = checkCancel;
+            checkCancel = true;
+        }
+
     }
 
 }

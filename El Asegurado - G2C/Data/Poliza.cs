@@ -28,10 +28,6 @@ namespace Data
         {
             NroPolizaSuc = 0001; //Hardcode
             NroPolizaSec = dtoPoliza.NroPolizaSec;
-            idTipoCobertura = dtoPoliza.Tipo_Cobertura;
-            idLocalidad = dtoPoliza.IdDomicilioRiesgo;
-            idVehiculo = dtoPoliza.IdVehiculo;
-            idCliente = dtoPoliza.IdCliente;
             datosVehiculo = dtoPoliza.Marca + "-" + dtoPoliza.Modelo + "-" + dtoPoliza.AñoVehiculo;
             valorAsegurado = dtoPoliza.Suma_Asegurada;
             nroMotor = dtoPoliza.NroMotor;
