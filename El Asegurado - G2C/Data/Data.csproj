@@ -168,6 +168,9 @@
     <Compile Include="v_Localidad.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="v_PagoCuota.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="v_ValorFactorAutoScoring.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

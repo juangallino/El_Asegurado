@@ -19,6 +19,7 @@ namespace DAO
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
                     return db.Polizas.Find(idPoliza);
+                    
                 }
             }
             catch (Exception e)
@@ -211,22 +212,36 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+        public List<PolizaCuota> GetCuotasPendientes(List<PolizaCuota> listaCuotas, int idPoliza)
+        {
+            List<PolizaCuota> cuotasPendientes = new List<PolizaCuota>();
+            PolizaCuota cuotaPendiente = new PolizaCuota();
+            try
+            {
+                using(DBEntities_TP db = new DBEntities_TP())
+                {
+                    var consulta = from t in db.v_PagoCuota
+                                 where t.id == idPoliza
+                                 select t;
+                    foreach(v_PagoCuota cuota in consulta)
+                    {
+                        cuotaPendiente.fechaVencimiento = cuota.fechaVencimiento;
+                        cuotaPendiente.id = cuota.id;
+                        cuotaPendiente.idPoliza = idPoliza;
+                        cuotaPendiente.importeRecargo = cuota.importeRecargo;
+                        cuotaPendiente.nroCuota = cuota.nroCuota;
+                        cuotasPendientes.Add(cuotaPendiente);
+                    }
+                }
+                return cuotasPendientes;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+        }
 
 
-        /* public EstadoPoliza GetEstado(Poliza poliza)
-         {
-             try
-             {
-                 using (DBEntities_TP db = new DBEntities_TP())
-                 {
-                  //   return db.EstadoPolizas.AsNoTracking().Where(p => p.Polizas == poliza);
-
-                         }
-             }
-             catch (Exception e)
-             {
-                 throw new Exception(e.Message);
-             }
-         }*/
     }
 }

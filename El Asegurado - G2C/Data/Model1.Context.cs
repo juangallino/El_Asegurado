@@ -61,6 +61,7 @@ namespace Data
         public virtual DbSet<v_Localidad> v_Localidad { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<v_Cliente> v_Cliente { get; set; }
+        public virtual DbSet<v_PagoCuota> v_PagoCuota { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

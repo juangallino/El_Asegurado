@@ -161,14 +161,9 @@
           <Property Name="idEstadoCivil" Type="int" Nullable="false" />
           <Property Name="idPoliza" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBTP2019.dbo.PolizaMedidaSeguridad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PolizaMedidaSeguridad">
           <Key>
             <PropertyRef Name="id" />
-            
-            
-            
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idMedidaSeguridad" Type="int" Nullable="false" />
@@ -369,6 +364,22 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_Localidad' no tiene definida 
           <Property Name="codpostal" Type="numeric" Precision="4" Scale="0" Nullable="false" />
           <Property Name="Provincia" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Pais" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_PagoCuota' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="v_PagoCuota">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nroCuota" />
+            <PropertyRef Name="fechaVencimiento" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nroCuota" Type="int" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="date" Nullable="false" />
+          <Property Name="FechaRecibo" Type="date" />
+          <Property Name="importeCuota" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeRecargo" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -921,6 +932,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaCuota" EntityType="Self.PolizaCuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaHijo" EntityType="Self.PolizaHijo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRecibo" EntityType="Self.PolizaRecibo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacion" EntityType="Self.PolizaRenovacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PolizaRenovacionHijo" EntityType="Self.PolizaRenovacionHijo" Schema="dbo" store:Type="Tables" />
@@ -935,14 +947,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="ValorFactorAutoScoring" EntityType="Self.ValorFactorAutoScoring" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValorFactorAutoScoringHist" EntityType="Self.ValorFactorAutoScoringHist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PolizaMedidaSeguridad" EntityType="Self.PolizaMedidaSeguridad" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PolizaMedidaSeguridad].[id] AS [id], 
-    [PolizaMedidaSeguridad].[idMedidaSeguridad] AS [idMedidaSeguridad], 
-    [PolizaMedidaSeguridad].[idPoliza] AS [idPoliza], 
-    [PolizaMedidaSeguridad].[Valor] AS [Valor]
-    FROM [dbo].[PolizaMedidaSeguridad] AS [PolizaMedidaSeguridad]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="PolizaValorFactorAutoscoring" EntityType="Self.PolizaValorFactorAutoscoring" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PolizaValorFactorAutoscoring].[id] AS [id], 
@@ -986,6 +990,17 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
     [v_Localidad].[Provincia] AS [Provincia], 
     [v_Localidad].[Pais] AS [Pais]
     FROM [dbo].[v_Localidad] AS [v_Localidad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_PagoCuota" EntityType="Self.v_PagoCuota" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_PagoCuota].[id] AS [id], 
+    [v_PagoCuota].[nroCuota] AS [nroCuota], 
+    [v_PagoCuota].[fechaVencimiento] AS [fechaVencimiento], 
+    [v_PagoCuota].[FechaRecibo] AS [FechaRecibo], 
+    [v_PagoCuota].[importeCuota] AS [importeCuota], 
+    [v_PagoCuota].[importeRecargo] AS [importeRecargo], 
+    [v_PagoCuota].[importeDescuento] AS [importeDescuento]
+    FROM [dbo].[v_PagoCuota] AS [v_PagoCuota]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ValorFactorAutoScoring" EntityType="Self.v_ValorFactorAutoScoring" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1392,6 +1407,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="v_Localidad" EntityType="DB_El_Asegurado.v_Localidad" />
           <EntitySet Name="sysdiagrams" EntityType="DB_El_Asegurado.sysdiagram" />
           <EntitySet Name="v_Cliente" EntityType="DB_El_Asegurado.v_Cliente" />
+          <EntitySet Name="v_PagoCuota" EntityType="DB_El_Asegurado.v_PagoCuota" />
           </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -2331,6 +2347,20 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="Profesion" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="EstadoCliente" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="v_PagoCuota">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nroCuota" />
+            <PropertyRef Name="fechaVencimiento" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nroCuota" Type="Int32" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaRecibo" Type="DateTime" Precision="0" />
+          <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2726,6 +2756,19 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
                 <ScalarProperty Name="AñoRegistro" ColumnName="AñoRegistro" />
                 <ScalarProperty Name="NroCliente" ColumnName="NroCliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_PagoCuota">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.v_PagoCuota">
+              <MappingFragment StoreEntitySet="v_PagoCuota">
+                <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
+                <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
+                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
+                <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -156,6 +156,7 @@ namespace Negocio
 
             Modelo modelo = dAOPoliza.GetModelo(vehiculo.idModelo);
             Marca marca = dAOPoliza.GetMarca(modelo.idmarca);
+            
             List<DateTime> vencimientoPagos = new List<DateTime>();
             foreach (var vtoPago in dAOPoliza.GetCuotas(poliza.id))
             {

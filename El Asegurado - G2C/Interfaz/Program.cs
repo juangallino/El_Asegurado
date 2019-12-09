@@ -8,7 +8,11 @@ using Negocio;
 
 namespace Interfaz
 {
-    
+    static class Constants
+    {
+        public const double RECARGO = 0.025;
+        public const double DESCUENTO = 0.03;
+    }
     static class Program
     {
         public static decimal NRO_SUC = 1234;
@@ -18,18 +22,20 @@ namespace Interfaz
         [STAThread]
         static void Main()
         {
-          /*  dto_poliza d = new dto_poliza(true);
-            GestorPoliza gp = new GestorPoliza();
+            GestorPago gp = new GestorPago();
+            
+            //dto_poliza d = new dto_poliza(true);
+            //GestorPoliza gp = new GestorPoliza();
             try
             {
-                gp.generarPoliza(d);
-                
+                //gp.generarPoliza(d);
+                gp.cargarPolizaParaPagar(13);
             }
             catch(Exception e)
             {
                 
                 MessageBox.Show("Error: \nMensaje: " + e.Message +" \nTrace:"+e.StackTrace+" \nData: "+e.Data+" \nInnerException: "+e.InnerException);
-            }*/
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

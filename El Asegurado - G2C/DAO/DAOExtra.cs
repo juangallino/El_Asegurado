@@ -182,6 +182,22 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+
+        public EstadoPoliza GetEstadoPoliza(int idEstadoPoliza)
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    var estadoPoliza = db.EstadoPolizas.AsQueryable().Where(p => p.id == idEstadoPoliza).FirstOrDefault();
+                    return estadoPoliza;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public List<TipoDocumento> BuscarTipoDocumento()
         {
             try
