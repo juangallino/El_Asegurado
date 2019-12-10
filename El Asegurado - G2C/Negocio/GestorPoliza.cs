@@ -97,7 +97,7 @@ namespace Negocio
             }
         }
 
-        internal Poliza BuscarPoliza(int idPoliza)
+        public Poliza BuscarPoliza(int idPoliza)
         {
             try
             {

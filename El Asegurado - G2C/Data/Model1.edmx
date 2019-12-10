@@ -372,6 +372,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_PagoCuota' no tiene definida 
             <PropertyRef Name="id" />
             <PropertyRef Name="nroCuota" />
             <PropertyRef Name="fechaVencimiento" />
+            <PropertyRef Name="idPoliza" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="nroCuota" Type="int" Nullable="false" />
@@ -380,6 +381,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_PagoCuota' no tiene definida 
           <Property Name="importeCuota" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeRecargo" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -999,7 +1001,8 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
     [v_PagoCuota].[FechaRecibo] AS [FechaRecibo], 
     [v_PagoCuota].[importeCuota] AS [importeCuota], 
     [v_PagoCuota].[importeRecargo] AS [importeRecargo], 
-    [v_PagoCuota].[importeDescuento] AS [importeDescuento]
+    [v_PagoCuota].[importeDescuento] AS [importeDescuento], 
+    [v_PagoCuota].[idPoliza] AS [idPoliza]
     FROM [dbo].[v_PagoCuota] AS [v_PagoCuota]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ValorFactorAutoScoring" EntityType="Self.v_ValorFactorAutoScoring" store:Type="Views" store:Schema="dbo">
@@ -2352,6 +2355,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <PropertyRef Name="id" />
             <PropertyRef Name="nroCuota" />
             <PropertyRef Name="fechaVencimiento" />
+            <PropertyRef Name="idPoliza" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nroCuota" Type="Int32" Nullable="false" />
@@ -2360,6 +2364,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2763,6 +2768,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySetMapping Name="v_PagoCuota">
             <EntityTypeMapping TypeName="DB_El_Asegurado.v_PagoCuota">
               <MappingFragment StoreEntitySet="v_PagoCuota">
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
                 <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
                 <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
                 <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />

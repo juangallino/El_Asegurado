@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dto_Cuota.cs" />
+    <Compile Include="dto_Pago.cs" />
     <Compile Include="dto_PagoPoliza.cs" />
     <Compile Include="dto_busquedaCliente.cs" />
     <Compile Include="dto_ListaClientesBuscados.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,10 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
-                    return db.Polizas.Find(idPoliza);
+                    return db.Polizas
+                            .Where(p => p.id == idPoliza)
+                            .Include(p=> p.PolizaCuotas)        //Entidad Relacionada 
+                            .FirstOrDefault();
                     
                 }
             }
@@ -48,8 +52,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message+e.InnerException);
-                throw new Exception(e.Message, e.InnerException);
+                throw new Exception(e.Message);
             }
 
         }
@@ -215,16 +218,17 @@ namespace DAO
         public List<PolizaCuota> GetCuotasPendientes(List<PolizaCuota> listaCuotas, int idPoliza)
         {
             List<PolizaCuota> cuotasPendientes = new List<PolizaCuota>();
-            PolizaCuota cuotaPendiente = new PolizaCuota();
+            
             try
             {
                 using(DBEntities_TP db = new DBEntities_TP())
                 {
                     var consulta = from t in db.v_PagoCuota
-                                 where t.id == idPoliza
+                                 where t.idPoliza == idPoliza
                                  select t;
                     foreach(v_PagoCuota cuota in consulta)
                     {
+                        PolizaCuota cuotaPendiente = new PolizaCuota();
                         cuotaPendiente.fechaVencimiento = cuota.fechaVencimiento;
                         cuotaPendiente.id = cuota.id;
                         cuotaPendiente.idPoliza = idPoliza;
