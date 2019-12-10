@@ -42,12 +42,13 @@ namespace Negocio
             dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
             
             dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
+            dtoPagoPoliza.Patente = poliza.patente;
             dtoPagoPoliza.CuotasPendientes = dtoCuota;
             dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
             dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
             dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
             dtoPagoPoliza.ImportePago = 0;//FALTA VISTA
-            dtoPagoPoliza.UltimoDiaPago = DateTime.Today; //FALTA VISTA
+            dtoPagoPoliza.UltimoPago = DateTime.Today; //FALTA VISTA
             
             return dtoPagoPoliza;
 

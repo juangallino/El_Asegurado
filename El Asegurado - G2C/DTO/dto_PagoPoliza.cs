@@ -19,5 +19,6 @@ namespace DTO
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public List<dto_Cuota> CuotasPendientes { get; set; }
+        public string Patente { get; set; }
     }
 }
