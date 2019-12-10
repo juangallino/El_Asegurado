@@ -16,32 +16,50 @@ namespace Negocio
         {
             dto_PagoPoliza dtoPagoPoliza = new dto_PagoPoliza();
             GestorPoliza gestorPoliza = new GestorPoliza();
-            DAOExtra dAOExtra = new DAOExtra();
-            DAOCliente dAOCliente = new DAOCliente();
             Poliza poliza = new Poliza();
             
-            poliza = gestorPoliza.BuscarPoliza(idPoliza);
-            if (poliza == null)
+           
+            DAOExtra dAOExtra = new DAOExtra();
+            DAOCliente dAOCliente = new DAOCliente();
+
+            try
             {
-                throw new Exception("Póliza Inexistente.");
+
+            
+                poliza = gestorPoliza.BuscarPoliza(idPoliza);
+                if (poliza == null)
+                {
+                    throw new Exception("Póliza Inexistente.");
+                }
+                if (dAOExtra.GetEstadoPoliza(poliza.idEstadoPoliza).nombre.Trim() != "Vigente") 
+                {
+                    throw new Exception("Póliza No Vigente.");
+                }
+                List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
+                // dtoCuota = CalcularCuotasPendientes(poliza.PolizaCuotas);
+
+                Cliente cliente = dAOCliente.Get(poliza.idCliente);
+                Persona persona = dAOCliente.GetPersona(cliente.idPersona);
+                dtoPagoPoliza.ApellidoCliente = persona.apellido;
+                dtoPagoPoliza.NombreCliente = persona.nombre;
+                dtoPagoPoliza.NroCliente = Convert.ToInt32(poliza.idCliente);
+                dtoPagoPoliza.UltimoPago = DateTime.Today;
+                dtoPagoPoliza.ImportePago = 1000;
+                    //dtoCuota[0].ImporteCuota + dtoCuota[0].ImporteDescuento + dtoCuota[0].ImporteRecargo;
+            
+                dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
+                dtoPagoPoliza.CuotasPendientes = dtoCuota;
+                dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
+                dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
+                dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
+
+                    return dtoPagoPoliza;
             }
-            if (dAOExtra.GetEstadoPoliza(poliza.idEstadoPoliza).nombre.Trim() != "Vigente") 
+            catch (Exception error)
             {
-                throw new Exception("Póliza No Vigente.");
+                throw new Exception(error.Message);
             }
-            List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
-            //dtoCuota = CalcularCuotasPendientes(poliza.PolizaCuotas);
-            dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.idCliente).apellido;
-            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.idCliente).nombre;
-            dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
-            
-            dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
-            dtoPagoPoliza.CuotasPendientes = dtoCuota;
-            dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
-            dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
-            dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
-            
-            return dtoPagoPoliza;
+
 
         }
 

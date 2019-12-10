@@ -29,7 +29,7 @@ namespace Interfaz
             try
             {
                 //gp.generarPoliza(d);
-                gp.cargarPolizaParaPagar(13);
+                //gp.cargarPolizaParaPagar(13);
             }
             catch(Exception e)
             {
