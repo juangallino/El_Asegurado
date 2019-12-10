@@ -33,9 +33,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MnuMenuPrincipal = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarPagoPolizaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarPagoPolizaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +81,13 @@
             this.clienteToolStripMenuItem.Text = "Cliente";
             this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
             // 
+            // registrarPagoPolizaToolStripMenuItem
+            // 
+            this.registrarPagoPolizaToolStripMenuItem.Name = "registrarPagoPolizaToolStripMenuItem";
+            this.registrarPagoPolizaToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.registrarPagoPolizaToolStripMenuItem.Text = "Registrar Pago Poliza";
+            this.registrarPagoPolizaToolStripMenuItem.Click += new System.EventHandler(this.registrarPagoPolizaToolStripMenuItem_Click);
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -92,13 +99,6 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(32, 19);
-            // 
-            // registrarPagoPolizaToolStripMenuItem
-            // 
-            this.registrarPagoPolizaToolStripMenuItem.Name = "registrarPagoPolizaToolStripMenuItem";
-            this.registrarPagoPolizaToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
-            this.registrarPagoPolizaToolStripMenuItem.Text = "Registrar Pago Poliza";
-     //       this.registrarPagoPolizaToolStripMenuItem.Click += new System.EventHandler(this.generarToolStripMenuItem_Click);
             // 
             // MenuPrincipal
             // 

@@ -15,7 +15,10 @@ namespace Interfaz
 {
     public partial class PagoPolizaForm : Form
     {
-        private string nroPoliza ;
+        private int nroPoliza;
+        dto_PagoPoliza DTO_PagoPoliza = new dto_PagoPoliza();
+
+
         public PagoPolizaForm()
         {
             InitializeComponent();
@@ -30,16 +33,16 @@ namespace Interfaz
         {
 
         }
-        
+
         private void btnBusquedaCliente_Click(object sender, EventArgs e)
         {
-            
-           
 
-                //cargamos dto con datos a buscar
-               
 
-      
+
+            //cargamos dto con datos a buscar
+
+
+
 
 
         }
@@ -86,8 +89,33 @@ namespace Interfaz
 
         private void btnBusquedaCliente_Click_1(object sender, EventArgs e)
         {
+            ////////////////////////////////
+            ///cargamos data table 
+            ///
+            GestorPago gestorPago = new GestorPago();
+            DateTime hoy = DateTime.Today;
+            bool error = false;
+            string mensaje = "";
+
+            // Verifica que haya ingresado una poliza
+            if (string.IsNullOrEmpty(txtPolizaNro.Text))
+            {
+                MessageBox.Show("Debe ingresar el Número de Póliza a pagar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+                txtPolizaNro.Focus();
+            }
+
+            else
+            {
+                nroPoliza = Convert.ToInt32(txtPolizaNro.Text);
+
+                MessageBox.Show(nroPoliza.ToString());
+
+
+                tabControlPagoPoliza.SelectedTab = tabDetallesPoliza;
+            }
 
         }
+
     }
-    
 }

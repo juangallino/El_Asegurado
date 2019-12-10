@@ -24,6 +24,7 @@ namespace Interfaz
 
         private ClienteForm ClienteFrm;
         private PolizaForm PolizaFrm;
+        private PagoPolizaForm PagoPolizaFrm;
 
         public MenuPrincipal()
         {
@@ -112,6 +113,22 @@ namespace Interfaz
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void registrarPagoPolizaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PagoPolizaFrm == null)
+            {
+                PagoPolizaFrm = new PagoPolizaForm();
+                PagoPolizaFrm.MdiParent = this;
+                PagoPolizaFrm.Show();
+            }
+            else
+            {
+                PagoPolizaFrm.Activate();
+                PagoPolizaFrm.Show();
+            }
+
         }
     }
 }
