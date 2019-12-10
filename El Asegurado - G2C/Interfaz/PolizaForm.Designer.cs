@@ -61,7 +61,7 @@ namespace Interfaz
             this.comboBoxMarca = new System.Windows.Forms.ComboBox();
             this.comboBoxProvincia = new System.Windows.Forms.ComboBox();
             this.textBoxSumaAsegurada = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblSumaAsegurada = new System.Windows.Forms.Label();
             this.textBoxKmAño = new System.Windows.Forms.TextBox();
             this.textBoxMotorNro = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -329,7 +329,7 @@ namespace Interfaz
             this.tabDatosPoliza.Controls.Add(this.comboBoxMarca);
             this.tabDatosPoliza.Controls.Add(this.comboBoxProvincia);
             this.tabDatosPoliza.Controls.Add(this.textBoxSumaAsegurada);
-            this.tabDatosPoliza.Controls.Add(this.label16);
+            this.tabDatosPoliza.Controls.Add(this.lblSumaAsegurada);
             this.tabDatosPoliza.Controls.Add(this.textBoxKmAño);
             this.tabDatosPoliza.Controls.Add(this.textBoxMotorNro);
             this.tabDatosPoliza.Controls.Add(this.label17);
@@ -537,14 +537,14 @@ namespace Interfaz
             this.textBoxSumaAsegurada.Size = new System.Drawing.Size(125, 20);
             this.textBoxSumaAsegurada.TabIndex = 22;
             // 
-            // label16
+            // lblSumaAsegurada
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(648, 45);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(88, 13);
-            this.label16.TabIndex = 21;
-            this.label16.Text = "Suma Asegurada";
+            this.lblSumaAsegurada.AutoSize = true;
+            this.lblSumaAsegurada.Location = new System.Drawing.Point(648, 45);
+            this.lblSumaAsegurada.Name = "lblSumaAsegurada";
+            this.lblSumaAsegurada.Size = new System.Drawing.Size(88, 13);
+            this.lblSumaAsegurada.TabIndex = 21;
+            this.lblSumaAsegurada.Text = "Suma Asegurada";
             // 
             // textBoxKmAño
             // 
@@ -1871,7 +1871,7 @@ namespace Interfaz
         private System.Windows.Forms.ComboBox comboBoxMarca;
         private System.Windows.Forms.ComboBox comboBoxProvincia;
         private System.Windows.Forms.TextBox textBoxSumaAsegurada;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblSumaAsegurada;
         private System.Windows.Forms.TextBox textBoxKmAño;
         private System.Windows.Forms.TextBox textBoxMotorNro;
         private System.Windows.Forms.Label label17;

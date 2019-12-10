@@ -26,9 +26,10 @@ namespace Interfaz
         public PolizaForm()
         {
             InitializeComponent();
-            //panelcliente.Visible = false;
             panelPoliza.Visible = true;
             textBoxSumaAsegurada.Visible = false;
+            lblSumaAsegurada.Visible = true;
+
         }
 
     
@@ -466,6 +467,7 @@ namespace Interfaz
 
             GestorExtra gestorExtra = new GestorExtra();
             textBoxSumaAsegurada.Visible = true;
+            lblSumaAsegurada.Visible = true;
             textBoxSumaAsegurada.Text = Convert.ToString(gestorExtra.GetSumaAsegurada(comboBoxModelo.SelectedIndex, comboBoxAño.SelectedIndex));
         }
                
@@ -546,9 +548,9 @@ namespace Interfaz
         {
             GestorPoliza gestorPoliza = new GestorPoliza();
             int polizaId = Convert.ToInt32(dataGridBusquedaPoliza.Rows[e.RowIndex].Cells[0].Value);
-            var ResultBusquedaPolizaCliente = gestorPoliza.BuscarDetallePolizaID(polizaId);
-            CargarPolizaDetalles(ResultBusquedaPolizaCliente.Item1, ResultBusquedaPolizaCliente.Item2);
-            tabControlPoliza1.SelectedTab = tabDetallesPoliza;
+      //      dto_Poliza = gestorPoliza.BuscarDetallePolizaID(polizaId);
+      //      CargarPolizaDetalles(ResultBusquedaPolizaCliente.Item1, ResultBusquedaPolizaCliente.Item2);
+      //      tabControlPoliza1.SelectedTab = tabDetallesPoliza;
         }
 
         private void CargarPolizaDetalles(dto_poliza dtoPoliza, dto_cliente dtoCliente)

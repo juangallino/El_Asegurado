@@ -12,8 +12,9 @@ namespace DTO
         public int NroCliente { get; set; }
         public string ApellidoCliente { get; set; }
         public string NombreCliente { get; set; }
-        public DateTime UltimoDiaPago { get; set; }
-        public decimal ImportePago { get; set; }
+        public DateTime UltimoPago { get; set; }
+        public Decimal ImportePago { get; set; }
+
         public string DatosVehiculo { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
