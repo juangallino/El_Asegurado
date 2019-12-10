@@ -22,6 +22,7 @@ namespace DAO
                     return db.Polizas
                             .Where(p => p.id == idPoliza)
                             .Include(p=> p.PolizaCuotas)        //Entidad Relacionada 
+                            .Include(p=> p.Cliente)             //Entidad Relacionada
                             .FirstOrDefault();
                     
                 }

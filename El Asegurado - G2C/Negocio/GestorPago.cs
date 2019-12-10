@@ -37,7 +37,7 @@ namespace Negocio
             List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
             List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
             dtoCuota = CalcularCuotasPendientes(cuotas);
-            dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.idCliente).apellido;
+            dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
             dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.idCliente).nombre;
             dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
             
