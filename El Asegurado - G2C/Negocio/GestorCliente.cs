@@ -44,12 +44,12 @@ namespace Negocio
 
             if (esClienteActivo && nroSiniestros == 0 && cuotasImpagas == 0)
             {
-                estadoCliente = dAOCliente.GetEstadoCliente(2);// "Plata");
+                estadoCliente = dAOCliente.GetEstadoCliente("Plata");
 
             }
             else
             {
-                estadoCliente = dAOCliente.GetEstadoCliente(1);// "Normal");
+                estadoCliente = dAOCliente.GetEstadoCliente("Normal");
                 
             }
             dAOCliente.SetEstadoCliente(idcliente, estadoCliente.id);

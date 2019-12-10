@@ -19,6 +19,7 @@ namespace DAO
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
                     return db.Polizas.Find(idPoliza);
+                    
                 }
             }
             catch (Exception e)
@@ -34,6 +35,13 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
+                    //Sentencias para que vincule las instancias persistidas en la BD y no cree una nueva
+                    db.Entry(p.Localidad).State = System.Data.Entity.EntityState.Unchanged;
+                    db.Entry(p.Cliente).State = System.Data.Entity.EntityState.Unchanged;
+                    db.Entry(p.Vehiculo).State = System.Data.Entity.EntityState.Unchanged;
+                    db.Entry(p.TipoCobertura).State = System.Data.Entity.EntityState.Unchanged;
+                    db.Entry(p.EstadoPoliza).State = System.Data.Entity.EntityState.Unchanged;
+
                     db.Polizas.Add(p);
                     db.SaveChanges();
                 }
@@ -52,17 +60,17 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
-                    int cantPolizasVigentes = db.Polizas.AsNoTracking().Where(p => p.patente == patente).
-                                                                Where(p => p.nroMotor == nroMotor).
-                                                                Where(p => p.nroChasis == nroChasis).
+                    int cantPolizasVigentes = db.Polizas.AsNoTracking().Where(p => p.patente == patente || 
+                                                                                   p.nroMotor == nroMotor ||
+                                                                                   p.nroChasis == nroChasis).
                                                                 Where(p => p.fechaFinVigencia > DateTime.Today).
                                                                 Count();
-
+                    
                     if (cantPolizasVigentes == 0)
                         return true;
                     else
                         if (cantPolizasVigentes > 0)
-                        throw new Exception("Existe una póliza vigente del asociado para ese vehículo");
+                        throw new Exception("Existe una póliza vigente para la patente, motor o chasis indicados");
                     else
                         throw new Exception("Error en la Base de Datos al intentar recuperar póliza.");
                 }
@@ -204,22 +212,36 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+        public List<PolizaCuota> GetCuotasPendientes(List<PolizaCuota> listaCuotas, int idPoliza)
+        {
+            List<PolizaCuota> cuotasPendientes = new List<PolizaCuota>();
+            PolizaCuota cuotaPendiente = new PolizaCuota();
+            try
+            {
+                using(DBEntities_TP db = new DBEntities_TP())
+                {
+                    var consulta = from t in db.v_PagoCuota
+                                 where t.id == idPoliza
+                                 select t;
+                    foreach(v_PagoCuota cuota in consulta)
+                    {
+                        cuotaPendiente.fechaVencimiento = cuota.fechaVencimiento;
+                        cuotaPendiente.id = cuota.id;
+                        cuotaPendiente.idPoliza = idPoliza;
+                        cuotaPendiente.importeRecargo = cuota.importeRecargo;
+                        cuotaPendiente.nroCuota = cuota.nroCuota;
+                        cuotasPendientes.Add(cuotaPendiente);
+                    }
+                }
+                return cuotasPendientes;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+        }
 
 
-        /* public EstadoPoliza GetEstado(Poliza poliza)
-         {
-             try
-             {
-                 using (DBEntities_TP db = new DBEntities_TP())
-                 {
-                  //   return db.EstadoPolizas.AsNoTracking().Where(p => p.Polizas == poliza);
-
-                         }
-             }
-             catch (Exception e)
-             {
-                 throw new Exception(e.Message);
-             }
-         }*/
     }
 }

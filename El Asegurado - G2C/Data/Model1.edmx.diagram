@@ -114,6 +114,7 @@
         <EntityTypeShape EntityType="DB_El_Asegurado.v_Localidad" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.v_Cliente" Width="1.5" PointX="15.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.v_PagoCuota" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

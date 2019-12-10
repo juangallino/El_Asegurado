@@ -311,6 +311,7 @@ namespace Interfaz
             this.tabControlPoliza2.SelectedIndex = 0;
             this.tabControlPoliza2.Size = new System.Drawing.Size(1009, 329);
             this.tabControlPoliza2.TabIndex = 8;
+            this.tabControlPoliza2.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
             // tabDatosPoliza
             // 
@@ -655,6 +656,7 @@ namespace Interfaz
             // btnCheckMensual
             // 
             this.btnCheckMensual.AutoSize = true;
+            this.btnCheckMensual.Checked = true;
             this.btnCheckMensual.Location = new System.Drawing.Point(249, 143);
             this.btnCheckMensual.Name = "btnCheckMensual";
             this.btnCheckMensual.Size = new System.Drawing.Size(65, 17);

@@ -51,12 +51,11 @@ namespace DAO
             }
         }
 
-        public EstadoCliente GetEstadoCliente(int idEstadoCliente)
+        public EstadoCliente GetEstadoCliente(string estado)
         {
             using (DBEntities_TP db = new DBEntities_TP())
             {
-                EstadoCliente estadoCliente = new EstadoCliente();
-                estadoCliente = db.EstadoClientes.Find(idEstadoCliente);
+                EstadoCliente estadoCliente = db.EstadoClientes.AsNoTracking().Where(p => p.nombre == estado).FirstOrDefault();
                 return estadoCliente;
             }
 ;

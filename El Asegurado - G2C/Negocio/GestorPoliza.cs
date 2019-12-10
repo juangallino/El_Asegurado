@@ -23,7 +23,7 @@ namespace Negocio
                 Validar(dtoPoliza);
                 Poliza poliza = new Poliza(dtoPoliza)
                 {
-                    idCliente = clientePoliza.id
+                    Cliente = clientePoliza
                 };
                 //Agregar medidas de seguridad
                 foreach (var ms in dtoPoliza.Medidas_Seguridad)
@@ -60,23 +60,29 @@ namespace Negocio
                         importeCuota = dtoPoliza.Monto_Abonar / dtoPoliza.FormaPago,
                         nroCuota = nroCuota++
                     };
+                    
                     poliza.PolizaCuotas.Add(polizaCuota);   // Usando esta clase virtual terminamos creando una PolizaCuota
                 }
+                //Vinculamos el domicilio de riesgo a la Póliza
+                DAODomRiesgo dAODomRiesgo = new DAODomRiesgo();
+                poliza.Localidad = dAODomRiesgo.Get(dtoPoliza.IdDomicilioRiesgo);
 
-                // CARGA VEHICULO
+                //Viculamos el Vehículo
                 DAOVehiculo dAOVehiculo = new DAOVehiculo();
+                poliza.Vehiculo = dAOVehiculo.Get(dtoPoliza.IdVehiculo);
 
+                //Vinculamos el Tipo de Cobertura
+                DAOTipoCob dAOTipoCob = new DAOTipoCob();
+                poliza.TipoCobertura = dAOTipoCob.Get(dtoPoliza.Tipo_Cobertura);
 
-                poliza.idVehiculo = dAOVehiculo.Get(dtoPoliza.IdVehiculo).id;
-                poliza.nroMotor = dtoPoliza.NroMotor;
-                poliza.nroChasis = dtoPoliza.NroChasis;
-                poliza.patente = dtoPoliza.Patente;
+                //Se le asigna el estado a la póliza
+                DAOExtra dAOExtra = new DAOExtra();
+                poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("Generada");
 
                 DAOPoliza dAOPoliza = new DAOPoliza();
 
-                poliza.idEstadoPoliza = 1;  //Estado Generada
-
-                //Se guarda la poliza generada
+               
+                //Se guarda la póliza generada
 
                 dAOPoliza.GuardarPoliza(poliza);
 
@@ -150,6 +156,7 @@ namespace Negocio
 
             Modelo modelo = dAOPoliza.GetModelo(vehiculo.idModelo);
             Marca marca = dAOPoliza.GetMarca(modelo.idmarca);
+            
             List<DateTime> vencimientoPagos = new List<DateTime>();
             foreach (var vtoPago in dAOPoliza.GetCuotas(poliza.id))
             {

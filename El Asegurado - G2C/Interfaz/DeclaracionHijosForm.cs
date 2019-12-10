@@ -25,7 +25,7 @@ namespace Interfaz
         }
          public void Limpiate()
         {
-            ListaHijos = null;
+            ListaHijos.Clear();
             HijosGridView.Rows.Clear();
             HijosGridView.Refresh();
           

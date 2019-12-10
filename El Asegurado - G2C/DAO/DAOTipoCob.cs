@@ -10,12 +10,12 @@ namespace DAO
 {
     public class DAOTipoCob
     {
-        public TipoCobertura Get(string nombreTipoCobertura)
+        public TipoCobertura Get(int tipoCobertura)
         {
             using (DBEntities_TP db = new DBEntities_TP())
             {
                 var tc = new TipoCobertura();
-                tc = db.TipoCoberturas.Find(nombreTipoCobertura);
+                tc = db.TipoCoberturas.Find(tipoCobertura);
                 return tc;
             }
         }
