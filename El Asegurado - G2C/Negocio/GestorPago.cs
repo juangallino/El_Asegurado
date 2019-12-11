@@ -10,95 +10,164 @@ using DTO;
 
 namespace Negocio
 {
+    static class Constants
+    {
+        public const double RECARGO = 0.005;
+        public const double DESCUENTO = 0.015;
+    }
     public class GestorPago
     {
         public dto_PagoPoliza cargarPolizaParaPagar(int idPoliza)
         {
             dto_PagoPoliza dtoPagoPoliza = new dto_PagoPoliza();
             GestorPoliza gestorPoliza = new GestorPoliza();
-            Poliza poliza = new Poliza();
-            
-           
             DAOExtra dAOExtra = new DAOExtra();
             DAOCliente dAOCliente = new DAOCliente();
-
-            try
-            {
-
+            Poliza poliza = new Poliza();
             
-                poliza = gestorPoliza.BuscarPoliza(idPoliza);
-                if (poliza == null)
-                {
-                    throw new Exception("Póliza Inexistente.");
-                }
-                if (dAOExtra.GetEstadoPoliza(poliza.idEstadoPoliza).nombre.Trim() != "Vigente") 
-                {
-                    throw new Exception("Póliza No Vigente.");
-                }
-                List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
-                // dtoCuota = CalcularCuotasPendientes(poliza.PolizaCuotas);
-
-                Cliente cliente = dAOCliente.Get(poliza.idCliente);
-                Persona persona = dAOCliente.GetPersona(cliente.idPersona);
-                dtoPagoPoliza.ApellidoCliente = persona.apellido;
-                dtoPagoPoliza.NombreCliente = persona.nombre;
-                dtoPagoPoliza.NroCliente = Convert.ToInt32(poliza.idCliente);
-                dtoPagoPoliza.UltimoPago = DateTime.Today;
-                dtoPagoPoliza.ImportePago = 1000;
-                    //dtoCuota[0].ImporteCuota + dtoCuota[0].ImporteDescuento + dtoCuota[0].ImporteRecargo;
-            
-                dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
-                dtoPagoPoliza.CuotasPendientes = dtoCuota;
-                dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
-                dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
-                dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
-
-                    return dtoPagoPoliza;
-            }
-            catch (Exception error)
+            poliza = gestorPoliza.BuscarPoliza(idPoliza);
+            if (poliza == null)
             {
-                throw new Exception(error.Message);
+                throw new Exception("Póliza Inexistente.");
             }
-
+            if (dAOExtra.GetEstadoPoliza(poliza.idEstadoPoliza).nombre.Trim() != "Vigente") 
+            {
+                throw new Exception("Póliza No Vigente.");
+            }
+            List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
+            List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
+            dtoCuota = CalcularCuotasPendientes(cuotas);
+            dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
+            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.idCliente).nombre;
+            dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
+            
+            dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
+            dtoPagoPoliza.Patente = poliza.patente;
+            dtoPagoPoliza.CuotasPendientes = dtoCuota;
+            dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
+            dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
+            dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
+            dtoPagoPoliza.ImportePago = 0;//FALTA VISTA
+            dtoPagoPoliza.UltimoPago = DateTime.Today; //FALTA VISTA
+            
+            return dtoPagoPoliza;
 
         }
 
-        private List<dto_Cuota> CalcularCuotasPendientes(ICollection<PolizaCuota> polizaCuotas)
+        private List<dto_Cuota> CalcularCuotasPendientes(List<PolizaCuota> polizaCuotas)
         {
             List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
-            dto_Cuota dtoCuotaAux = new dto_Cuota();
+            
             DAOPoliza dAOPoliza = new DAOPoliza();
-
-            foreach(var cuota in polizaCuotas)
+            List<PolizaCuota> cuotasPendientes = dAOPoliza.GetCuotasPendientes(polizaCuotas, polizaCuotas.First().idPoliza);
+            foreach(var cuota in cuotasPendientes)
             {
-                //if la cuota no está pagada
+                dto_Cuota dtoCuotaAux = new dto_Cuota();
                 dtoCuotaAux.IdCuota = cuota.id; 
                 dtoCuotaAux.ImporteCuota = cuota.importeCuota.GetValueOrDefault();
                 dtoCuotaAux.ImporteDescuento = CalcularDescuento(cuota.fechaVencimiento, cuota.importeCuota.GetValueOrDefault());
                 dtoCuotaAux.ImporteRecargo = CalcularRecargo(cuota.fechaVencimiento, cuota.importeCuota.GetValueOrDefault());
                 dtoCuotaAux.NroCuota = cuota.nroCuota;
                 dtoCuotaAux.FechaVencimiento = cuota.fechaVencimiento;
+                
                 dtoCuota.Add(dtoCuotaAux);
             }
             return dtoCuota;
         }
 
-        private decimal CalcularRecargo(DateTime fechaVencimiento, decimal importeCuota)
+        //Calcula el recargo diario aplicado a las cuotas vencidas
+        public decimal CalcularRecargo(DateTime fechaVencimiento, decimal importeCuota)
         {
-            DateTime hoy = DateTime.Today;
+            DateTime hoy = DateTime.Now;
             decimal recargo = 0;
-            if(fechaVencimiento < hoy)
+            decimal factor = new decimal(Constants.RECARGO);
+            int diasMora = hoy.Subtract(fechaVencimiento).Days;
+            
+            if (diasMora > 0)   //Cuota vencida
             {
-                
+                recargo = factor * diasMora * importeCuota;
             }
-
             return recargo;
-
         }
 
-        private decimal CalcularDescuento(DateTime fechaVencimiento, decimal importeCuota)
+        //Calcula la bonificación a otorgar por adelanto de cuotas. Se aplica a vencimientos mayores a 30 días.
+        public decimal CalcularDescuento(DateTime fechaVencimiento, decimal importeCuota)
         {
-            throw new NotImplementedException();
+            DateTime hoy = DateTime.Now;
+            decimal descuento = 0;
+            decimal factor = new decimal(Constants.DESCUENTO);
+            int diferencia = fechaVencimiento.AddDays(-30).Subtract(hoy).Days;
+            if (diferencia > 0) //Fecha de vencimiento posterior a 30 días
+            {
+                int adelanto = (diferencia/30) + 1;
+
+                descuento = factor * adelanto * importeCuota * -1;
+            }
+            return descuento;
+        }
+
+        public dto_Pago RegistrarPago(List<dto_Cuota> cuotas,int idPoliza)
+        {
+            dto_Pago dtoPago = new dto_Pago();
+
+            GestorPoliza gestorPoliza = new GestorPoliza();
+
+            DAOExtra dAOExtra = new DAOExtra();
+            DAOCliente dAOCliente = new DAOCliente();
+            DAOPolizaRecibo dAOPolizaRecibo = new DAOPolizaRecibo();
+
+            Poliza poliza = new Poliza();
+            PolizaCuota cuotaAux = new PolizaCuota();
+
+            try
+            {
+                poliza = gestorPoliza.BuscarPoliza(idPoliza);
+                // verificarSeleccionCuotas(cuotas.First());  //seguir
+
+                PolizaRecibo polizaRecibo = new PolizaRecibo();
+                var contador = 0;
+                foreach (var cuota in cuotas)
+                {
+                    contador = cuota.NroCuota;  //se utiliza para buscar la primer cuota impaga luego de cargar las cuotas a pagar
+                    PolizaCuota polizaCuota = poliza.PolizaCuotas.ElementAt(cuota.NroCuota - 1);  //getCuota(cuota.nroCuota) <-- SeqDiag
+                    polizaCuota.importeDescuento = cuota.ImporteDescuento;
+                    polizaCuota.importeRecargo = cuota.ImporteRecargo;
+                    //polizaRecibo.
+                }
+                dAOPolizaRecibo.GuardarRecibo(polizaRecibo);
+
+                //ActualizarPolizaEstado
+                if (contador < poliza.PolizaCuotas.Count)   //hay cuotas impagas?
+                {
+                    cuotaAux = poliza.PolizaCuotas.ElementAt(contador); //getPrimerCuota() <- SeqDiag
+                    if(cuotaAux.fechaVencimiento >= DateTime.Today)
+                    {
+                        poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("Vigente");
+                    }
+                    else
+                    {
+                        poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("Suspendida");
+                    }
+                }
+                else if(cuotaAux.fechaVencimiento < DateTime.Today)
+                {
+                    poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("No Vigente");
+                }
+               
+
+
+            return dtoPago;
+            }
+           
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void verificarSeleccionCuotas(dto_Cuota dto_Cuota)
+        {
+            //
         }
     }
 }

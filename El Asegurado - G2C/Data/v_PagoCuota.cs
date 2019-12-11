@@ -21,5 +21,6 @@ namespace Data
         public Nullable<decimal> importeCuota { get; set; }
         public Nullable<decimal> importeRecargo { get; set; }
         public Nullable<decimal> importeDescuento { get; set; }
+        public int idPoliza { get; set; }
     }
 }
