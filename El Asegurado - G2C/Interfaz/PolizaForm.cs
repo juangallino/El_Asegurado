@@ -743,9 +743,9 @@ namespace Interfaz
 
             ////////////////////////////////
             ///cargamos data table 
-            dataGridBusquedaPoliza.DataSource = gestorPoliza.BuscarPoliza(dtoBusquedaPoliza);
+           // dataGridBusquedaPoliza.DataSource = gestorPoliza.BuscarPoliza(dtoBusquedaPoliza);
 
-            dataGridBusquedaPoliza.Refresh();
+          //  dataGridBusquedaPoliza.Refresh();
 
         }
 

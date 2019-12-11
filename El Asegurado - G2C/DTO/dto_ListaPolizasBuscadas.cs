@@ -9,7 +9,7 @@ namespace DTO
     public class dto_ListaPolizasBuscadas
     {
         public int id { get; set; }
-        public int PolizaNumero { get; set; }
+        public decimal NroPoliza { get; set; }
         public string Cliente { get; set; }
         public string Vehiculo { get; set; }
         public string Patente { get; set; }

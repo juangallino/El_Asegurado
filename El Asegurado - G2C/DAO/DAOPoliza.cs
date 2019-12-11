@@ -21,8 +21,8 @@ namespace DAO
                 {
                     return db.Polizas
                             .Where(p => p.id == idPoliza)
-                            .Include(p=> p.PolizaCuotas)        //Entidad Relacionada 
-                            .Include(p=> p.Cliente)             //Entidad Relacionada
+                            .Include(p => p.Cliente)       //Entidad Relacionada 
+                            .Include(p => p.PolizaCuotas)  //Entidad Relacionada
                             .FirstOrDefault();
                     
                 }
@@ -175,40 +175,67 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
-       /* public List<Poliza> ConsultaBuscarPolizasPorNumero(string nroPolizaBusqueda)
+
+        /* public List<Poliza> ConsultaBuscarPolizasPorNumero(string nroPolizaBusqueda)
+         {
+             try
+             {
+                 using (DBEntities_TP db = new DBEntities_TP())
+
+                 {
+                    // return db.Polizas.Find(nroPolizaBusqueda);
+
+
+                 }
+             }
+             catch (Exception e)
+             {
+                 throw new Exception(e.Message);
+             }
+         }*/
+
+        /* public List<Poliza> ConsultaBuscarPolizas(dto_busquedaPoliza dtoBP)
+         {
+             try
+             {
+                 using (DBEntities_TP db = new DBEntities_TP())
+                 {
+
+                     var aux = db.Polizas.AsNoTracking().Where(p => (dtoBP.nroPoliza == "" || p.NroPoliza.ToString() == dtoBP.nroPoliza) &&
+                                                                 (dtoBP.nombreCliente == "" || (p.Cliente.Persona.nombre.Contains(dtoBP.nombreCliente) || p.Cliente.Persona.apellido.Contains(dtoBP.nombreCliente))) &&
+                                                                  (dtoBP.idestado == 0 || p.EstadoPoliza.id == dtoBP.idestado) &&
+                                                                  (dtoBP.idmarca == 0 || p.Vehiculo.Modelo.Marca.id == dtoBP.idmarca) &&
+                                                                  (dtoBP.idmodelo == 0 || p.Vehiculo.Modelo.id == dtoBP.idmodelo)&&
+                                                                  (dtoBP.fdesde == null || p.fechaFinVigencia >= dtoBP.fdesde) &&
+                                                                  (dtoBP.fhasta == null || p.fechaFinVigencia <= dtoBP.fhasta)).ToList();
+
+                     return aux;
+
+                 }
+             }
+             catch (Exception e)
+             {
+                 throw new Exception(e.Message);
+             }
+         }*/
+        public List<Poliza> ConsultaBuscarPolizas(decimal nroPoliza)
         {
             try
             {
                 using (DBEntities_TP db = new DBEntities_TP())
-
                 {
-                   // return db.Polizas.Find(nroPolizaBusqueda);
+                    /*var consulta = from t in db.Polizas
+                                   where t.NroPoliza == nroPoliza
+                                   select t;
+                    return consulta.ToList();*/
 
-
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }*/
-        public List<Poliza> ConsultaBuscarPolizas(dto_busquedaPoliza dtoBP)
-        {
-            try
-            {
-                using (DBEntities_TP db = new DBEntities_TP())
-                {
-
-                    var aux = db.Polizas.AsNoTracking().Where(p => //(nroPoliza ==0 || p.NroPolizaSec.Tostring() == nroPoliza) &&
-                                                                (dtoBP.nombreCliente == "" || (p.Cliente.Persona.nombre.Contains(dtoBP.nombreCliente) || p.Cliente.Persona.apellido.Contains(dtoBP.nombreCliente))) &&
-                                                                 (dtoBP.idestado == 0 || p.EstadoPoliza.id == dtoBP.idestado) &&
-                                                                 (dtoBP.idmarca == 0 || p.Vehiculo.Modelo.Marca.id == dtoBP.idmarca) &&
-                                                                 (dtoBP.idmodelo == 0 || p.Vehiculo.Modelo.id == dtoBP.idmodelo)&&
-                                                                 (dtoBP.fdesde == null || p.fechaFinVigencia >= dtoBP.fdesde) &&
-                                                                 (dtoBP.fhasta == null || p.fechaFinVigencia <= dtoBP.fhasta)).ToList();
-
-                    return aux;
-
+                    return db.Polizas
+                           .Where(p => p.NroPoliza == nroPoliza)
+                           .Include(p => p.Cliente)                         //Entidad Relacionada 
+                           .Include(p => p.Cliente.Persona)                 //Entidad Relacionada
+                           .Include(p => p.Cliente.Persona.TipoDocumento)   //Entidad Relacionada
+                           .Include(p => p.PolizaCuotas)                    //Entidad Relacionada
+                           .ToList();
                 }
             }
             catch (Exception e)
@@ -226,6 +253,7 @@ namespace DAO
                 {
                     var consulta = from t in db.v_PagoCuota
                                  where t.idPoliza == idPoliza
+                                 where t.FechaRecibo == null
                                  select t;
                     foreach(v_PagoCuota cuota in consulta)
                     {
@@ -234,6 +262,8 @@ namespace DAO
                         cuotaPendiente.id = cuota.id;
                         cuotaPendiente.idPoliza = idPoliza;
                         cuotaPendiente.importeRecargo = cuota.importeRecargo;
+                        cuotaPendiente.importeDescuento = cuota.importeDescuento;
+                        cuotaPendiente.importeCuota = cuota.importeCuota;
                         cuotaPendiente.nroCuota = cuota.nroCuota;
                         cuotasPendientes.Add(cuotaPendiente);
                     }

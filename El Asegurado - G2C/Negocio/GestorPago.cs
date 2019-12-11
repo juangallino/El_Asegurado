@@ -38,7 +38,7 @@ namespace Negocio
             List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
             dtoCuota = CalcularCuotasPendientes(cuotas);
             dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
-            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.idCliente).nombre;
+            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).nombre;
             dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
             
             dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
@@ -122,7 +122,9 @@ namespace Negocio
             try
             {
                 poliza = gestorPoliza.BuscarPoliza(idPoliza);
-                // verificarSeleccionCuotas(cuotas.First());  //seguir
+                verificarSeleccionCuotas(cuotas.First(), poliza.PolizaCuotas.ToList());  //seguir
+
+                
 
                 PolizaRecibo polizaRecibo = new PolizaRecibo();
                 var contador = 0;
@@ -132,7 +134,7 @@ namespace Negocio
                     PolizaCuota polizaCuota = poliza.PolizaCuotas.ElementAt(cuota.NroCuota - 1);  //getCuota(cuota.nroCuota) <-- SeqDiag
                     polizaCuota.importeDescuento = cuota.ImporteDescuento;
                     polizaCuota.importeRecargo = cuota.ImporteRecargo;
-                    //polizaRecibo.
+                    //polizaRecibo.PolizaCuotas.Add(polizaCuota);
                 }
                 dAOPolizaRecibo.GuardarRecibo(polizaRecibo);
 
@@ -165,9 +167,35 @@ namespace Negocio
             }
         }
 
-        private void verificarSeleccionCuotas(dto_Cuota dto_Cuota)
+        private void verificarSeleccionCuotas(dto_Cuota primerCuotaAPagar, List<PolizaCuota> cuotas)
         {
-            //
+            foreach(var cuota in cuotas)    //getPrimerCuota() <-- SeqDiag
+            {
+               if (cuota.idPolizaRecibo == null)
+                    if (cuota.nroCuota != primerCuotaAPagar.NroCuota)
+                        throw new Exception("Existen cuotas anteriores que aún no han sido abonadas.");
+            }
+        }
+
+        public (Nullable<DateTime>, decimal) GetUltimoPago(ICollection<PolizaCuota> polizaCuotas)
+        {
+            try
+            {
+                foreach (var cuota in polizaCuotas)
+                {
+                    if (cuota.idPolizaRecibo != null)
+                    {
+                        DAOPolizaRecibo dAOPolizaRecibo = new DAOPolizaRecibo();
+                        PolizaRecibo polizaRecibo = dAOPolizaRecibo.Get(cuota.idPolizaRecibo);
+                        return (polizaRecibo.FechaRecibo, (cuota.importeCuota + cuota.importeDescuento + cuota.importeRecargo).GetValueOrDefault());
+                    }
+                }
+                return (null, 0);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

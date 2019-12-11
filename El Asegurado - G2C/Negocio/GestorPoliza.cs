@@ -79,6 +79,10 @@ namespace Negocio
                 DAOExtra dAOExtra = new DAOExtra();
                 poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("Generada");
 
+                //Se genera el número de póliza
+
+
+                
                 DAOPoliza dAOPoliza = new DAOPoliza();
 
                
@@ -97,6 +101,7 @@ namespace Negocio
             }
         }
 
+        //Busca una Poliza por su id. Incorpora Cliente y PolizaCuota como entidades relacionadas (No Lazy)
         public Poliza BuscarPoliza(int idPoliza)
         {
             try
@@ -210,30 +215,31 @@ namespace Negocio
 
         }
 
-        public List<dto_ListaPolizasBuscadas> BuscarPoliza(dto_busquedaPoliza dto_BusquedaPoliza)
+        //Busca pólizas a partir de un criterio de búsqueda - Rel. CU18
+        public List<dto_busquedaPoliza> BuscarPoliza(dto_busquedaPoliza dto_BusquedaPoliza)
         {
             DAOPoliza dAOPoliza = new DAOPoliza();
             
-            List<dto_ListaPolizasBuscadas> listaAux = new List<dto_ListaPolizasBuscadas>();
-            
-            foreach (var poliza in dAOPoliza.ConsultaBuscarPolizas(dto_BusquedaPoliza)) {
+            List<dto_busquedaPoliza> polizas = new List<dto_busquedaPoliza>();
 
-                dto_ListaPolizasBuscadas dto_Lista = new dto_ListaPolizasBuscadas
+            foreach (var poliza in dAOPoliza.ConsultaBuscarPolizas(dto_BusquedaPoliza.NroPoliza))
+            {
+                GestorPago gestorPago = new GestorPago();
+                var ultimoPago = gestorPago.GetUltimoPago(poliza.PolizaCuotas);
+
+                dto_busquedaPoliza dtoAux = new dto_busquedaPoliza
                 {
-                    id = poliza.id,
-                    Patente = poliza.patente,
-                    Cliente = poliza.idCliente.ToString()
+                    NroCliente = poliza.Cliente.NroCliente,
+                    NroPoliza = poliza.NroPoliza,
+                    Apellido = poliza.Cliente.Persona.apellido,
+                    Nombre = poliza.Cliente.Persona.nombre,
+                    TipoDoc = poliza.Cliente.Persona.TipoDocumento.nombre,
+                    NroDoc = poliza.Cliente.Persona.nroDocumento,
+                    UltimoPago = ultimoPago.Item1.GetValueOrDefault(),
+                    MontoUltimoPago = ultimoPago.Item2
                 };
-                ; //poliza.Cliente.Persona.nombre + ", " + poliza.Cliente.Persona.apellido;
-                dto_Lista.Vehiculo = poliza.datosVehiculo;
-                dto_Lista.Motor = poliza.nroMotor;
-                dto_Lista.Chasis = poliza.nroChasis;
-                dto_Lista.FechaFin = poliza.fechaFinVigencia;
-                dto_Lista.FechaInicio = poliza.fechaInicioVigencia;
-                dto_Lista.Estado = poliza.idEstadoPoliza.ToString();// poliza.EstadoPoliza.nombre;
-                listaAux.Add(dto_Lista);
             }
-            return listaAux;
+            return polizas;
 
         }
 
