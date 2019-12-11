@@ -8,13 +8,15 @@ namespace DTO
 {
      public class dto_busquedaPoliza
     {
-    
-     public string nroPoliza { get; set; }
-        public string nombreCliente { get; set; }
-        public int idestado { get; set; }
-        public int idmarca{ get; set; }
-        public int idmodelo { get; set; }
-        public DateTime fdesde { get; set; }
-        public DateTime fhasta { get; set; }
-}
+        public decimal NroCliente { get; set; }
+        public decimal NroPoliza { get; set; }
+        public string Apellido { get; set; }
+        public string Nombre { get; set; }
+
+        public string TipoDoc { get; set; }
+        public decimal NroDoc { get; set; }
+        public DateTime UltimoPago { get; set; }
+        public decimal MontoUltimoPago { get; set; }
+
+    }
 }

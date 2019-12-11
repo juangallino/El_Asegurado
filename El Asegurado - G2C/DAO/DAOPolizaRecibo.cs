@@ -29,5 +29,18 @@ namespace DAO
                throw new Exception(e.Message);
             }
         }
+
+        public PolizaRecibo Get(object idPolizaRecibo)
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                    return db.PolizaReciboes.Find(idPolizaRecibo);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            };
+        }
     }
 }
