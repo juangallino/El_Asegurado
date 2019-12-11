@@ -18,39 +18,13 @@ namespace Data
         public Poliza()
         {
             this.Poliza1 = new HashSet<Poliza>();
-            this.PolizaCuotas = new HashSet<PolizaCuota>();
             this.PolizaHijoes = new HashSet<PolizaHijo>();
             this.PolizaMedidaSeguridads = new HashSet<PolizaMedidaSeguridad>();
             this.PolizaRenovacions = new HashSet<PolizaRenovacion>();
             this.PolizaValorFactorAutoscorings = new HashSet<PolizaValorFactorAutoscoring>();
-        }
-        public Poliza(DTO.dto_poliza dtoPoliza)
-        {
-            NroPolizaSuc = 0001; //Hardcode
-            NroPolizaSec = dtoPoliza.NroPolizaSec;
-            datosVehiculo = dtoPoliza.Marca + "-" + dtoPoliza.Modelo + "-" + dtoPoliza.AñoVehiculo;
-            valorAsegurado = dtoPoliza.Suma_Asegurada;
-            nroMotor = dtoPoliza.NroMotor;
-            nroChasis = dtoPoliza.NroChasis;
-            patente = dtoPoliza.Patente;
-            kmPorAño = dtoPoliza.KmPorAño;
-            nroSiniestros = dtoPoliza.Nro_Siniestros;
-            fechaInicioVigencia = dtoPoliza.FechaInicioVigencia;
-            fechaFinVigencia = fechaInicioVigencia.AddDays(180);
-            importeDerechoEmision = dtoPoliza.DerechoEmision;
-            importePremio = dtoPoliza.Premio;
-            importeDescuento = dtoPoliza.ImporteDescuento;
-            importeTotal = dtoPoliza.Monto_Abonar;
-
-            //falta cambiar idPolizaAnterior por PolizaAnterior 
-
-            this.PolizaHijoes = new HashSet<PolizaHijo>();
-            this.Poliza1 = new HashSet<Poliza>();
             this.PolizaCuotas = new HashSet<PolizaCuota>();
-            this.PolizaMedidaSeguridads = new HashSet<PolizaMedidaSeguridad>();
-            this.PolizaRenovacions = new HashSet<PolizaRenovacion>();
-            this.PolizaValorFactorAutoscorings = new HashSet<PolizaValorFactorAutoscoring>();
         }
+    
         public int id { get; set; }
         public decimal NroPolizaSuc { get; set; }
         public decimal NroPoliza { get; set; }
@@ -84,8 +58,6 @@ namespace Data
         public virtual TipoCobertura TipoCobertura { get; set; }
         public virtual Vehiculo Vehiculo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PolizaCuota> PolizaCuotas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolizaHijo> PolizaHijoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolizaMedidaSeguridad> PolizaMedidaSeguridads { get; set; }
@@ -93,5 +65,7 @@ namespace Data
         public virtual ICollection<PolizaRenovacion> PolizaRenovacions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolizaValorFactorAutoscoring> PolizaValorFactorAutoscorings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolizaCuota> PolizaCuotas { get; set; }
     }
 }

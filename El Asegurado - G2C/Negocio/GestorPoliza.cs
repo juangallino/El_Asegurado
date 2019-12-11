@@ -21,7 +21,8 @@ namespace Negocio
             try
             {
                 Validar(dtoPoliza);
-                Poliza poliza = new Poliza(dtoPoliza)
+                //Poliza poliza = new Poliza(dtoPoliza)
+                Poliza poliza = new Poliza()
                 {
                     Cliente = clientePoliza
                 };

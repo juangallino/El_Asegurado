@@ -14,14 +14,20 @@ namespace Data
     
     public partial class PolizaRecibo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PolizaRecibo()
+        {
+            this.PolizaCuotas = new HashSet<PolizaCuota>();
+        }
+    
         public int id { get; set; }
         public decimal NroRecibo { get; set; }
-        public int idPolizaCuota { get; set; }
         public System.DateTime FechaRecibo { get; set; }
         public System.TimeSpan HoraRecibo { get; set; }
         public int idUsuario { get; set; }
     
-        public virtual PolizaCuota PolizaCuota { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolizaCuota> PolizaCuotas { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

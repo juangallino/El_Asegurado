@@ -19,9 +19,7 @@
         <EntityTypeShape EntityType="DB_El_Asegurado.Pai" Width="1.5" PointX="1.5" PointY="26" />
         <EntityTypeShape EntityType="DB_El_Asegurado.Persona" Width="1.5" PointX="3" PointY="8.375" />
         <EntityTypeShape EntityType="DB_El_Asegurado.Poliza" Width="1.5" PointX="7.5" PointY="6.5" />
-        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaCuota" Width="1.5" PointX="9.75" PointY="22.25" />
         <EntityTypeShape EntityType="DB_El_Asegurado.PolizaHijo" Width="1.5" PointX="9.75" PointY="5.125" />
-        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRecibo" Width="1.5" PointX="12" PointY="22.25" />
         <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRenovacion" Width="1.5" PointX="12.75" PointY="7.875" />
         <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRenovacionHijo" Width="1.5" PointX="15" PointY="9.125" />
         <EntityTypeShape EntityType="DB_El_Asegurado.Profesion" Width="1.5" PointX="3" PointY="15.875" />
@@ -95,14 +93,11 @@
         <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_Poliza1" />
         <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_TipoCobertura" />
         <AssociationConnector Association="DB_El_Asegurado.FK_Poliza_Vehiculo" />
-        <AssociationConnector Association="DB_El_Asegurado.FK_polizaCuota_Poliza" />
         <AssociationConnector Association="DB_El_Asegurado.FK_polizaHijo_Poliza" />
         <AssociationConnector Association="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" />
         <AssociationConnector Association="DB_El_Asegurado.FK_polizaRenovacion_Poliza" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza" />
-        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaHijo_Sexo" />
-        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_Usuario" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRenovacion_Vehiculo" />
@@ -114,7 +109,13 @@
         <EntityTypeShape EntityType="DB_El_Asegurado.v_Localidad" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_El_Asegurado.v_Cliente" Width="1.5" PointX="15.375" PointY="16.75" />
-        <EntityTypeShape EntityType="DB_El_Asegurado.v_PagoCuota" Width="1.5" PointX="12.375" PointY="0.75" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaCuota_PolizaCuota" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.v_PagoCuota" Width="1.5" PointX="7.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaCuota" Width="1.5" PointX="18" PointY="13" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_polizaCuota_Poliza" />
+        <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRecibo" Width="1.5" PointX="12.75" PointY="18.125" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo" />
+        <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

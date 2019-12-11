@@ -36,9 +36,9 @@ namespace Negocio
             }
             List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
             List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
-            dtoCuota = CalcularCuotasPendientes(cuotas);
+        //    dtoCuota = CalcularCuotasPendientes(cuotas);
             dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
-            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.idCliente).nombre;
+            dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).nombre;
             dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
             
             dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
@@ -54,12 +54,12 @@ namespace Negocio
 
         }
 
-        private List<dto_Cuota> CalcularCuotasPendientes(List<PolizaCuota> polizaCuotas)
+        public List<dto_Cuota> CalcularCuotasPendientes(int nroPoliza)
         {
             List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
             
             DAOPoliza dAOPoliza = new DAOPoliza();
-            List<PolizaCuota> cuotasPendientes = dAOPoliza.GetCuotasPendientes(polizaCuotas, polizaCuotas.First().idPoliza);
+            List<PolizaCuota> cuotasPendientes = dAOPoliza.GetCuotasPendientes(nroPoliza);
             foreach(var cuota in cuotasPendientes)
             {
                 dto_Cuota dtoCuotaAux = new dto_Cuota();

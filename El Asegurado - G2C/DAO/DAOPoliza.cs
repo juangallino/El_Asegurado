@@ -216,9 +216,10 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
-        public List<PolizaCuota> GetCuotasPendientes(List<PolizaCuota> listaCuotas, int idPoliza)
+        public List<PolizaCuota> GetCuotasPendientes(int idPoliza)
         {
             List<PolizaCuota> cuotasPendientes = new List<PolizaCuota>();
+         
             
             try
             {

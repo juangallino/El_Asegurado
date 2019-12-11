@@ -108,7 +108,7 @@ namespace Interfaz
 
                     nroPoliza = Convert.ToInt32(textPolizaNroBusquedaPoliza.Text);
 
-                    MessageBox.Show(nroPoliza.ToString());
+                  //  MessageBox.Show(nroPoliza.ToString());
 
                     DTO_PagoPoliza = gestorPago.cargarPolizaParaPagar(nroPoliza);
 
@@ -118,13 +118,25 @@ namespace Interfaz
                         {
                             textBoxPolizaNro.Text = nroPoliza.ToString();
                             textBoxClienteDNI.Text = DTO_PagoPoliza.NroCliente.ToString();
-                            textBoxClienteNombre.Text = DTO_PagoPoliza.ApellidoCliente + " " + DTO_PagoPoliza.NombreCliente;
+                            textBoxClienteNombre.Text = DTO_PagoPoliza.ApellidoCliente.Trim() + " " + DTO_PagoPoliza.NombreCliente.Trim();
                             textBoxNroCliente.Text = DTO_PagoPoliza.NroCliente.ToString();
                             textBoxRevDiaPago1.Text = DTO_PagoPoliza.UltimoPago.ToString();
                             textBoxDatosVehiculo.Text = DTO_PagoPoliza.DatosVehiculo;
                             textBoxEntrega.Text = "0";
                             textBoxVuelto.Text = "0";
-                                                         
+                            try
+                            {
+                                dataGridViewCuotasPendientes.Visible = true;
+                                dataGridViewCuotasPendientes.DataSource = gestorPago.CalcularCuotasPendientes(nroPoliza);
+
+                                dataGridViewCuotasPendientes.Refresh();
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new Exception(ex.Message);
+                            }
+
+
                         }
                         catch (Exception error)
                         {
