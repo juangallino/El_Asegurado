@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Interfaz
 {
@@ -49,7 +50,7 @@ namespace Interfaz
             this.tabDatosPoliza = new System.Windows.Forms.TabPage();
             this.nroPatenteMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.comboBoxAño = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblAnioDatosPoliza = new System.Windows.Forms.Label();
             this.comboBoxPatente = new System.Windows.Forms.ComboBox();
             this.btnDeclaracionHijos = new System.Windows.Forms.Button();
             this.btnMedidasdeSeguridad = new System.Windows.Forms.Button();
@@ -57,20 +58,20 @@ namespace Interfaz
             this.comboBoxNroSiniestros = new System.Windows.Forms.ComboBox();
             this.comboBoxLocalidad = new System.Windows.Forms.ComboBox();
             this.comboBoxModelo = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
+            this.lblModeloDatosPoliza = new System.Windows.Forms.Label();
             this.comboBoxMarca = new System.Windows.Forms.ComboBox();
             this.comboBoxProvincia = new System.Windows.Forms.ComboBox();
             this.textBoxSumaAsegurada = new System.Windows.Forms.TextBox();
             this.lblSumaAsegurada = new System.Windows.Forms.Label();
             this.textBoxKmAño = new System.Windows.Forms.TextBox();
             this.textBoxMotorNro = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.lblSiniestrosDatosPoliza = new System.Windows.Forms.Label();
+            this.lblPatenteDatosPoliza = new System.Windows.Forms.Label();
+            this.lblChasisDatosPoliza = new System.Windows.Forms.Label();
+            this.lblKmDatosPoliza = new System.Windows.Forms.Label();
+            this.lblMotorDatosPoliza = new System.Windows.Forms.Label();
+            this.lblVehiculoDatosPoliza = new System.Windows.Forms.Label();
+            this.LabelDomRiesgoComboBox = new System.Windows.Forms.Label();
             this.tabTipoCob = new System.Windows.Forms.TabPage();
             this.btnCheckSemestral = new System.Windows.Forms.RadioButton();
             this.btnCheckMensual = new System.Windows.Forms.RadioButton();
@@ -119,13 +120,13 @@ namespace Interfaz
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxClienteDNI = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.LabelDocPpal = new System.Windows.Forms.Label();
             this.textBoxClienteDomicilio = new System.Windows.Forms.TextBox();
             this.textBoxClienteNombre = new System.Windows.Forms.TextBox();
-            this.textBoxClienteNro = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxClienteNroPpal = new System.Windows.Forms.TextBox();
+            this.LabelDomicilioPpal = new System.Windows.Forms.Label();
+            this.LabelApNomCliPpal = new System.Windows.Forms.Label();
+            this.LabelClienteNroPpal = new System.Windows.Forms.Label();
             this.tabBusquedaPoliza = new System.Windows.Forms.TabPage();
             this.cboxEstadoBusquedaPoliza = new System.Windows.Forms.ComboBox();
             this.cboxModeloBusquedaPoliza = new System.Windows.Forms.ComboBox();
@@ -244,13 +245,13 @@ namespace Interfaz
             this.tabNuevaPoliza.Controls.Add(this.btnVolver);
             this.tabNuevaPoliza.Controls.Add(this.tabControlPoliza2);
             this.tabNuevaPoliza.Controls.Add(this.textBoxClienteDNI);
-            this.tabNuevaPoliza.Controls.Add(this.label7);
+            this.tabNuevaPoliza.Controls.Add(this.LabelDocPpal);
             this.tabNuevaPoliza.Controls.Add(this.textBoxClienteDomicilio);
             this.tabNuevaPoliza.Controls.Add(this.textBoxClienteNombre);
-            this.tabNuevaPoliza.Controls.Add(this.textBoxClienteNro);
-            this.tabNuevaPoliza.Controls.Add(this.label6);
-            this.tabNuevaPoliza.Controls.Add(this.label5);
-            this.tabNuevaPoliza.Controls.Add(this.label4);
+            this.tabNuevaPoliza.Controls.Add(this.textBoxClienteNroPpal);
+            this.tabNuevaPoliza.Controls.Add(this.LabelDomicilioPpal);
+            this.tabNuevaPoliza.Controls.Add(this.LabelApNomCliPpal);
+            this.tabNuevaPoliza.Controls.Add(this.LabelClienteNroPpal);
             this.tabNuevaPoliza.Location = new System.Drawing.Point(4, 22);
             this.tabNuevaPoliza.Name = "tabNuevaPoliza";
             this.tabNuevaPoliza.Padding = new System.Windows.Forms.Padding(3);
@@ -267,7 +268,6 @@ namespace Interfaz
             this.lblClienteSeleccionado.Size = new System.Drawing.Size(0, 13);
             this.lblClienteSeleccionado.TabIndex = 22;
             this.lblClienteSeleccionado.Visible = false;
-            this.lblClienteSeleccionado.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnSiguiente
             // 
@@ -317,7 +317,7 @@ namespace Interfaz
             // 
             this.tabDatosPoliza.Controls.Add(this.nroPatenteMaskedTextBox);
             this.tabDatosPoliza.Controls.Add(this.comboBoxAño);
-            this.tabDatosPoliza.Controls.Add(this.label14);
+            this.tabDatosPoliza.Controls.Add(this.lblAnioDatosPoliza);
             this.tabDatosPoliza.Controls.Add(this.comboBoxPatente);
             this.tabDatosPoliza.Controls.Add(this.btnDeclaracionHijos);
             this.tabDatosPoliza.Controls.Add(this.btnMedidasdeSeguridad);
@@ -325,20 +325,20 @@ namespace Interfaz
             this.tabDatosPoliza.Controls.Add(this.comboBoxNroSiniestros);
             this.tabDatosPoliza.Controls.Add(this.comboBoxLocalidad);
             this.tabDatosPoliza.Controls.Add(this.comboBoxModelo);
-            this.tabDatosPoliza.Controls.Add(this.label24);
+            this.tabDatosPoliza.Controls.Add(this.lblModeloDatosPoliza);
             this.tabDatosPoliza.Controls.Add(this.comboBoxMarca);
             this.tabDatosPoliza.Controls.Add(this.comboBoxProvincia);
             this.tabDatosPoliza.Controls.Add(this.textBoxSumaAsegurada);
             this.tabDatosPoliza.Controls.Add(this.lblSumaAsegurada);
             this.tabDatosPoliza.Controls.Add(this.textBoxKmAño);
             this.tabDatosPoliza.Controls.Add(this.textBoxMotorNro);
-            this.tabDatosPoliza.Controls.Add(this.label17);
-            this.tabDatosPoliza.Controls.Add(this.label18);
-            this.tabDatosPoliza.Controls.Add(this.label19);
-            this.tabDatosPoliza.Controls.Add(this.label20);
-            this.tabDatosPoliza.Controls.Add(this.label21);
-            this.tabDatosPoliza.Controls.Add(this.label22);
-            this.tabDatosPoliza.Controls.Add(this.label23);
+            this.tabDatosPoliza.Controls.Add(this.lblSiniestrosDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.lblPatenteDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.lblChasisDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.lblKmDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.lblMotorDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.lblVehiculoDatosPoliza);
+            this.tabDatosPoliza.Controls.Add(this.LabelDomRiesgoComboBox);
             this.tabDatosPoliza.Location = new System.Drawing.Point(4, 22);
             this.tabDatosPoliza.Name = "tabDatosPoliza";
             this.tabDatosPoliza.Padding = new System.Windows.Forms.Padding(3);
@@ -357,6 +357,7 @@ namespace Interfaz
             this.nroPatenteMaskedTextBox.TabIndex = 16;
             this.nroPatenteMaskedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nroPatenteMaskedTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MaskedTextBox1_MaskInputRejected);
+            this.nroPatenteMaskedTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Mayusculas_KeyPress);
             this.nroPatenteMaskedTextBox.Leave += new System.EventHandler(this.NroPatenteMaskedTextBox_Leave);
             // 
             // comboBoxAño
@@ -409,14 +410,14 @@ namespace Interfaz
             this.comboBoxAño.TabIndex = 12;
             this.comboBoxAño.SelectedIndexChanged += new System.EventHandler(this.ComboBoxAño_SelectedIndexChanged);
             // 
-            // label14
+            // lblAnioDatosPoliza
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(697, 93);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(26, 13);
-            this.label14.TabIndex = 34;
-            this.label14.Text = "Año";
+            this.lblAnioDatosPoliza.AutoSize = true;
+            this.lblAnioDatosPoliza.Location = new System.Drawing.Point(697, 93);
+            this.lblAnioDatosPoliza.Name = "lblAnioDatosPoliza";
+            this.lblAnioDatosPoliza.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioDatosPoliza.TabIndex = 34;
+            this.lblAnioDatosPoliza.Text = "Año";
             // 
             // comboBoxPatente
             // 
@@ -457,7 +458,8 @@ namespace Interfaz
             this.textboxChasis.MaxLength = 20;
             this.textboxChasis.Name = "textboxChasis";
             this.textboxChasis.Size = new System.Drawing.Size(136, 20);
-            this.textboxChasis.TabIndex = 14;
+            this.textboxChasis.TabIndex = 14;            
+            this.textboxChasis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Mayusculas_KeyPress);
             // 
             // comboBoxNroSiniestros
             // 
@@ -494,14 +496,14 @@ namespace Interfaz
             this.comboBoxModelo.Size = new System.Drawing.Size(138, 21);
             this.comboBoxModelo.TabIndex = 11;
             // 
-            // label24
+            // lblModeloDatosPoliza
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(383, 86);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(42, 13);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "Modelo";
+            this.lblModeloDatosPoliza.AutoSize = true;
+            this.lblModeloDatosPoliza.Location = new System.Drawing.Point(383, 86);
+            this.lblModeloDatosPoliza.Name = "lblModeloDatosPoliza";
+            this.lblModeloDatosPoliza.Size = new System.Drawing.Size(42, 13);
+            this.lblModeloDatosPoliza.TabIndex = 25;
+            this.lblModeloDatosPoliza.Text = "Modelo";
             // 
             // comboBoxMarca
             // 
@@ -553,6 +555,7 @@ namespace Interfaz
             this.textBoxKmAño.Name = "textBoxKmAño";
             this.textBoxKmAño.Size = new System.Drawing.Size(79, 20);
             this.textBoxKmAño.TabIndex = 16;
+            this.textBoxKmAño.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
             // textBoxMotorNro
             // 
@@ -561,69 +564,70 @@ namespace Interfaz
             this.textBoxMotorNro.Name = "textBoxMotorNro";
             this.textBoxMotorNro.Size = new System.Drawing.Size(178, 20);
             this.textBoxMotorNro.TabIndex = 13;
+            this.textBoxMotorNro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Mayusculas_KeyPress);
             // 
-            // label17
+            // lblSiniestrosDatosPoliza
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(382, 168);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(107, 13);
-            this.label17.TabIndex = 18;
-            this.label17.Text = "Número de Siniestros";
+            this.lblSiniestrosDatosPoliza.AutoSize = true;
+            this.lblSiniestrosDatosPoliza.Location = new System.Drawing.Point(382, 168);
+            this.lblSiniestrosDatosPoliza.Name = "lblSiniestrosDatosPoliza";
+            this.lblSiniestrosDatosPoliza.Size = new System.Drawing.Size(107, 13);
+            this.lblSiniestrosDatosPoliza.TabIndex = 18;
+            this.lblSiniestrosDatosPoliza.Text = "Número de Siniestros";
             // 
-            // label18
+            // lblPatenteDatosPoliza
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(697, 133);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(44, 13);
-            this.label18.TabIndex = 17;
-            this.label18.Text = "Patente";
+            this.lblPatenteDatosPoliza.AutoSize = true;
+            this.lblPatenteDatosPoliza.Location = new System.Drawing.Point(697, 133);
+            this.lblPatenteDatosPoliza.Name = "lblPatenteDatosPoliza";
+            this.lblPatenteDatosPoliza.Size = new System.Drawing.Size(44, 13);
+            this.lblPatenteDatosPoliza.TabIndex = 17;
+            this.lblPatenteDatosPoliza.Text = "Patente";
             // 
-            // label19
+            // lblChasisDatosPoliza
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(386, 130);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 13);
-            this.label19.TabIndex = 16;
-            this.label19.Text = "Chasis";
+            this.lblChasisDatosPoliza.AutoSize = true;
+            this.lblChasisDatosPoliza.Location = new System.Drawing.Point(386, 130);
+            this.lblChasisDatosPoliza.Name = "lblChasisDatosPoliza";
+            this.lblChasisDatosPoliza.Size = new System.Drawing.Size(38, 13);
+            this.lblChasisDatosPoliza.TabIndex = 16;
+            this.lblChasisDatosPoliza.Text = "Chasis";
             // 
-            // label20
+            // lblKmDatosPoliza
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(56, 171);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(88, 13);
-            this.label20.TabIndex = 15;
-            this.label20.Text = "Kilometros al Año";
+            this.lblKmDatosPoliza.AutoSize = true;
+            this.lblKmDatosPoliza.Location = new System.Drawing.Point(56, 171);
+            this.lblKmDatosPoliza.Name = "lblKmDatosPoliza";
+            this.lblKmDatosPoliza.Size = new System.Drawing.Size(88, 13);
+            this.lblKmDatosPoliza.TabIndex = 15;
+            this.lblKmDatosPoliza.Text = "Kilometros al Año";
             // 
-            // label21
+            // lblMotorDatosPoliza
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(60, 130);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(74, 13);
-            this.label21.TabIndex = 14;
-            this.label21.Text = "Motor Número";
+            this.lblMotorDatosPoliza.AutoSize = true;
+            this.lblMotorDatosPoliza.Location = new System.Drawing.Point(60, 130);
+            this.lblMotorDatosPoliza.Name = "lblMotorDatosPoliza";
+            this.lblMotorDatosPoliza.Size = new System.Drawing.Size(74, 13);
+            this.lblMotorDatosPoliza.TabIndex = 14;
+            this.lblMotorDatosPoliza.Text = "Motor Número";
             // 
-            // label22
+            // lblVehiculoDatosPoliza
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(56, 86);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(83, 13);
-            this.label22.TabIndex = 13;
-            this.label22.Text = "Vehículo Marca";
+            this.lblVehiculoDatosPoliza.AutoSize = true;
+            this.lblVehiculoDatosPoliza.Location = new System.Drawing.Point(56, 86);
+            this.lblVehiculoDatosPoliza.Name = "lblVehiculoDatosPoliza";
+            this.lblVehiculoDatosPoliza.Size = new System.Drawing.Size(83, 13);
+            this.lblVehiculoDatosPoliza.TabIndex = 13;
+            this.lblVehiculoDatosPoliza.Text = "Vehículo Marca";
             // 
-            // label23
+            // LabelDomRiesgoComboBox
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(56, 43);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(100, 13);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "Domicilio de Riesgo";
+            this.LabelDomRiesgoComboBox.AutoSize = true;
+            this.LabelDomRiesgoComboBox.Location = new System.Drawing.Point(56, 43);
+            this.LabelDomRiesgoComboBox.Name = "LabelDomRiesgoComboBox";
+            this.LabelDomRiesgoComboBox.Size = new System.Drawing.Size(100, 13);
+            this.LabelDomRiesgoComboBox.TabIndex = 12;
+            this.LabelDomRiesgoComboBox.Text = "Domicilio de Riesgo";
             // 
             // tabTipoCob
             // 
@@ -1090,15 +1094,14 @@ namespace Interfaz
             this.textBoxClienteDNI.Size = new System.Drawing.Size(178, 20);
             this.textBoxClienteDNI.TabIndex = 5;
             // 
-            // label7
+            // LabelDocPpal
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(736, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Documento";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
+            this.LabelDocPpal.AutoSize = true;
+            this.LabelDocPpal.Location = new System.Drawing.Point(736, 26);
+            this.LabelDocPpal.Name = "LabelDocPpal";
+            this.LabelDocPpal.Size = new System.Drawing.Size(62, 13);
+            this.LabelDocPpal.TabIndex = 6;
+            this.LabelDocPpal.Text = "Documento";
             // 
             // textBoxClienteDomicilio
             // 
@@ -1119,41 +1122,41 @@ namespace Interfaz
             this.textBoxClienteNombre.TabIndex = 6;
             this.textBoxClienteNombre.TextChanged += new System.EventHandler(this.TextBoxClienteNombre_TextChanged);
             // 
-            // textBoxClienteNro
+            // textBoxClienteNroPpal
             // 
-            this.textBoxClienteNro.Location = new System.Drawing.Point(161, 23);
-            this.textBoxClienteNro.MaxLength = 15;
-            this.textBoxClienteNro.Name = "textBoxClienteNro";
-            this.textBoxClienteNro.ReadOnly = true;
-            this.textBoxClienteNro.Size = new System.Drawing.Size(178, 20);
-            this.textBoxClienteNro.TabIndex = 3;
+            this.textBoxClienteNroPpal.Location = new System.Drawing.Point(161, 23);
+            this.textBoxClienteNroPpal.MaxLength = 15;
+            this.textBoxClienteNroPpal.Name = "textBoxClienteNroPpal";
+            this.textBoxClienteNroPpal.ReadOnly = true;
+            this.textBoxClienteNroPpal.Size = new System.Drawing.Size(178, 20);
+            this.textBoxClienteNroPpal.TabIndex = 3;
             // 
-            // label6
+            // LabelDomicilioPpal
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(57, 88);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Domicilio";
+            this.LabelDomicilioPpal.AutoSize = true;
+            this.LabelDomicilioPpal.Location = new System.Drawing.Point(57, 88);
+            this.LabelDomicilioPpal.Name = "LabelDomicilioPpal";
+            this.LabelDomicilioPpal.Size = new System.Drawing.Size(49, 13);
+            this.LabelDomicilioPpal.TabIndex = 2;
+            this.LabelDomicilioPpal.Text = "Domicilio";
             // 
-            // label5
+            // LabelApNomCliPpal
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 56);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Apellido y Nombre";
+            this.LabelApNomCliPpal.AutoSize = true;
+            this.LabelApNomCliPpal.Location = new System.Drawing.Point(57, 56);
+            this.LabelApNomCliPpal.Name = "LabelApNomCliPpal";
+            this.LabelApNomCliPpal.Size = new System.Drawing.Size(92, 13);
+            this.LabelApNomCliPpal.TabIndex = 1;
+            this.LabelApNomCliPpal.Text = "Apellido y Nombre";
             // 
-            // label4
+            // LabelClienteNroPpal
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(57, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Cliente Número";
+            this.LabelClienteNroPpal.AutoSize = true;
+            this.LabelClienteNroPpal.Location = new System.Drawing.Point(57, 26);
+            this.LabelClienteNroPpal.Name = "LabelClienteNroPpal";
+            this.LabelClienteNroPpal.Size = new System.Drawing.Size(79, 13);
+            this.LabelClienteNroPpal.TabIndex = 0;
+            this.LabelClienteNroPpal.Text = "Cliente Número";
             // 
             // tabBusquedaPoliza
             // 
@@ -1859,7 +1862,7 @@ namespace Interfaz
         private System.Windows.Forms.TabControl tabControlPoliza2;
         private System.Windows.Forms.TabPage tabDatosPoliza;
         private System.Windows.Forms.ComboBox comboBoxAño;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblAnioDatosPoliza;
         private System.Windows.Forms.ComboBox comboBoxPatente;
         private System.Windows.Forms.Button btnDeclaracionHijos;
         private System.Windows.Forms.Button btnMedidasdeSeguridad;
@@ -1867,20 +1870,20 @@ namespace Interfaz
         private System.Windows.Forms.ComboBox comboBoxNroSiniestros;
         private System.Windows.Forms.ComboBox comboBoxLocalidad;
         private System.Windows.Forms.ComboBox comboBoxModelo;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblModeloDatosPoliza;
         private System.Windows.Forms.ComboBox comboBoxMarca;
         private System.Windows.Forms.ComboBox comboBoxProvincia;
         private System.Windows.Forms.TextBox textBoxSumaAsegurada;
         private System.Windows.Forms.Label lblSumaAsegurada;
         private System.Windows.Forms.TextBox textBoxKmAño;
         private System.Windows.Forms.TextBox textBoxMotorNro;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblSiniestrosDatosPoliza;
+        private System.Windows.Forms.Label lblPatenteDatosPoliza;
+        private System.Windows.Forms.Label lblChasisDatosPoliza;
+        private System.Windows.Forms.Label lblKmDatosPoliza;
+        private System.Windows.Forms.Label lblMotorDatosPoliza;
+        private System.Windows.Forms.Label lblVehiculoDatosPoliza;
+        private System.Windows.Forms.Label LabelDomRiesgoComboBox;
         private System.Windows.Forms.TabPage tabTipoCob;
         private System.Windows.Forms.RadioButton btnCheckSemestral;
         private System.Windows.Forms.RadioButton btnCheckMensual;
@@ -1929,13 +1932,13 @@ namespace Interfaz
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxClienteDNI;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label LabelDocPpal;
         private System.Windows.Forms.TextBox textBoxClienteDomicilio;
         private System.Windows.Forms.TextBox textBoxClienteNombre;
-        private System.Windows.Forms.TextBox textBoxClienteNro;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxClienteNroPpal;
+        private System.Windows.Forms.Label LabelDomicilioPpal;
+        private System.Windows.Forms.Label LabelApNomCliPpal;
+        private System.Windows.Forms.Label LabelClienteNroPpal;
         private System.Windows.Forms.TabPage tabBusquedaPoliza;
         private System.Windows.Forms.ComboBox cboxEstadoBusquedaPoliza;
         private System.Windows.Forms.ComboBox cboxModeloBusquedaPoliza;

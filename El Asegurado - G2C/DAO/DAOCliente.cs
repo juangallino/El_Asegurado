@@ -203,8 +203,23 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+        public int CountIninterrumpidoParaPlata(int idCliente)
+        {
+            try
+            {
+                var fecha = DateTime.Today.AddYears(-2);
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Polizas.Where(p => p.idCliente == idCliente && p.fechaInicioVigencia > fecha).Count();
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+        }
     }
-
 }
 
 

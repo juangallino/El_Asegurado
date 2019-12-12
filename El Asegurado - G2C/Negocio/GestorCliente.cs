@@ -57,7 +57,11 @@ namespace Negocio
 
         public bool ClienteActivo (int idcliente)
         {
-            return true; //Desarrollar
+            DAOCliente dAOCliente = new DAOCliente();
+
+            if (dAOCliente.CountIninterrumpidoParaPlata(idcliente) < 4)
+                return false;
+            return true;
         }
 
         //Método para cargar los datos desde la Base de Datos en el DTOCliente
