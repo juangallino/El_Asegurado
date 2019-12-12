@@ -17,7 +17,7 @@ namespace Negocio
     }
     public class GestorPago
     {
-        public dto_PagoPoliza cargarPolizaParaPagar(int idPoliza)
+        public dto_PagoPoliza cargarPolizaParaPagar(decimal NroPolizaSuc, decimal NroPoliza, decimal NroPolizaSec)
         {
             dto_PagoPoliza dtoPagoPoliza = new dto_PagoPoliza();
             GestorPoliza gestorPoliza = new GestorPoliza();
@@ -25,7 +25,7 @@ namespace Negocio
             DAOCliente dAOCliente = new DAOCliente();
             Poliza poliza = new Poliza();
             
-            poliza = gestorPoliza.BuscarPoliza(idPoliza);
+            poliza = gestorPoliza.BuscarPoliza(NroPolizaSuc, NroPoliza, NroPolizaSec);
             if (poliza == null)
             {
                 throw new Exception("Póliza Inexistente.");
@@ -36,7 +36,7 @@ namespace Negocio
             }
             List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
             List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
-        //    dtoCuota = CalcularCuotasPendientes(cuotas);
+            dtoCuota = CalcularCuotasPendientes(cuotas);
             dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
             dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).nombre;
             dtoPagoPoliza.NroCliente = Convert.ToInt32(dAOCliente.Get(poliza.idCliente).NroCliente);
@@ -44,9 +44,10 @@ namespace Negocio
             dtoPagoPoliza.DatosVehiculo = poliza.datosVehiculo;
             dtoPagoPoliza.Patente = poliza.patente;
             dtoPagoPoliza.CuotasPendientes = dtoCuota;
+            
             dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
             dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
-            dtoPagoPoliza.NroPoliza = Convert.ToInt32(poliza.NroPoliza);
+            dtoPagoPoliza.idPoliza = poliza.id;
             dtoPagoPoliza.ImportePago = 0;//FALTA VISTA
             dtoPagoPoliza.UltimoPago = DateTime.Today; //FALTA VISTA
             
@@ -54,14 +55,15 @@ namespace Negocio
 
         }
 
-        public List<dto_Cuota> CalcularCuotasPendientes(int nroPoliza)
+        public List<dto_Cuota> CalcularCuotasPendientes(List<PolizaCuota> cuotas)
         {
             List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
             
-            DAOPoliza dAOPoliza = new DAOPoliza();
-            List<PolizaCuota> cuotasPendientes = dAOPoliza.GetCuotasPendientes(nroPoliza);
-            foreach(var cuota in cuotasPendientes)
+                  
+            foreach(var cuota in cuotas)
             {
+                if (cuota.idPolizaRecibo == null)
+                {
                 dto_Cuota dtoCuotaAux = new dto_Cuota();
                 dtoCuotaAux.IdCuota = cuota.id; 
                 dtoCuotaAux.ImporteCuota = cuota.importeCuota.GetValueOrDefault();
@@ -71,6 +73,9 @@ namespace Negocio
                 dtoCuotaAux.FechaVencimiento = cuota.fechaVencimiento;
                 
                 dtoCuota.Add(dtoCuotaAux);
+
+                }
+
             }
             return dtoCuota;
         }
@@ -122,7 +127,7 @@ namespace Negocio
             try
             {
                 poliza = gestorPoliza.BuscarPoliza(idPoliza);
-                verificarSeleccionCuotas(cuotas.First(), poliza.PolizaCuotas.ToList());  //seguir
+                verificarSeleccionCuotas(cuotas.First(), poliza.PolizaCuotas.ToList());  
 
                 
 

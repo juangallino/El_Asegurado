@@ -8,7 +8,7 @@ namespace DTO
 {
     public class dto_PagoPoliza
     {
-        public int NroPoliza { get; set; }
+        public int idPoliza { get; set; }
         public int NroCliente { get; set; }
         public string ApellidoCliente { get; set; }
         public string NombreCliente { get; set; }

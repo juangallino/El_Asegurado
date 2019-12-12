@@ -15,7 +15,7 @@ namespace Interfaz
 {
     public partial class PagoPolizaForm : Form
     {
-        private int nroPoliza;
+        
         dto_PagoPoliza DTO_PagoPoliza = new dto_PagoPoliza();
 
 
@@ -105,18 +105,20 @@ namespace Interfaz
                 }
                 else
                 {
-
-                    nroPoliza = Convert.ToInt32(textPolizaNroBusquedaPoliza.Text);
+                    decimal NroPolizaSuc = 1;
+                    decimal NroPoliza = Convert.ToDecimal(textPolizaNroBusquedaPoliza.Text);
+                    decimal NroPolizaSec = 01;
 
                   //  MessageBox.Show(nroPoliza.ToString());
+                    
 
-                    DTO_PagoPoliza = gestorPago.cargarPolizaParaPagar(nroPoliza);
+                    DTO_PagoPoliza = gestorPago.cargarPolizaParaPagar(NroPolizaSuc, NroPoliza, NroPolizaSec);
 
                     if (!string.IsNullOrEmpty(DTO_PagoPoliza.ApellidoCliente))
                     {
                     try
                         {
-                            textBoxPolizaNro.Text = nroPoliza.ToString();
+                            textBoxPolizaNro.Text = NroPoliza.ToString();
                             textBoxClienteDNI.Text = DTO_PagoPoliza.NroCliente.ToString();
                             textBoxClienteNombre.Text = DTO_PagoPoliza.ApellidoCliente.Trim() + " " + DTO_PagoPoliza.NombreCliente.Trim();
                             textBoxNroCliente.Text = DTO_PagoPoliza.NroCliente.ToString();
@@ -127,8 +129,7 @@ namespace Interfaz
                             try
                             {
                                 dataGridViewCuotasPendientes.Visible = true;
-                                dataGridViewCuotasPendientes.DataSource = gestorPago.CalcularCuotasPendientes(nroPoliza);
-
+                                dataGridViewCuotasPendientes.DataSource = DTO_PagoPoliza.CuotasPendientes; 
                                 dataGridViewCuotasPendientes.Refresh();
                             }
                             catch (Exception ex)
@@ -144,7 +145,7 @@ namespace Interfaz
                         }
                     }
                     else
-                        MessageBox.Show("No se ha seleccionado un cliente");
+                        MessageBox.Show("No existe la Poliza ingresada ");
 
                     MessageBox.Show( DTO_PagoPoliza.DatosVehiculo.ToString());
 

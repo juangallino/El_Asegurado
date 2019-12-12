@@ -32,7 +32,27 @@ namespace DAO
                 throw new Exception(e.Message);
             }
         }
+        public Poliza GetPolizaPorNroPoliza(decimal NroPolizaSuc, decimal NroPoliza, decimal NroPolizaSec)
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Polizas
+                            .Where(p => p.NroPolizaSuc == NroPolizaSuc)
+                            .Where(p => p.NroPoliza == NroPoliza)
+                            .Where(p => p.NroPolizaSec == NroPolizaSec)
+                            .Include(p => p.Cliente)       //Entidad Relacionada 
+                            .Include(p => p.PolizaCuotas)  //Entidad Relacionada
+                            .FirstOrDefault();
 
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         public void GuardarPoliza(Poliza p)
         {

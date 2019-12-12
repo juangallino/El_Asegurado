@@ -122,7 +122,7 @@
             this.btnBusquedaPoliza.BackColor = System.Drawing.Color.Maroon;
             this.btnBusquedaPoliza.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusquedaPoliza.BackgroundImage")));
             this.btnBusquedaPoliza.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBusquedaPoliza.Location = new System.Drawing.Point(316, 23);
+            this.btnBusquedaPoliza.Location = new System.Drawing.Point(418, 20);
             this.btnBusquedaPoliza.Name = "btnBusquedaPoliza";
             this.btnBusquedaPoliza.Size = new System.Drawing.Size(27, 25);
             this.btnBusquedaPoliza.TabIndex = 26;
