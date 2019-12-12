@@ -40,10 +40,8 @@ namespace Data
         public virtual DbSet<Pai> Pais { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<Poliza> Polizas { get; set; }
-        public virtual DbSet<PolizaCuota> PolizaCuotas { get; set; }
         public virtual DbSet<PolizaHijo> PolizaHijoes { get; set; }
         public virtual DbSet<PolizaMedidaSeguridad> PolizaMedidaSeguridads { get; set; }
-        public virtual DbSet<PolizaRecibo> PolizaReciboes { get; set; }
         public virtual DbSet<PolizaRenovacion> PolizaRenovacions { get; set; }
         public virtual DbSet<PolizaRenovacionHijo> PolizaRenovacionHijoes { get; set; }
         public virtual DbSet<Profesion> Profesions { get; set; }
@@ -62,6 +60,8 @@ namespace Data
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<v_Cliente> v_Cliente { get; set; }
         public virtual DbSet<v_PagoCuota> v_PagoCuota { get; set; }
+        public virtual DbSet<PolizaCuota> PolizaCuotas { get; set; }
+        public virtual DbSet<PolizaRecibo> PolizaReciboes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

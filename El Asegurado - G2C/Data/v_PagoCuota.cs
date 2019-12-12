@@ -15,12 +15,12 @@ namespace Data
     public partial class v_PagoCuota
     {
         public int id { get; set; }
+        public int idPoliza { get; set; }
         public int nroCuota { get; set; }
         public System.DateTime fechaVencimiento { get; set; }
         public Nullable<System.DateTime> FechaRecibo { get; set; }
         public Nullable<decimal> importeCuota { get; set; }
         public Nullable<decimal> importeRecargo { get; set; }
         public Nullable<decimal> importeDescuento { get; set; }
-        public int idPoliza { get; set; }
     }
 }

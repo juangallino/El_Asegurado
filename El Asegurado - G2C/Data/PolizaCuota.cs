@@ -14,12 +14,6 @@ namespace Data
     
     public partial class PolizaCuota
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PolizaCuota()
-        {
-            this.PolizaReciboes = new HashSet<PolizaRecibo>();
-        }
-    
         public int id { get; set; }
         public int idPoliza { get; set; }
         public int nroCuota { get; set; }
@@ -27,9 +21,9 @@ namespace Data
         public Nullable<decimal> importeCuota { get; set; }
         public Nullable<decimal> importeRecargo { get; set; }
         public Nullable<decimal> importeDescuento { get; set; }
+        public Nullable<int> idPolizaRecibo { get; set; }
     
         public virtual Poliza Poliza { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PolizaRecibo> PolizaReciboes { get; set; }
+        public virtual PolizaRecibo PolizaRecibo { get; set; }
     }
 }

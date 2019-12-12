@@ -732,12 +732,13 @@ namespace Interfaz
             {
 
                 //cargamos dto con datos a buscar
-                idestado = Convert.ToInt32(cboxEstadoBusquedaPoliza.SelectedIndex),
+             /*   idestado = Convert.ToInt32(cboxEstadoBusquedaPoliza.SelectedIndex),
                 idmarca = Convert.ToInt32(cboxMarcaBusquedaPoliza.SelectedIndex),
                 idmodelo = Convert.ToInt32(cboxModeloBusquedaPoliza.SelectedValue),
                 nombreCliente = textBoxClienteNombreBusquedaPoliza.Text,
                 fdesde = dtPickerDesdeBusquedaPoliza.Value,
                 fhasta = dtPickerHastaBusquedaPoliza.Value
+                */
             };
 
 

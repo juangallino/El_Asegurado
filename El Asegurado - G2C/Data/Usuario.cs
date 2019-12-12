@@ -17,22 +17,22 @@ namespace Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.PolizaReciboes = new HashSet<PolizaRecibo>();
             this.PolizaRenovacions = new HashSet<PolizaRenovacion>();
             this.ValorFactorAutoScorings = new HashSet<ValorFactorAutoScoring>();
             this.ValorFactorAutoScoringHists = new HashSet<ValorFactorAutoScoringHist>();
+            this.PolizaReciboes = new HashSet<PolizaRecibo>();
         }
     
         public int id { get; set; }
         public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PolizaRecibo> PolizaReciboes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PolizaRenovacion> PolizaRenovacions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValorFactorAutoScoring> ValorFactorAutoScorings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValorFactorAutoScoringHist> ValorFactorAutoScoringHists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PolizaRecibo> PolizaReciboes { get; set; }
     }
 }

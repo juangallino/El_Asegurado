@@ -33,7 +33,7 @@
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.tabBusquedaPoliza = new System.Windows.Forms.TabPage();
-            this.btnBusquedaCliente = new System.Windows.Forms.Button();
+            this.btnBusquedaPoliza = new System.Windows.Forms.Button();
             this.btnVolverTabBusquedaPoliza = new System.Windows.Forms.Button();
             this.textPolizaNroBusquedaPoliza = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
             // 
             // tabBusquedaPoliza
             // 
-            this.tabBusquedaPoliza.Controls.Add(this.btnBusquedaCliente);
+            this.tabBusquedaPoliza.Controls.Add(this.btnBusquedaPoliza);
             this.tabBusquedaPoliza.Controls.Add(this.btnVolverTabBusquedaPoliza);
             this.tabBusquedaPoliza.Controls.Add(this.textPolizaNroBusquedaPoliza);
             this.tabBusquedaPoliza.Controls.Add(this.label35);
@@ -117,17 +117,17 @@
             this.tabBusquedaPoliza.Text = "Búsqueda";
             this.tabBusquedaPoliza.UseVisualStyleBackColor = true;
             // 
-            // btnBusquedaCliente
+            // btnBusquedaPoliza
             // 
-            this.btnBusquedaCliente.BackColor = System.Drawing.Color.Maroon;
-            this.btnBusquedaCliente.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusquedaCliente.BackgroundImage")));
-            this.btnBusquedaCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBusquedaCliente.Location = new System.Drawing.Point(316, 23);
-            this.btnBusquedaCliente.Name = "btnBusquedaCliente";
-            this.btnBusquedaCliente.Size = new System.Drawing.Size(27, 25);
-            this.btnBusquedaCliente.TabIndex = 26;
-            this.btnBusquedaCliente.UseVisualStyleBackColor = false;
-            this.btnBusquedaCliente.Click += new System.EventHandler(this.btnBusquedaCliente_Click_1);
+            this.btnBusquedaPoliza.BackColor = System.Drawing.Color.Maroon;
+            this.btnBusquedaPoliza.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusquedaPoliza.BackgroundImage")));
+            this.btnBusquedaPoliza.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBusquedaPoliza.Location = new System.Drawing.Point(418, 20);
+            this.btnBusquedaPoliza.Name = "btnBusquedaPoliza";
+            this.btnBusquedaPoliza.Size = new System.Drawing.Size(27, 25);
+            this.btnBusquedaPoliza.TabIndex = 26;
+            this.btnBusquedaPoliza.UseVisualStyleBackColor = false;
+            this.btnBusquedaPoliza.Click += new System.EventHandler(this.btnBusquedaCliente_Click_1);
             // 
             // btnVolverTabBusquedaPoliza
             // 
@@ -145,6 +145,7 @@
             this.textPolizaNroBusquedaPoliza.Name = "textPolizaNroBusquedaPoliza";
             this.textPolizaNroBusquedaPoliza.Size = new System.Drawing.Size(159, 20);
             this.textPolizaNroBusquedaPoliza.TabIndex = 10;
+            this.textPolizaNroBusquedaPoliza.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label35
             // 
@@ -247,6 +248,7 @@
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(129, 20);
             this.textBox5.TabIndex = 42;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label5
@@ -266,6 +268,7 @@
             this.textBoxRevDiaPago1.ReadOnly = true;
             this.textBoxRevDiaPago1.Size = new System.Drawing.Size(135, 20);
             this.textBoxRevDiaPago1.TabIndex = 39;
+            this.textBoxRevDiaPago1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
             // 
@@ -293,6 +296,7 @@
             this.textBoxClienteDNI.ReadOnly = true;
             this.textBoxClienteDNI.Size = new System.Drawing.Size(129, 20);
             this.textBoxClienteDNI.TabIndex = 35;
+            this.textBoxClienteDNI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxNroCliente
             // 
@@ -301,6 +305,7 @@
             this.textBoxNroCliente.ReadOnly = true;
             this.textBoxNroCliente.Size = new System.Drawing.Size(163, 20);
             this.textBoxNroCliente.TabIndex = 34;
+            this.textBoxNroCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -319,6 +324,7 @@
             this.textBoxVuelto.ReadOnly = true;
             this.textBoxVuelto.Size = new System.Drawing.Size(126, 29);
             this.textBoxVuelto.TabIndex = 28;
+            this.textBoxVuelto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxEntrega
             // 
@@ -327,6 +333,7 @@
             this.textBoxEntrega.Name = "textBoxEntrega";
             this.textBoxEntrega.Size = new System.Drawing.Size(135, 29);
             this.textBoxEntrega.TabIndex = 27;
+            this.textBoxEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxFechaFin
             // 
@@ -335,6 +342,7 @@
             this.textBoxFechaFin.ReadOnly = true;
             this.textBoxFechaFin.Size = new System.Drawing.Size(163, 20);
             this.textBoxFechaFin.TabIndex = 25;
+            this.textBoxFechaFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxFechaInicio
             // 
@@ -343,6 +351,7 @@
             this.textBoxFechaInicio.ReadOnly = true;
             this.textBoxFechaInicio.Size = new System.Drawing.Size(135, 20);
             this.textBoxFechaInicio.TabIndex = 24;
+            this.textBoxFechaInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxDatosVehiculo
             // 
@@ -368,6 +377,7 @@
             this.textBoxPolizaNro.ReadOnly = true;
             this.textBoxPolizaNro.Size = new System.Drawing.Size(163, 29);
             this.textBoxPolizaNro.TabIndex = 15;
+            this.textBoxPolizaNro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnModPolizaTabDetalles
             // 
@@ -487,7 +497,7 @@
         private System.Windows.Forms.TextBox textPolizaNroBusquedaPoliza;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TabControl tabControlPagoPoliza;
-        private System.Windows.Forms.Button btnBusquedaCliente;
+        private System.Windows.Forms.Button btnBusquedaPoliza;
         private System.Windows.Forms.TabPage tabDetallesPoliza;
         private System.Windows.Forms.TextBox textBoxVuelto;
         private System.Windows.Forms.TextBox textBoxEntrega;

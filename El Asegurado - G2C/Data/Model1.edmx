@@ -150,6 +150,7 @@
           <Property Name="importeCuota" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeRecargo" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="idPolizaRecibo" Type="int" />
         </EntityType>
         <EntityType Name="PolizaHijo">
           <Key>
@@ -176,7 +177,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroRecibo" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="idPolizaCuota" Type="int" Nullable="false" />
           <Property Name="FechaRecibo" Type="date" Nullable="false" />
           <Property Name="HoraRecibo" Type="time" Precision="7" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
@@ -370,18 +370,19 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_PagoCuota' no tiene definida 
         <EntityType Name="v_PagoCuota">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="idPoliza" />
             <PropertyRef Name="nroCuota" />
             <PropertyRef Name="fechaVencimiento" />
-            <PropertyRef Name="idPoliza" />
+            <PropertyRef Name="FechaRecibo" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="idPoliza" Type="int" Nullable="false" />
           <Property Name="nroCuota" Type="int" Nullable="false" />
           <Property Name="fechaVencimiento" Type="date" Nullable="false" />
-          <Property Name="FechaRecibo" Type="date" />
+          <Property Name="FechaRecibo" Type="date" Nullable="false" />
           <Property Name="importeCuota" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeRecargo" Type="decimal" Precision="15" Scale="2" />
           <Property Name="importeDescuento" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="idPoliza" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -623,6 +624,18 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PolizaCuota_PolizaRecibo">
+          <End Role="PolizaRecibo" Type="Self.PolizaRecibo" Multiplicity="0..1" />
+          <End Role="PolizaCuota" Type="Self.PolizaCuota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaRecibo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaCuota">
+              <PropertyRef Name="idPolizaRecibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PolizaHijo_EstadoCivil">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="PolizaHijo" Type="Self.PolizaHijo" Multiplicity="*" />
@@ -680,18 +693,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Principal>
             <Dependent Role="PolizaMedidaSeguridad">
               <PropertyRef Name="idPoliza" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PolizaRecibo_PolizaCuota">
-          <End Role="PolizaCuota" Type="Self.PolizaCuota" Multiplicity="1" />
-          <End Role="PolizaRecibo" Type="Self.PolizaRecibo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PolizaCuota">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PolizaRecibo">
-              <PropertyRef Name="idPolizaCuota" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -996,13 +997,13 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="v_PagoCuota" EntityType="Self.v_PagoCuota" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [v_PagoCuota].[id] AS [id], 
+    [v_PagoCuota].[idPoliza] AS [idPoliza], 
     [v_PagoCuota].[nroCuota] AS [nroCuota], 
     [v_PagoCuota].[fechaVencimiento] AS [fechaVencimiento], 
     [v_PagoCuota].[FechaRecibo] AS [FechaRecibo], 
     [v_PagoCuota].[importeCuota] AS [importeCuota], 
     [v_PagoCuota].[importeRecargo] AS [importeRecargo], 
-    [v_PagoCuota].[importeDescuento] AS [importeDescuento], 
-    [v_PagoCuota].[idPoliza] AS [idPoliza]
+    [v_PagoCuota].[importeDescuento] AS [importeDescuento]
     FROM [dbo].[v_PagoCuota] AS [v_PagoCuota]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_ValorFactorAutoScoring" EntityType="Self.v_ValorFactorAutoScoring" store:Type="Views" store:Schema="dbo">
@@ -1088,6 +1089,10 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <End Role="Poliza" EntitySet="Poliza" />
             <End Role="PolizaCuota" EntitySet="PolizaCuota" />
           </AssociationSet>
+          <AssociationSet Name="FK_PolizaCuota_PolizaRecibo" Association="Self.FK_PolizaCuota_PolizaRecibo">
+            <End Role="PolizaRecibo" EntitySet="PolizaRecibo" />
+            <End Role="PolizaCuota" EntitySet="PolizaCuota" />
+          </AssociationSet>
           <AssociationSet Name="FK_PolizaHijo_EstadoCivil" Association="Self.FK_PolizaHijo_EstadoCivil">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
             <End Role="PolizaHijo" EntitySet="PolizaHijo" />
@@ -1107,10 +1112,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <AssociationSet Name="FK_polizaMedidaSeguridad_Poliza" Association="Self.FK_polizaMedidaSeguridad_Poliza">
             <End Role="Poliza" EntitySet="Poliza" />
             <End Role="PolizaMedidaSeguridad" EntitySet="PolizaMedidaSeguridad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PolizaRecibo_PolizaCuota" Association="Self.FK_PolizaRecibo_PolizaCuota">
-            <End Role="PolizaCuota" EntitySet="PolizaCuota" />
-            <End Role="PolizaRecibo" EntitySet="PolizaRecibo" />
           </AssociationSet>
           <AssociationSet Name="FK_PolizaRecibo_Usuario" Association="Self.FK_PolizaRecibo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1225,10 +1226,8 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="Pais" EntityType="DB_El_Asegurado.Pai" />
           <EntitySet Name="Personas" EntityType="DB_El_Asegurado.Persona" />
           <EntitySet Name="Polizas" EntityType="DB_El_Asegurado.Poliza" />
-          <EntitySet Name="PolizaCuotas" EntityType="DB_El_Asegurado.PolizaCuota" />
           <EntitySet Name="PolizaHijoes" EntityType="DB_El_Asegurado.PolizaHijo" />
           <EntitySet Name="PolizaMedidaSeguridads" EntityType="DB_El_Asegurado.PolizaMedidaSeguridad" />
-          <EntitySet Name="PolizaReciboes" EntityType="DB_El_Asegurado.PolizaRecibo" />
           <EntitySet Name="PolizaRenovacions" EntityType="DB_El_Asegurado.PolizaRenovacion" />
           <EntitySet Name="PolizaRenovacionHijoes" EntityType="DB_El_Asegurado.PolizaRenovacionHijo" />
           <EntitySet Name="Profesions" EntityType="DB_El_Asegurado.Profesion" />
@@ -1343,10 +1342,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <End Role="Vehiculo" EntitySet="Vehiculoes" />
             <End Role="Poliza" EntitySet="Polizas" />
           </AssociationSet>
-          <AssociationSet Name="FK_polizaCuota_Poliza" Association="DB_El_Asegurado.FK_polizaCuota_Poliza">
-            <End Role="Poliza" EntitySet="Polizas" />
-            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
-          </AssociationSet>
           <AssociationSet Name="FK_polizaHijo_Poliza" Association="DB_El_Asegurado.FK_polizaHijo_Poliza">
             <End Role="Poliza" EntitySet="Polizas" />
             <End Role="PolizaHijo" EntitySet="PolizaHijoes" />
@@ -1363,17 +1358,9 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             <End Role="Poliza" EntitySet="Polizas" />
             <End Role="PolizaValorFactorAutoscoring" EntitySet="PolizaValorFactorAutoscorings" />
           </AssociationSet>
-          <AssociationSet Name="FK_PolizaRecibo_PolizaCuota" Association="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota">
-            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
-            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
-          </AssociationSet>
           <AssociationSet Name="FK_PolizaHijo_Sexo" Association="DB_El_Asegurado.FK_PolizaHijo_Sexo">
             <End Role="Sexo" EntitySet="Sexoes" />
             <End Role="PolizaHijo" EntitySet="PolizaHijoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PolizaRecibo_Usuario" Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
           </AssociationSet>
           <AssociationSet Name="FK_PolizaRenovacion_TipoCobertura" Association="DB_El_Asegurado.FK_PolizaRenovacion_TipoCobertura">
             <End Role="TipoCobertura" EntitySet="TipoCoberturas" />
@@ -1411,6 +1398,20 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySet Name="sysdiagrams" EntityType="DB_El_Asegurado.sysdiagram" />
           <EntitySet Name="v_Cliente" EntityType="DB_El_Asegurado.v_Cliente" />
           <EntitySet Name="v_PagoCuota" EntityType="DB_El_Asegurado.v_PagoCuota" />
+          <EntitySet Name="PolizaCuotas" EntityType="DB_El_Asegurado.PolizaCuota" />
+          <AssociationSet Name="FK_polizaCuota_Poliza" Association="DB_El_Asegurado.FK_polizaCuota_Poliza">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
+          </AssociationSet>
+          <EntitySet Name="PolizaReciboes" EntityType="DB_El_Asegurado.PolizaRecibo" />
+          <AssociationSet Name="FK_PolizaCuota_PolizaRecibo" Association="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo">
+            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
+            <End Role="PolizaCuota" EntitySet="PolizaCuotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolizaRecibo_Usuario" Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="PolizaRecibo" EntitySet="PolizaReciboes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -1581,25 +1582,11 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <NavigationProperty Name="Poliza2" Relationship="DB_El_Asegurado.FK_Poliza_Poliza1" FromRole="Poliza1" ToRole="Poliza" />
           <NavigationProperty Name="TipoCobertura" Relationship="DB_El_Asegurado.FK_Poliza_TipoCobertura" FromRole="Poliza" ToRole="TipoCobertura" />
           <NavigationProperty Name="Vehiculo" Relationship="DB_El_Asegurado.FK_Poliza_Vehiculo" FromRole="Poliza" ToRole="Vehiculo" />
-          <NavigationProperty Name="PolizaCuotas" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="Poliza" ToRole="PolizaCuota" />
           <NavigationProperty Name="PolizaHijoes" Relationship="DB_El_Asegurado.FK_polizaHijo_Poliza" FromRole="Poliza" ToRole="PolizaHijo" />
           <NavigationProperty Name="PolizaMedidaSeguridads" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" FromRole="Poliza" ToRole="PolizaMedidaSeguridad" />
           <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_polizaRenovacion_Poliza" FromRole="Poliza" ToRole="PolizaRenovacion" />
           <NavigationProperty Name="PolizaValorFactorAutoscorings" Relationship="DB_El_Asegurado.FK_PolizaValorFactorAutoscoring_Poliza" FromRole="Poliza" ToRole="PolizaValorFactorAutoscoring" />
-        </EntityType>
-        <EntityType Name="PolizaCuota">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idPoliza" Type="Int32" Nullable="false" />
-          <Property Name="nroCuota" Type="Int32" Nullable="false" />
-          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
-          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="PolizaCuota" ToRole="Poliza" />
-          <NavigationProperty Name="PolizaReciboes" Relationship="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" FromRole="PolizaCuota" ToRole="PolizaRecibo" />
+          <NavigationProperty Name="PolizaCuotas" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="Poliza" ToRole="PolizaCuota" />
         </EntityType>
         <EntityType Name="PolizaHijo">
           <Key>
@@ -1624,19 +1611,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="Valor" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MedidaSeguridad" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_MedidaSeguridad" FromRole="PolizaMedidaSeguridad" ToRole="MedidaSeguridad" />
           <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaMedidaSeguridad_Poliza" FromRole="PolizaMedidaSeguridad" ToRole="Poliza" />
-        </EntityType>
-        <EntityType Name="PolizaRecibo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NroRecibo" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="idPolizaCuota" Type="Int32" Nullable="false" />
-          <Property Name="FechaRecibo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="HoraRecibo" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PolizaCuota" Relationship="DB_El_Asegurado.FK_PolizaRecibo_PolizaCuota" FromRole="PolizaRecibo" ToRole="PolizaCuota" />
-          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="PolizaRecibo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="PolizaRenovacion">
           <Key>
@@ -1737,10 +1711,10 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="PolizaReciboes" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="Usuario" ToRole="PolizaRecibo" />
           <NavigationProperty Name="PolizaRenovacions" Relationship="DB_El_Asegurado.FK_PolizaRenovacion_Usuario" FromRole="Usuario" ToRole="PolizaRenovacion" />
           <NavigationProperty Name="ValorFactorAutoScorings" Relationship="DB_El_Asegurado.FK_ValorFActorAutoscoring_Usuario" FromRole="Usuario" ToRole="ValorFactorAutoScoring" />
           <NavigationProperty Name="ValorFactorAutoScoringHists" Relationship="DB_El_Asegurado.FK_ValorFactorAutoScoringHist_Usuario" FromRole="Usuario" ToRole="ValorFactorAutoScoringHist" />
+          <NavigationProperty Name="PolizaReciboes" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="Usuario" ToRole="PolizaRecibo" />
         </EntityType>
         <EntityType Name="ValorFactorAutoScoring">
           <Key>
@@ -2103,18 +2077,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_polizaCuota_Poliza">
-          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
-          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Poliza">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PolizaCuota">
-              <PropertyRef Name="idPoliza" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_polizaHijo_Poliza">
           <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
           <End Type="DB_El_Asegurado.PolizaHijo" Role="PolizaHijo" Multiplicity="*" />
@@ -2163,18 +2125,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PolizaRecibo_PolizaCuota">
-          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="1" />
-          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PolizaCuota">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PolizaRecibo">
-              <PropertyRef Name="idPolizaCuota" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PolizaHijo_Sexo">
           <End Type="DB_El_Asegurado.Sexo" Role="Sexo" Multiplicity="1" />
           <End Type="DB_El_Asegurado.PolizaHijo" Role="PolizaHijo" Multiplicity="*" />
@@ -2184,18 +2134,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
             </Principal>
             <Dependent Role="PolizaHijo">
               <PropertyRef Name="idSexo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PolizaRecibo_Usuario">
-          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PolizaRecibo">
-              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2353,19 +2291,83 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
         <EntityType Name="v_PagoCuota">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="idPoliza" />
             <PropertyRef Name="nroCuota" />
             <PropertyRef Name="fechaVencimiento" />
-            <PropertyRef Name="idPoliza" />
+            <PropertyRef Name="FechaRecibo" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
           <Property Name="nroCuota" Type="Int32" Nullable="false" />
           <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaRecibo" Type="DateTime" Precision="0" />
+          <Property Name="FechaRecibo" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="idPoliza" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="PolizaCuota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPoliza" Type="Int32" Nullable="false" />
+          <Property Name="nroCuota" Type="Int32" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="importeCuota" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeRecargo" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="importeDescuento" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="idPolizaRecibo" Type="Int32" />
+          <NavigationProperty Name="Poliza" Relationship="DB_El_Asegurado.FK_polizaCuota_Poliza" FromRole="PolizaCuota" ToRole="Poliza" />
+          <NavigationProperty Name="PolizaRecibo" Relationship="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo" FromRole="PolizaCuota" ToRole="PolizaRecibo" />
+        </EntityType>
+        <Association Name="FK_polizaCuota_Poliza">
+          <End Type="DB_El_Asegurado.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaCuota">
+              <PropertyRef Name="idPoliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PolizaRecibo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroRecibo" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="FechaRecibo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HoraRecibo" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PolizaCuotas" Relationship="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo" FromRole="PolizaRecibo" ToRole="PolizaCuota" />
+          <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="PolizaRecibo" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_PolizaCuota_PolizaRecibo">
+          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="0..1" />
+          <End Type="DB_El_Asegurado.PolizaCuota" Role="PolizaCuota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolizaRecibo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaCuota">
+              <PropertyRef Name="idPolizaRecibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolizaRecibo_Usuario">
+          <End Type="DB_El_Asegurado.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DB_El_Asegurado.PolizaRecibo" Role="PolizaRecibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PolizaRecibo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2526,19 +2528,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PolizaCuotas">
-            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaCuota">
-              <MappingFragment StoreEntitySet="PolizaCuota">
-                <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
-                <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
-                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
-                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
-                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
-                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PolizaHijoes">
             <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaHijo">
               <MappingFragment StoreEntitySet="PolizaHijo">
@@ -2556,18 +2545,6 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
                 <ScalarProperty Name="idMedidaSeguridad" ColumnName="idMedidaSeguridad" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PolizaReciboes">
-            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaRecibo">
-              <MappingFragment StoreEntitySet="PolizaRecibo">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="HoraRecibo" ColumnName="HoraRecibo" />
-                <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
-                <ScalarProperty Name="idPolizaCuota" ColumnName="idPolizaCuota" />
-                <ScalarProperty Name="NroRecibo" ColumnName="NroRecibo" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2768,13 +2745,38 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <EntitySetMapping Name="v_PagoCuota">
             <EntityTypeMapping TypeName="DB_El_Asegurado.v_PagoCuota">
               <MappingFragment StoreEntitySet="v_PagoCuota">
-                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
                 <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
                 <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
                 <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
                 <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
                 <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
                 <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaCuotas">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaCuota">
+              <MappingFragment StoreEntitySet="PolizaCuota">
+                <ScalarProperty Name="idPolizaRecibo" ColumnName="idPolizaRecibo" />
+                <ScalarProperty Name="importeDescuento" ColumnName="importeDescuento" />
+                <ScalarProperty Name="importeRecargo" ColumnName="importeRecargo" />
+                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolizaReciboes">
+            <EntityTypeMapping TypeName="DB_El_Asegurado.PolizaRecibo">
+              <MappingFragment StoreEntitySet="PolizaRecibo">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="HoraRecibo" ColumnName="HoraRecibo" />
+                <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
+                <ScalarProperty Name="NroRecibo" ColumnName="NroRecibo" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2794,7 +2796,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

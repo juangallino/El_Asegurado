@@ -21,7 +21,8 @@ namespace Negocio
             try
             {
                 Validar(dtoPoliza);
-                Poliza poliza = new Poliza(dtoPoliza)
+                //Poliza poliza = new Poliza(dtoPoliza)
+                Poliza poliza = new Poliza()
                 {
                     Cliente = clientePoliza
                 };
@@ -102,6 +103,18 @@ namespace Negocio
         }
 
         //Busca una Poliza por su id. Incorpora Cliente y PolizaCuota como entidades relacionadas (No Lazy)
+        public Poliza BuscarPoliza(decimal NroPolizaSuc, decimal NroPoliza, decimal NroPolizaSec)
+        {
+            try
+            {
+                DAOPoliza dAOPoliza = new DAOPoliza();
+                return dAOPoliza.GetPolizaPorNroPoliza(NroPolizaSuc, NroPoliza, NroPolizaSec);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public Poliza BuscarPoliza(int idPoliza)
         {
             try
@@ -109,12 +122,11 @@ namespace Negocio
                 DAOPoliza dAOPoliza = new DAOPoliza();
                 return dAOPoliza.GetPoliza(idPoliza);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
         private void Validar(dto_poliza dto_Poliza) 
         {
             try
