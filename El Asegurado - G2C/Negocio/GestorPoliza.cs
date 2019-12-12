@@ -21,8 +21,7 @@ namespace Negocio
             try
             {
                 Validar(dtoPoliza);
-                //Poliza poliza = new Poliza(dtoPoliza)
-                Poliza poliza = new Poliza()
+                Poliza poliza = new Poliza(dtoPoliza)
                 {
                     Cliente = clientePoliza
                 };
@@ -80,15 +79,12 @@ namespace Negocio
                 DAOExtra dAOExtra = new DAOExtra();
                 poliza.EstadoPoliza = dAOExtra.GetEstadoPoliza("Generada");
 
-                //Se genera el número de póliza
-
-
-                
                 DAOPoliza dAOPoliza = new DAOPoliza();
 
-               
-                //Se guarda la póliza generada
+                //Se genera el número de póliza
+                poliza.NroPoliza = dAOPoliza.AsignarNroPoliza(poliza.NroPolizaSuc);
 
+                //Se guarda la póliza generada
                 dAOPoliza.GuardarPoliza(poliza);
 
                 //Cambiar estado al Cliente
@@ -227,7 +223,7 @@ namespace Negocio
 
         }
 
-        //Busca pólizas a partir de un criterio de búsqueda - Rel. CU18
+        
         public List<dto_busquedaPoliza> BuscarPoliza(dto_busquedaPoliza dto_BusquedaPoliza)
         {
             DAOPoliza dAOPoliza = new DAOPoliza();

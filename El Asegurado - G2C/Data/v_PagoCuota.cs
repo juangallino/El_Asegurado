@@ -18,7 +18,7 @@ namespace Data
         public int idPoliza { get; set; }
         public int nroCuota { get; set; }
         public System.DateTime fechaVencimiento { get; set; }
-        public Nullable<System.DateTime> FechaRecibo { get; set; }
+        public System.DateTime FechaRecibo { get; set; }
         public Nullable<decimal> importeCuota { get; set; }
         public Nullable<decimal> importeRecargo { get; set; }
         public Nullable<decimal> importeDescuento { get; set; }

@@ -36,6 +36,8 @@ namespace Negocio
             }
             List<dto_Cuota> dtoCuota= new List<dto_Cuota>();
             List<PolizaCuota> cuotas = poliza.PolizaCuotas.ToList();
+            var ultimoPago = GetUltimoPago(poliza.PolizaCuotas);
+
             dtoCuota = CalcularCuotasPendientes(cuotas);
             dtoPagoPoliza.ApellidoCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).apellido;
             dtoPagoPoliza.NombreCliente = dAOCliente.GetPersona(poliza.Cliente.idPersona).nombre;
@@ -48,8 +50,9 @@ namespace Negocio
             dtoPagoPoliza.FechaFin = poliza.fechaFinVigencia;
             dtoPagoPoliza.FechaInicio = poliza.fechaInicioVigencia;
             dtoPagoPoliza.idPoliza = poliza.id;
-            dtoPagoPoliza.ImportePago = 0;//FALTA VISTA
-            dtoPagoPoliza.UltimoPago = DateTime.Today; //FALTA VISTA
+            dtoPagoPoliza.UltimoPago = ultimoPago.Item1.GetValueOrDefault();
+            dtoPagoPoliza.ImportePago = ultimoPago.Item2;
+            
             
             return dtoPagoPoliza;
 
@@ -129,8 +132,6 @@ namespace Negocio
                 poliza = gestorPoliza.BuscarPoliza(idPoliza);
                 verificarSeleccionCuotas(cuotas.First(), poliza.PolizaCuotas.ToList());  
 
-                
-
                 PolizaRecibo polizaRecibo = new PolizaRecibo();
                 var contador = 0;
                 foreach (var cuota in cuotas)
@@ -139,8 +140,9 @@ namespace Negocio
                     PolizaCuota polizaCuota = poliza.PolizaCuotas.ElementAt(cuota.NroCuota - 1);  //getCuota(cuota.nroCuota) <-- SeqDiag
                     polizaCuota.importeDescuento = cuota.ImporteDescuento;
                     polizaCuota.importeRecargo = cuota.ImporteRecargo;
-                    //polizaRecibo.PolizaCuotas.Add(polizaCuota);
+                    polizaRecibo.PolizaCuotas.Add(polizaCuota);
                 }
+
                 dAOPolizaRecibo.GuardarRecibo(polizaRecibo);
 
                 //ActualizarPolizaEstado
