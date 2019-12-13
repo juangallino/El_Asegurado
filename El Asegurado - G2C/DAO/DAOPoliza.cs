@@ -84,8 +84,8 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
-                    int cantPolizasVigentes = db.Polizas.AsNoTracking().Where(p => p.patente == patente || 
-                                                                                   p.nroMotor == nroMotor ||
+                    int cantPolizasVigentes = db.Polizas.AsNoTracking().Where(p => p.patente == patente &&
+                                                                                   p.nroMotor == nroMotor &&
                                                                                    p.nroChasis == nroChasis).
                                                                 Where(p => p.fechaFinVigencia > DateTime.Today).
                                                                 Count();

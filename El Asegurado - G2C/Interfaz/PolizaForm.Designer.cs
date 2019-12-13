@@ -458,7 +458,7 @@ namespace Interfaz
             this.textboxChasis.MaxLength = 20;
             this.textboxChasis.Name = "textboxChasis";
             this.textboxChasis.Size = new System.Drawing.Size(136, 20);
-            this.textboxChasis.TabIndex = 14;            
+            this.textboxChasis.TabIndex = 14;
             this.textboxChasis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Mayusculas_KeyPress);
             // 
             // comboBoxNroSiniestros
@@ -538,6 +538,7 @@ namespace Interfaz
             this.textBoxSumaAsegurada.ReadOnly = true;
             this.textBoxSumaAsegurada.Size = new System.Drawing.Size(125, 20);
             this.textBoxSumaAsegurada.TabIndex = 22;
+            this.textBoxSumaAsegurada.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblSumaAsegurada
             // 
@@ -555,6 +556,7 @@ namespace Interfaz
             this.textBoxKmAño.Name = "textBoxKmAño";
             this.textBoxKmAño.Size = new System.Drawing.Size(79, 20);
             this.textBoxKmAño.TabIndex = 16;
+            this.textBoxKmAño.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxKmAño.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
             // textBoxMotorNro
@@ -772,6 +774,7 @@ namespace Interfaz
             this.textBoxRevMontoPago6.ReadOnly = true;
             this.textBoxRevMontoPago6.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago6.TabIndex = 54;
+            this.textBoxRevMontoPago6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevMontoPago5
             // 
@@ -780,6 +783,7 @@ namespace Interfaz
             this.textBoxRevMontoPago5.ReadOnly = true;
             this.textBoxRevMontoPago5.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago5.TabIndex = 53;
+            this.textBoxRevMontoPago5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevMontoPago4
             // 
@@ -788,6 +792,7 @@ namespace Interfaz
             this.textBoxRevMontoPago4.ReadOnly = true;
             this.textBoxRevMontoPago4.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago4.TabIndex = 52;
+            this.textBoxRevMontoPago4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevMontoPago3
             // 
@@ -796,6 +801,7 @@ namespace Interfaz
             this.textBoxRevMontoPago3.ReadOnly = true;
             this.textBoxRevMontoPago3.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago3.TabIndex = 51;
+            this.textBoxRevMontoPago3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevMontoPago2
             // 
@@ -804,6 +810,7 @@ namespace Interfaz
             this.textBoxRevMontoPago2.ReadOnly = true;
             this.textBoxRevMontoPago2.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago2.TabIndex = 50;
+            this.textBoxRevMontoPago2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevMontoPago1
             // 
@@ -812,6 +819,7 @@ namespace Interfaz
             this.textBoxRevMontoPago1.ReadOnly = true;
             this.textBoxRevMontoPago1.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevMontoPago1.TabIndex = 49;
+            this.textBoxRevMontoPago1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label34
             // 
@@ -886,6 +894,7 @@ namespace Interfaz
             this.textBoxRevImpDescuentos.ReadOnly = true;
             this.textBoxRevImpDescuentos.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevImpDescuentos.TabIndex = 40;
+            this.textBoxRevImpDescuentos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label32
             // 
@@ -903,6 +912,7 @@ namespace Interfaz
             this.textBoxRevPremio.ReadOnly = true;
             this.textBoxRevPremio.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevPremio.TabIndex = 38;
+            this.textBoxRevPremio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label31
             // 
@@ -920,6 +930,7 @@ namespace Interfaz
             this.textBoxRevSumaAsegurada.ReadOnly = true;
             this.textBoxRevSumaAsegurada.Size = new System.Drawing.Size(79, 20);
             this.textBoxRevSumaAsegurada.TabIndex = 36;
+            this.textBoxRevSumaAsegurada.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxRevVigenciaFin
             // 

@@ -200,7 +200,44 @@ namespace Interfaz
         {
             List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
             GestorPago gestorPago = new GestorPago();
+            int filaant = 0;
+            bool errorcuota = false;
+            foreach (DataGridViewRow fila in dataGridViewCuotasPendientes.Rows)
+            {
+                DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[fila.Index].Cells[0];
+                if (filaant == 0)
+                {
+                    filaant = fila.Index;
 
+                }
+                if (check.Value == check.TrueValue)
+                {
+                    
+                   if (fila.Index == filaant)
+                    {
+
+                        filaant = filaant + 1;
+                    }
+                   else
+                    {
+                        errorcuota = true;
+                    }
+                   
+                }
+
+
+            }
+
+            if (errorcuota)
+            {
+                MessageBox.Show("Cuotas a pagar fuera de secuencia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEntrega.Focus();
+
+            }
+            else
+            {
+
+            
             double vuelto = 0;
             double entrega = 0;
             if (!string.IsNullOrWhiteSpace(textBoxEntrega.Text))
@@ -262,6 +299,7 @@ namespace Interfaz
                 {
                     btnVolverTabDetallePoliza.Focus();
                 }
+            }
             }
         }
 
