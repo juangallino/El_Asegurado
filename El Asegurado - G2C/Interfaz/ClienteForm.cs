@@ -159,5 +159,41 @@ namespace Interfaz
                 MessageBox.Show("Opcion no disponible.");
             tabControlCliente.SelectedTab = tabPageBuscarCliente;
         }
+
+        private void SoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            LimitarKeypres(e, false, true, false, true);
+        }
+
+        void Mayusculas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        public void LimitarKeypres(KeyPressEventArgs e, bool numero, bool letra, bool control, bool separador)
+
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = numero;
+            }
+            else if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = letra;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = control;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = separador;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

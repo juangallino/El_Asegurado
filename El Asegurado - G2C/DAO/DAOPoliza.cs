@@ -266,8 +266,7 @@ namespace DAO
         public List<PolizaCuota> GetCuotasPendientes(int idPoliza)
         {
             List<PolizaCuota> cuotasPendientes = new List<PolizaCuota>();
-         
-            
+           
             try
             {
                 using(DBEntities_TP db = new DBEntities_TP())
@@ -298,6 +297,23 @@ namespace DAO
             
         }
 
+        public decimal AsignarNroPoliza(decimal NroSuc)
+        {
+            try
+            {
+                using(DBEntities_TP db = new DBEntities_TP())
+                {
+                    return db.Polizas.Where(p=> p.NroPolizaSuc == NroSuc)
+                                     .Select(w => w.NroPoliza)
+                                     .DefaultIfEmpty(0).Max() + 1;
+                    
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
     }
 }

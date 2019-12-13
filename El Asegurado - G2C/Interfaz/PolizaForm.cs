@@ -79,7 +79,7 @@ namespace Interfaz
             try
             {
                 //Creo un gestor poliza para poder calcular el premio y los descuentos
-
+                
                 dto_poliza dtoPoliza = new dto_poliza
                 {
                     IdDomicilioRiesgo = Convert.ToInt32(comboBoxLocalidad.SelectedValue),
@@ -91,12 +91,12 @@ namespace Interfaz
                     NroMotor = textBoxMotorNro.Text,
                     NroChasis = textboxChasis.Text,
                     KmPorAño = Convert.ToInt32(textBoxKmAño.Text),
-                    Nro_Siniestros = Convert.ToInt32(comboBoxNroSiniestros.SelectedValue),
+                    Nro_Siniestros = comboBoxNroSiniestros.SelectedIndex,
                     Tipo_Cobertura = Convert.ToInt32(comboBoxTipoCobertura.SelectedValue),
                     NombreCobertura = comboBoxTipoCobertura.Text,
                     FechaInicioVigencia = (timepickerFechaInicio.Value),
                     Patente = nroPatenteMaskedTextBox.Text,
-                    IdCliente = Convert.ToInt32(textBoxClienteNro.Text)
+                    IdCliente = Convert.ToInt32(textBoxClienteNroPpal.Text)
                 }; // Creamos el dto de poliza y lo cargamos con los datos obtenido de la interfaz
 
                 //CREAMOS LAS LISTA DE CUOTAS
@@ -252,7 +252,7 @@ namespace Interfaz
             textBoxSumaAsegurada.Text = "";
             comboBoxPatente.SelectedItem = null;
             nroPatenteMaskedTextBox.Text = "";
-            textBoxClienteNro.Text = "";
+            textBoxClienteNroPpal.Text = "";
 
             //cliente
             textBoxClienteDNI.Text = "";
@@ -335,9 +335,9 @@ namespace Interfaz
         {
             //Recorremos los controles cuyo contenido puede contener algún error
             //Cliente
-            if (textBoxClienteNro.Text == "")
+            if (textBoxClienteNroPpal.Text == "")
             {
-                return textBoxClienteNro;
+                return textBoxClienteNroPpal;
             }
             //Domicilio de Riesgo ////// Si no se seleccionó Localidad es porque no se abrió el combobox de provincia
             if (Convert.ToString(comboBoxLocalidad.SelectedValue) == "")
@@ -436,21 +436,14 @@ namespace Interfaz
             medidaSeguridadView.BringToFront();
         }
 
-        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void SoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
             LimitarKeypres(e, false, true, false, true);
         }
 
-
-
-        private void TextBox11_KeyPress(object sender, KeyPressEventArgs e)
+        void Mayusculas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            LimitarKeypres(e, false, false, false, true);
-        }
-
-        private void TextBox9_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            LimitarKeypres(e, false, true, false, true);
+            e.KeyChar = char.ToUpper(e.KeyChar);
         }
 
         private void ComboBoxMarca_SelectionChangeCommitted(object sender, EventArgs e)
@@ -531,12 +524,6 @@ namespace Interfaz
             cboxModeloBusquedaPoliza.SelectedIndex = 0;
         }
 
-       /* private void BtnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
-        {
-            //super consulta
-           
-        }*/
-
         private void BtnVolverTabDetallePoliza_Click(object sender, EventArgs e)
         {
             tabControlPoliza1.SelectedTab = tabBusquedaPoliza;
@@ -609,7 +596,7 @@ namespace Interfaz
             try
             {
                 dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(lblClienteSeleccionado.Text));
-                textBoxClienteNro.Text = (dtoCliente.IdCliente.ToString());
+                textBoxClienteNroPpal.Text = (dtoCliente.IdCliente.ToString());
                 textBoxClienteNombre.Text = (dtoCliente.Nombre.Trim() + ", " + dtoCliente.Apellido.Trim());
                 textBoxClienteDomicilio.Text = (dtoCliente.Calle.ToString().Trim() + "  " + dtoCliente.NumeroDomicilio.ToString().Trim() + ",  " + dtoCliente.Localidad.ToString().Trim() + ", " + dtoCliente.Provincia.ToString().Trim() + ", " + dtoCliente.Pais.ToUpper().ToString().Trim());
                 textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + " " + dtoCliente.NroDocumento.ToString().Trim();
@@ -644,7 +631,7 @@ namespace Interfaz
                 try
                 {
                     dtoCliente = gestorCliente.CargarDTOCliente(Convert.ToInt32(lblClienteSeleccionado.Text));
-                    textBoxClienteNro.Text = (dtoCliente.IdCliente.ToString());
+                    textBoxClienteNroPpal.Text = (dtoCliente.IdCliente.ToString());
                     textBoxClienteNombre.Text = (dtoCliente.Nombre.Trim() + ", " + dtoCliente.Apellido.Trim());
                     textBoxClienteDomicilio.Text = (dtoCliente.Calle.ToString().Trim() + "  " + dtoCliente.NumeroDomicilio.ToString().Trim() + ",  " + dtoCliente.Localidad.ToString().Trim() + ", " + dtoCliente.Provincia.ToString().Trim() + ", " + dtoCliente.Pais.ToUpper().ToString().Trim());
                     textBoxClienteDNI.Text = dtoCliente.TipoDoc.ToString().Trim() + " " + dtoCliente.NroDocumento.ToString().Trim();
@@ -760,13 +747,9 @@ namespace Interfaz
         }
         private void MaskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-            using (ToolTip toolTip1 = new ToolTip
-            {
-                ToolTipTitle = "Entrada inválida"
-            })
-            {
-                toolTip1.Show("Debés ingresar un caracter válido, de acuerdo al tipo de patente que has elegido.", nroPatenteMaskedTextBox, nroPatenteMaskedTextBox.Location, 3000);
-            }
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.ToolTipTitle = "Entrada inválida";
+            toolTip1.Show("Debés ingresar un caracter válido, de acuerdo al tipo de patente que has elegido.", nroPatenteMaskedTextBox, nroPatenteMaskedTextBox.Location, 3000);
         }
 
         private void NroPatenteMaskedTextBox_Leave(object sender, EventArgs e)
@@ -783,29 +766,17 @@ namespace Interfaz
         private void TextBoxClienteNombre_TextChanged(object sender, EventArgs e)
         {
             GestorExtra gestorExtra = new GestorExtra();
-            if (textBoxClienteNro.Text == "")
+            if (textBoxClienteNroPpal.Text == "")
                 comboBoxNroSiniestros.SelectedItem = null;
             else
-                comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNro.Text));
+                comboBoxNroSiniestros.SelectedIndex = gestorExtra.GetNroSiniestros(Convert.ToInt32(textBoxClienteNroPpal.Text));
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
+       
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             e.Cancel = checkCancel;
             checkCancel = true;
         }
-
     }
 
 }
