@@ -15,5 +15,8 @@ namespace DTO
         public decimal ImporteCuota { get; set; }
         public decimal ImporteRecargo { get; set; }
         public decimal ImporteDescuento { get; set; }
+
+        public decimal ImporteTotalCuota { get; set; }
+
     }
 }
