@@ -146,6 +146,7 @@ namespace Interfaz
                                 dataGridViewCuotasPendientes.Columns["FechaPago"].Visible = false;
                                 dataGridViewCuotasPendientes.Columns["ImporteRecargo"].Visible = false;
                                 dataGridViewCuotasPendientes.Columns["ImporteDescuento"].Visible = false;
+                                dataGridViewCuotasPendientes.Columns["ImporteTotalCuota"].DefaultCellStyle.Format = "0.00";
 
 
 
@@ -199,31 +200,68 @@ namespace Interfaz
         {
             List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
             GestorPago gestorPago = new GestorPago();
-            try
+
+            double vuelto = 0;
+            double entrega = 0;
+            if (!string.IsNullOrWhiteSpace(textBoxEntrega.Text))
             {
 
-                foreach (DataGridViewRow fila in dataGridViewCuotasPendientes.Rows)
-                {
-                    DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[fila.Index].Cells[0];
 
-                    if (check.Value == check.TrueValue)
-                    {
-                        dto_Cuota dtoCuotaAux = new dto_Cuota();
-                        dtoCuotaAux = DTO_PagoPoliza.CuotasPendientes.ElementAt(fila.Index);
-                        dtoCuota.Add(dtoCuotaAux);
-                    }
+                entrega = Convert.ToDouble(textBoxEntrega.Text);
 
+                vuelto = entrega - Convert.ToDouble(textBoxAPagar.Text);
 
-                }
+                textBoxVuelto.Text = vuelto.ToString("0.00");
 
-                gestorPago.RegistrarPago(dtoCuota, DTO_PagoPoliza.idPoliza);
-                MessageBox.Show("Recibo de Pago Emitido", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                Close();
             }
-            catch (Exception error)
+            if (vuelto < 0 )
             {
-                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Entrega no Suficiente para cancelar las cuotas seleccionadas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEntrega.Focus();
+            }
+            else
+                {
+
+           
+                
+                DialogResult result = MessageBox.Show("Vuelto de " + vuelto.ToString("0.00") + ". Confirma la emisión del Recibo de Pago?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                if (result == DialogResult.Yes )
+                {
+                
+
+                    try
+                    {
+
+                        foreach (DataGridViewRow fila in dataGridViewCuotasPendientes.Rows)
+                        {
+                            DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[fila.Index].Cells[0];
+
+                            if (check.Value == check.TrueValue)
+                            {
+                                dto_Cuota dtoCuotaAux = new dto_Cuota();
+                                dtoCuotaAux = DTO_PagoPoliza.CuotasPendientes.ElementAt(fila.Index);
+                                dtoCuota.Add(dtoCuotaAux);
+                            }
+
+
+                        }
+
+                        gestorPago.RegistrarPago(dtoCuota, DTO_PagoPoliza.idPoliza);
+                        MessageBox.Show("Recibo de Pago Emitido", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        Close();
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    btnVolverTabDetallePoliza.Focus();
+                }
             }
         }
 
@@ -275,7 +313,8 @@ namespace Interfaz
 
             }
 
-            textBoxAPagar.Text = Convert.ToString(importeAPagar);
+            textBoxAPagar.Text = importeAPagar.ToString("0.00");
+            
         }
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -295,16 +334,15 @@ namespace Interfaz
 
         }
 
+        private void textBoxVuelto_TextChanged(object sender, EventArgs e)
+        {
+           
+
+        }
+
         private void textBoxEntrega_TextChanged(object sender, EventArgs e)
         {
-            double vuelto = 0;
-            double entrega = 0;
-
-            entrega = Convert.ToDouble(textBoxEntrega.Text);
-            vuelto = entrega - Convert.ToDouble(textBoxAPagar.Text);
-            btnEmitirReciboPago.Focus();
-
-
+        
         }
     }
 }

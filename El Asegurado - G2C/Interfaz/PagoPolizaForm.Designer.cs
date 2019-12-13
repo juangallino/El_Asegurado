@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PagoPolizaForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TituloPanelPoliza = new System.Windows.Forms.Label();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -248,16 +249,13 @@
             // 
             // textBoxAPagar
             // 
-            this.textBoxAPagar.AcceptsReturn = true;
-            this.textBoxAPagar.AcceptsTab = true;
             this.textBoxAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAPagar.Location = new System.Drawing.Point(117, 409);
             this.textBoxAPagar.Name = "textBoxAPagar";
             this.textBoxAPagar.ReadOnly = true;
             this.textBoxAPagar.Size = new System.Drawing.Size(110, 23);
             this.textBoxAPagar.TabIndex = 46;
-            this.textBoxAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxAPagar.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.textBoxAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -272,10 +270,10 @@
             // 
             // btnEmitirReciboPago
             // 
-            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 403);
+            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 405);
             this.btnEmitirReciboPago.Name = "btnEmitirReciboPago";
             this.btnEmitirReciboPago.Size = new System.Drawing.Size(108, 25);
-            this.btnEmitirReciboPago.TabIndex = 44;
+            this.btnEmitirReciboPago.TabIndex = 28;
             this.btnEmitirReciboPago.Text = "Emitir Recibo Pago";
             this.btnEmitirReciboPago.UseVisualStyleBackColor = true;
             this.btnEmitirReciboPago.Click += new System.EventHandler(this.button1_Click);
@@ -292,6 +290,8 @@
             this.dataGridViewCuotasPendientes.Location = new System.Drawing.Point(146, 231);
             this.dataGridViewCuotasPendientes.Name = "dataGridViewCuotasPendientes";
             this.dataGridViewCuotasPendientes.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewCuotasPendientes.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewCuotasPendientes.Size = new System.Drawing.Size(566, 161);
             this.dataGridViewCuotasPendientes.TabIndex = 43;
             this.dataGridViewCuotasPendientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCuotasPendientes_CellContentClick);
@@ -401,8 +401,9 @@
             this.textBoxVuelto.Name = "textBoxVuelto";
             this.textBoxVuelto.ReadOnly = true;
             this.textBoxVuelto.Size = new System.Drawing.Size(99, 23);
-            this.textBoxVuelto.TabIndex = 28;
-            this.textBoxVuelto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxVuelto.TabIndex = 44;
+            this.textBoxVuelto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxVuelto.TextChanged += new System.EventHandler(this.textBoxVuelto_TextChanged);
             // 
             // textBoxEntrega
             // 
@@ -413,7 +414,7 @@
             this.textBoxEntrega.Name = "textBoxEntrega";
             this.textBoxEntrega.Size = new System.Drawing.Size(110, 23);
             this.textBoxEntrega.TabIndex = 27;
-            this.textBoxEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxEntrega.TextChanged += new System.EventHandler(this.textBoxEntrega_TextChanged);
             // 
             // textBoxFechaFin
