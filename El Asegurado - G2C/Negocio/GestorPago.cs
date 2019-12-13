@@ -141,9 +141,13 @@ namespace Negocio
                     PolizaCuota polizaCuota = poliza.PolizaCuotas.ElementAt(cuota.NroCuota - 1);  //getCuota(cuota.nroCuota) <-- SeqDiag
                     polizaCuota.importeDescuento = cuota.ImporteDescuento;
                     polizaCuota.importeRecargo = cuota.ImporteRecargo;
+                    polizaCuota.idPolizaRecibo = polizaRecibo.id;
                     polizaRecibo.PolizaCuotas.Add(polizaCuota);
                 }
-
+                polizaRecibo.FechaRecibo = DateTime.Today.Date;
+                polizaRecibo.HoraRecibo = DateTime.Now.ToString("HH:mm:ss");
+                polizaRecibo.idUsuario = 1;
+                polizaRecibo.NroRecibo = dAOPolizaRecibo.GetNroRecibo();
                 dAOPolizaRecibo.GuardarRecibo(polizaRecibo);
 
                 //ActualizarPolizaEstado
@@ -180,8 +184,13 @@ namespace Negocio
             foreach(var cuota in cuotas)    //getPrimerCuota() <-- SeqDiag
             {
                if (cuota.idPolizaRecibo == null)
+                {
                     if (cuota.nroCuota != primerCuotaAPagar.NroCuota)
                         throw new Exception("Existen cuotas anteriores que aún no han sido abonadas.");
+                    else
+                        return;
+                }
+
             }
         }
 

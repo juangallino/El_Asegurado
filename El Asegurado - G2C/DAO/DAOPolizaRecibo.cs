@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DAO
 {
     public class DAOPolizaRecibo
@@ -16,13 +16,14 @@ namespace DAO
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
                     //Sentencias para que vincule las instancias persistidas en la BD y no cree una nueva
-         //           db.Entry(p.PolizaCuota).State = System.Data.Entity.EntityState.Unchanged;
-                    db.Entry(p.Usuario).State = System.Data.Entity.EntityState.Unchanged;
+                    //db.Entry(p.PolizaCuotas).State = System.Data.Entity.EntityState.Unchanged;
                     
+                    //          db.Entry(p.Usuario).State = System.Data.Entity.EntityState.Unchanged;
+
                     db.PolizaReciboes.Add(p);
                     db.SaveChanges();
-                    return true;
                 }
+                return true;
             }
             catch (Exception e)
             {
@@ -36,6 +37,19 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                     return db.PolizaReciboes.Find(idPolizaRecibo);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            };
+        }
+
+        public decimal GetNroRecibo()
+        {
+            try
+            {
+                using (DBEntities_TP db = new DBEntities_TP())
+                    return db.PolizaReciboes.Select(x => x.NroRecibo).DefaultIfEmpty(0).Max() + 1;
             }
             catch (Exception e)
             {

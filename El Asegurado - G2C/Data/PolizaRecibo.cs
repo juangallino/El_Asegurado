@@ -23,7 +23,7 @@ namespace Data
         public int id { get; set; }
         public decimal NroRecibo { get; set; }
         public System.DateTime FechaRecibo { get; set; }
-        public System.TimeSpan HoraRecibo { get; set; }
+        public string HoraRecibo { get; set; }
         public int idUsuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

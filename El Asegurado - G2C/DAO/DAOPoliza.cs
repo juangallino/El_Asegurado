@@ -303,7 +303,10 @@ namespace DAO
             {
                 using(DBEntities_TP db = new DBEntities_TP())
                 {
-                    return db.Polizas.Where(p=> p.NroPolizaSuc == NroSuc).Max(w => w.NroPoliza)+1;
+                    return db.Polizas.Where(p=> p.NroPolizaSuc == NroSuc)
+                                     .Select(w => w.NroPoliza)
+                                     .DefaultIfEmpty(0).Max() + 1;
+                    
                 }
             }
             catch(Exception e)

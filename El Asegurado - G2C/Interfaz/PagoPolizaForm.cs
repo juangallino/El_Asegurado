@@ -222,7 +222,7 @@ namespace Interfaz
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                MessageBox.Show(error.Message);
             }
         }
 
