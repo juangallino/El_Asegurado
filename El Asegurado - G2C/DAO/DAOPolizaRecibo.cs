@@ -18,7 +18,7 @@ namespace DAO
                     int contador = 0;
                     foreach(var cuota in p.PolizaCuotas)
                     {
-                        db.Entry(p.PolizaCuotas.ElementAt(contador++)).State = System.Data.Entity.EntityState.Unchanged;
+                        db.Entry(p.PolizaCuotas.ElementAt(contador++)).State = System.Data.Entity.EntityState.Modified;
                     }
 
                     db.PolizaReciboes.Add(p);
