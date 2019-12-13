@@ -656,6 +656,10 @@ namespace Interfaz
                 tabControlPoliza2.SelectedIndex = (tabControlPoliza2.SelectedIndex - 1);
                 btnSiguiente.Text = "Siguiente";
             }
+            else
+            {
+                btnNuevo.Focus();
+            }
             btnSiguiente.Enabled = true;
 
         }
