@@ -13,9 +13,10 @@ using System.Threading;
 
 namespace Interfaz
 {
+    
     public partial class PagoPolizaForm : Form
     {
-        
+        private double importeAPagar = 0;
         dto_PagoPoliza DTO_PagoPoliza = new dto_PagoPoliza();
 
 
@@ -64,7 +65,7 @@ namespace Interfaz
 
         private void btnBuscarTabConsultaPoliza_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void label2_Click_1(object sender, EventArgs e)
@@ -105,12 +106,12 @@ namespace Interfaz
                 }
                 else
                 {
-                    decimal NroPolizaSuc = 1;
+                    decimal NroPolizaSuc = Convert.ToDecimal(textBoxNroPolizaSuc.Text);
                     decimal NroPoliza = Convert.ToDecimal(textPolizaNroBusquedaPoliza.Text);
-                    decimal NroPolizaSec = 01;
+                    decimal NroPolizaSec = Convert.ToDecimal(textBoxNroPolizaSec.Text);
 
-                  //  MessageBox.Show(nroPoliza.ToString());
-                    
+                    //  MessageBox.Show(nroPoliza.ToString());
+
 
                     DTO_PagoPoliza = gestorPago.cargarPolizaParaPagar(NroPolizaSuc, NroPoliza, NroPolizaSec);
 
@@ -124,12 +125,38 @@ namespace Interfaz
                             textBoxNroCliente.Text = DTO_PagoPoliza.NroCliente.ToString();
                             textBoxRevDiaPago1.Text = DTO_PagoPoliza.UltimoPago.ToString();
                             textBoxDatosVehiculo.Text = DTO_PagoPoliza.DatosVehiculo;
+                            textBoxFechaInicio.Text = DTO_PagoPoliza.FechaInicio.ToString();
+                            textBoxFechaFin.Text = DTO_PagoPoliza.FechaFin.ToString();
+
                             textBoxEntrega.Text = "0";
                             textBoxVuelto.Text = "0";
                             try
                             {
+                                /*  DataGridViewTextBoxColumn colImporteCuota = new DataGridViewTextBoxColumn();
+                                  colImporteCuota.HeaderText = "Importe a Pagar";
+                                  colImporteCuota.Name = "ImporteTotalCuota";
+                                  colImporteCuota.Visible = true;
+                                  */
                                 dataGridViewCuotasPendientes.Visible = true;
-                                dataGridViewCuotasPendientes.DataSource = DTO_PagoPoliza.CuotasPendientes; 
+                                dataGridViewCuotasPendientes.DataSource = DTO_PagoPoliza.CuotasPendientes;
+                             //   dataGridViewCuotasPendientes.Columns.Add(colImporteCuota);
+                                
+                                
+                                dataGridViewCuotasPendientes.Columns["IdCuota"].Visible = false;
+                                dataGridViewCuotasPendientes.Columns["FechaPago"].Visible = false;
+                                dataGridViewCuotasPendientes.Columns["ImporteRecargo"].Visible = false;
+                                dataGridViewCuotasPendientes.Columns["ImporteDescuento"].Visible = false;
+                               
+
+                                importeAPagar = 0;
+                                foreach (DataGridViewRow fila in dataGridViewCuotasPendientes.Rows)
+                                {
+                                    DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[fila.Index].Cells[0];
+                                    check.Value = check.FalseValue;
+                             
+
+                                }
+                                
                                 dataGridViewCuotasPendientes.Refresh();
                             }
                             catch (Exception ex)
@@ -146,10 +173,7 @@ namespace Interfaz
                     }
                     else
                         MessageBox.Show("No existe la Poliza ingresada ");
-
-                    MessageBox.Show( DTO_PagoPoliza.DatosVehiculo.ToString());
-
-                    
+                                                
 
                     tabControlPagoPoliza.SelectedTab = tabDetallesPoliza;
                 }
@@ -171,11 +195,101 @@ namespace Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<dto_Cuota> dtoCuota = new List<dto_Cuota>();
+            GestorPago gestorPago = new GestorPago();
+            try
+            {
+                
+            
+            dtoCuota = DTO_PagoPoliza.CuotasPendientes;
+
+            gestorPago.RegistrarPago(dtoCuota, DTO_PagoPoliza.idPoliza);
+
+           /* foreach (DataGridViewRow fila in dataGridViewCuotasPendientes.Rows)
+            {
+                
+                    C
+                DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[fila.Index].Cells[0];
+                check.Value = check.FalseValue;
+
+
+            } */
+
+            
             MessageBox.Show("Recibo de Pago Emitido", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             Close();
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
         }
 
         private void label44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabBusquedaPoliza_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+
+            tabControlPagoPoliza.SelectedTab = tabBusquedaPoliza;
+            textBoxNroPolizaSuc.Focus();
+        }
+
+        private void dataGridViewCuotasPendientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            DataGridViewCheckBoxCell check = (DataGridViewCheckBoxCell)dataGridViewCuotasPendientes.Rows[e.RowIndex].Cells[0];
+            DataGridViewTextBoxCell importeAPagarTextBox = (DataGridViewTextBoxCell)dataGridViewCuotasPendientes.Rows[e.RowIndex].Cells["ImporteTotalCuota"];
+           MessageBox.Show(importeAPagarTextBox.Value.ToString());
+            if (check.Value == check.TrueValue)
+            {
+                check.Value = check.FalseValue;
+                
+               
+                importeAPagar = importeAPagar - Convert.ToDouble(importeAPagarTextBox.Value);
+
+            }
+            else
+            {
+                check.Value = check.TrueValue;
+                importeAPagar = importeAPagar + Convert.ToDouble(dataGridViewCuotasPendientes.Rows[e.RowIndex].Cells["ImporteTotalCuota"].Value);
+
+            }
+            
+            textBoxAPagar.Text = Convert.ToString(importeAPagar);
+        }
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewCuotasPendientes.IsCurrentCellDirty)
+            {
+                dataGridViewCuotasPendientes.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
         }

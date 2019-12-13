@@ -69,6 +69,7 @@ namespace Negocio
                 dtoCuotaAux.ImporteCuota = cuota.importeCuota.GetValueOrDefault();
                 dtoCuotaAux.ImporteDescuento = CalcularDescuento(cuota.fechaVencimiento, cuota.importeCuota.GetValueOrDefault());
                 dtoCuotaAux.ImporteRecargo = CalcularRecargo(cuota.fechaVencimiento, cuota.importeCuota.GetValueOrDefault());
+                dtoCuotaAux.ImporteTotalCuota = dtoCuotaAux.ImporteCuota + dtoCuotaAux.ImporteDescuento + dtoCuotaAux.ImporteRecargo;
                 dtoCuotaAux.NroCuota = cuota.nroCuota;
                 dtoCuotaAux.FechaVencimiento = cuota.fechaVencimiento;
                 
