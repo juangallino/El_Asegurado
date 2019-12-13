@@ -272,7 +272,7 @@
             // 
             // btnEmitirReciboPago
             // 
-            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 405);
+            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 403);
             this.btnEmitirReciboPago.Name = "btnEmitirReciboPago";
             this.btnEmitirReciboPago.Size = new System.Drawing.Size(108, 25);
             this.btnEmitirReciboPago.TabIndex = 44;

@@ -182,6 +182,7 @@ namespace Interfaz
             catch (Exception error)
             {
                 MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
                 textPolizaNroBusquedaPoliza.Focus();
             }
 
@@ -208,6 +209,7 @@ namespace Interfaz
                     if (check.Value == check.TrueValue)
                     {
                         dto_Cuota dtoCuotaAux = new dto_Cuota();
+                        dtoCuotaAux = DTO_PagoPoliza.CuotasPendientes.ElementAt(fila.Index);
                         dtoCuota.Add(dtoCuotaAux);
                     }
 
@@ -300,6 +302,8 @@ namespace Interfaz
 
             entrega = Convert.ToDouble(textBoxEntrega.Text);
             vuelto = entrega - Convert.ToDouble(textBoxAPagar.Text);
+            btnEmitirReciboPago.Focus();
+
 
         }
     }
