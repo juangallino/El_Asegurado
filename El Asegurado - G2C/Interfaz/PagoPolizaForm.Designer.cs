@@ -41,8 +41,11 @@
             this.label35 = new System.Windows.Forms.Label();
             this.tabControlPagoPoliza = new System.Windows.Forms.TabControl();
             this.tabDetallesPoliza = new System.Windows.Forms.TabPage();
+            this.textBoxAPagar = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnEmitirReciboPago = new System.Windows.Forms.Button();
             this.dataGridViewCuotasPendientes = new System.Windows.Forms.DataGridView();
+            this.chkSeleccion = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.lblCuotasPendientesPago = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,9 +71,6 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.chkSeleccion = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.textBoxAPagar = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tabBusquedaPoliza.SuspendLayout();
             this.tabControlPagoPoliza.SuspendLayout();
             this.tabDetallesPoliza.SuspendLayout();
@@ -246,9 +246,33 @@
             this.tabDetallesPoliza.Text = "Detalle";
             this.tabDetallesPoliza.UseVisualStyleBackColor = true;
             // 
+            // textBoxAPagar
+            // 
+            this.textBoxAPagar.AcceptsReturn = true;
+            this.textBoxAPagar.AcceptsTab = true;
+            this.textBoxAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAPagar.Location = new System.Drawing.Point(117, 409);
+            this.textBoxAPagar.Name = "textBoxAPagar";
+            this.textBoxAPagar.ReadOnly = true;
+            this.textBoxAPagar.Size = new System.Drawing.Size(110, 23);
+            this.textBoxAPagar.TabIndex = 46;
+            this.textBoxAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxAPagar.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(55, 412);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 17);
+            this.label4.TabIndex = 45;
+            this.label4.Text = "A Pagar";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // btnEmitirReciboPago
             // 
-            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 405);
+            this.btnEmitirReciboPago.Location = new System.Drawing.Point(712, 403);
             this.btnEmitirReciboPago.Name = "btnEmitirReciboPago";
             this.btnEmitirReciboPago.Size = new System.Drawing.Size(108, 25);
             this.btnEmitirReciboPago.TabIndex = 44;
@@ -271,6 +295,15 @@
             this.dataGridViewCuotasPendientes.Size = new System.Drawing.Size(566, 161);
             this.dataGridViewCuotasPendientes.TabIndex = 43;
             this.dataGridViewCuotasPendientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCuotasPendientes_CellContentClick);
+            // 
+            // chkSeleccion
+            // 
+            this.chkSeleccion.FalseValue = "false";
+            this.chkSeleccion.HeaderText = "Sel";
+            this.chkSeleccion.IndeterminateValue = "false";
+            this.chkSeleccion.Name = "chkSeleccion";
+            this.chkSeleccion.ReadOnly = true;
+            this.chkSeleccion.TrueValue = "true";
             // 
             // lblCuotasPendientesPago
             // 
@@ -381,6 +414,7 @@
             this.textBoxEntrega.Size = new System.Drawing.Size(110, 23);
             this.textBoxEntrega.TabIndex = 27;
             this.textBoxEntrega.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxEntrega.TextChanged += new System.EventHandler(this.textBoxEntrega_TextChanged);
             // 
             // textBoxFechaFin
             // 
@@ -511,38 +545,6 @@
             this.label44.TabIndex = 2;
             this.label44.Text = "Póliza Nro:";
             this.label44.Click += new System.EventHandler(this.label44_Click);
-            // 
-            // chkSeleccion
-            // 
-            this.chkSeleccion.FalseValue = "false";
-            this.chkSeleccion.HeaderText = "Sel";
-            this.chkSeleccion.IndeterminateValue = "false";
-            this.chkSeleccion.Name = "chkSeleccion";
-            this.chkSeleccion.ReadOnly = true;
-            this.chkSeleccion.TrueValue = "true";
-            // 
-            // textBoxAPagar
-            // 
-            this.textBoxAPagar.AcceptsReturn = true;
-            this.textBoxAPagar.AcceptsTab = true;
-            this.textBoxAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAPagar.Location = new System.Drawing.Point(117, 409);
-            this.textBoxAPagar.Name = "textBoxAPagar";
-            this.textBoxAPagar.Size = new System.Drawing.Size(110, 23);
-            this.textBoxAPagar.TabIndex = 46;
-            this.textBoxAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxAPagar.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(55, 412);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 17);
-            this.label4.TabIndex = 45;
-            this.label4.Text = "A Pagar";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // PagoPolizaForm
             // 
