@@ -103,8 +103,8 @@ namespace Interfaz
                 dtoPoliza.Vto_Pago = gestorExtra.CargarListaCuotas(dtoPoliza.FechaInicioVigencia.AddDays(-1));
 
                 //OBTENGO FORMA DE PAGO
-                if (btnCheckMensual.Checked) dtoPoliza.FormaPago = 1;
-                if (btnCheckSemestral.Checked) dtoPoliza.FormaPago = 6;
+                if (btnCheckMensual.Checked) dtoPoliza.FormaPago = 6;
+                if (btnCheckSemestral.Checked) dtoPoliza.FormaPago = 1;
 
                 //OBTENGO DATOS DE LOS OTROS FORMULARIOS
                 dtoPoliza = declaracionHijosView.ObtenerDatos(dtoPoliza);
