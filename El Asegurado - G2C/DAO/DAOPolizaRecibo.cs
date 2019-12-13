@@ -15,12 +15,14 @@ namespace DAO
             {
                 using (DBEntities_TP db = new DBEntities_TP())
                 {
-                    //Sentencias para que vincule las instancias persistidas en la BD y no cree una nueva
-                    //db.Entry(p.PolizaCuotas).State = System.Data.Entity.EntityState.Unchanged;
-                    
-                    //          db.Entry(p.Usuario).State = System.Data.Entity.EntityState.Unchanged;
+                    int contador = 0;
+                    foreach(var cuota in p.PolizaCuotas)
+                    {
+                        db.Entry(p.PolizaCuotas.ElementAt(contador++)).State = System.Data.Entity.EntityState.Modified;
+                    }
 
                     db.PolizaReciboes.Add(p);
+
                     db.SaveChanges();
                 }
                 return true;
