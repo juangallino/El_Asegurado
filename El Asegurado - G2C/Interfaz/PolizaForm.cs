@@ -103,15 +103,15 @@ namespace Interfaz
                 dtoPoliza.Vto_Pago = gestorExtra.CargarListaCuotas(dtoPoliza.FechaInicioVigencia.AddDays(-1));
 
                 //OBTENGO FORMA DE PAGO
-                if (btnCheckMensual.Checked) dtoPoliza.FormaPago = 6;
-                if (btnCheckSemestral.Checked) dtoPoliza.FormaPago = 1;
+                if (btnCheckMensual.Checked) dtoPoliza.FormaPago = 1;
+                if (btnCheckSemestral.Checked) dtoPoliza.FormaPago = 6;
 
                 //OBTENGO DATOS DE LOS OTROS FORMULARIOS
                 dtoPoliza = declaracionHijosView.ObtenerDatos(dtoPoliza);
                 dtoPoliza = medidaSeguridadView.ObtenerDatos(dtoPoliza);
 
                 
-                //CALCULO DERECHO EMISION, PREMIO Y DESCUENTOS
+                //CALCULO DERECHO EMISION, PREMIO Y DESCUENTOSF
                 dtoPoliza.DerechoEmision = gestorCalculos.CalcularDerechoEmision();
                 dtoPoliza.Premio = gestorCalculos.CalcularPrima() + dtoPoliza.DerechoEmision;
                 dtoPoliza.ImporteDescuento = gestorCalculos.CalcularDescuento(dtoPoliza.FormaPago, dtoPoliza.IdCliente, dtoPoliza.Premio);
@@ -139,9 +139,9 @@ namespace Interfaz
             textBoxRevVigenciaFin.Text = dtoPoliza.FechaInicioVigencia.AddMonths(6).ToShortDateString();
             textBoxRevVigenciaInicio.Text = dtoPoliza.FechaInicioVigencia.ToShortDateString();
 
-            textBoxRevSumaAsegurada.Text = dtoPoliza.Suma_Asegurada.ToString();
-            textBoxRevPremio.Text = dtoPoliza.Premio.ToString();
-            textBoxRevImpDescuentos.Text = dtoPoliza.ImporteDescuento.ToString();
+            textBoxRevSumaAsegurada.Text = dtoPoliza.Suma_Asegurada.ToString("0.00");
+            textBoxRevPremio.Text = dtoPoliza.Premio.ToString("0.00");
+            textBoxRevImpDescuentos.Text = dtoPoliza.ImporteDescuento.ToString("0.00");
 
             if (dtoPoliza.FormaPago == 6)
             {
