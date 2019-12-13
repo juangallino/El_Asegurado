@@ -178,7 +178,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroRecibo" Type="numeric" Precision="12" Scale="0" Nullable="false" />
           <Property Name="FechaRecibo" Type="date" Nullable="false" />
-          <Property Name="HoraRecibo" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraRecibo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PolizaRenovacion">
@@ -2339,7 +2339,7 @@ advertencia 6002: La tabla o vista 'DBTP2019.dbo.v_ValorFactorAutoScoring' no ti
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NroRecibo" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
           <Property Name="FechaRecibo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="HoraRecibo" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraRecibo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PolizaCuotas" Relationship="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo" FromRole="PolizaRecibo" ToRole="PolizaCuota" />
           <NavigationProperty Name="Usuario" Relationship="DB_El_Asegurado.FK_PolizaRecibo_Usuario" FromRole="PolizaRecibo" ToRole="Usuario" />

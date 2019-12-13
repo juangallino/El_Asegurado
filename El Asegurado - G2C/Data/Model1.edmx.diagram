@@ -116,7 +116,7 @@
         <EntityTypeShape EntityType="DB_El_Asegurado.PolizaRecibo" Width="1.5" PointX="12.75" PointY="18.125" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaCuota_PolizaRecibo" />
         <AssociationConnector Association="DB_El_Asegurado.FK_PolizaRecibo_Usuario" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
